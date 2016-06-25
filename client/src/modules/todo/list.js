@@ -108,8 +108,8 @@ export class List {
   }
 
   editEnd(item) {
-    item.isEditing = false;
     if(!!item) {
+      item.isEditing = false;
       this.updateItem(item);
     }
   }
@@ -153,11 +153,7 @@ export class List {
       let pos = arrayFindObjectIndex(this.items, 'id', data.id);
       if(pos >= 0) {
         this.items.splice(pos, 1, data);
-        if(data.completed) {
-          this.itemDoneCount++;
-        }else {
-          this.itemDoneCount--;
-        }
+        this.itemDoneCount = this.items.filter(x => x.completed).length;
       }
     });
 

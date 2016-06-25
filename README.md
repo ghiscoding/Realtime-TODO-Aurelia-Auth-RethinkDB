@@ -7,7 +7,7 @@ A summary of tech stack:
 * **RethinkDB** as the best database for realtime web.
 
 ## Getting Started
-Make sure that you have Node.js v4.x or higher, and RethinkDB v3.x or higher (running on the default port 28015) installed on your computer. To get started, do the following:
+Make sure that you have Node.js v4.x or higher, and RethinkDB v2.3.x or higher (running on the default port 28015) installed on your computer. To get started, do the following:
 
 ######Server
 ```html
@@ -21,7 +21,7 @@ npm start
 ```html
 cd Realtime-TODO-Aurelia-RethinkDB/client
 npm install
-npm run dev
+npm start
 ```
 
 Your application should run on the 4081 port so in your browser just go to [http://localhost:4081](http://localhost:4081).
@@ -36,7 +36,7 @@ If you want to use the login credentials, you will need to create a `users` tabl
 Client configuration is specified in the [/client/src/config](https://github.com/ghiscoding/Realtime-TODO-Aurelia-RethinkDB/blob/master/client/src/config.js) directory, in the [config.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-RethinkDB/blob/master/client/src/config.js) file.
 
 ######Server
-Server configuration is specified in the [/server/config](https://github.com/ghiscoding/Realtime-TODO-Aurelia-RethinkDB/blob/master/server/config.js) directory, in the [config.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-RethinkDB/blob/master/server/config.js) file.
+Server configurations are specified in the [/server/config](https://github.com/ghiscoding/Realtime-TODO-Aurelia-RethinkDB/blob/master/server/config/) directory. When running `npm start` it will load the configuration that is defined in your `process.env.NODE_ENV` (environment variable, if unset it will use by default `development`).
 
 ## License
 MIT

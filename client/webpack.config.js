@@ -3,6 +3,7 @@
 var path = require('path');
 var AureliaWebpackPlugin = require('aurelia-webpack-plugin');
 var ProvidePlugin = require('webpack/lib/ProvidePlugin');
+var nodeRoot = path.join( __dirname, 'node_modules' );
 
 module.exports = {
   devServer: {
@@ -41,7 +42,8 @@ module.exports = {
       { test: /\.(png|gif|jpg)$/, loader: 'url?limit=8192' },
       { test: /\.woff2(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url?limit=10000&mimetype=application/font-woff2' },
       { test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
-      { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'file' }
+      { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'file' },
+      { test: /\.json$/, loader: "json-loader" }
     ],
     noParse: ['ws']
   },

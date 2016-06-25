@@ -8,7 +8,7 @@ const server = require('http').createServer(app.callback());
 const io = require('socket.io')(server);
 
 // Load config for RethinkDB and koa
-const config = require("./config.js");
+const config = require("./config");
 
 // Import rethinkdbdash
 const r = require('rethinkdbdash')(config.rethinkdb);
@@ -17,13 +17,13 @@ const r = require('rethinkdbdash')(config.rethinkdb);
 io.sockets.on("connection", function(socket) {
   console.log('A new WebSocket client connected with ID: ' + socket.client.id);
 
-  r.table(config.tableTodo)
+  return r.table(config.tableTodo)
     .changes()
     .run()
     .then(function(cursor) {
-      cursor.each(function(err, item) {
+      return cursor.each(function(err, item) {
         if(item == null) {
-          return;
+          return null;
         }
         if (!!item.new_val && item.old_val == null) {
           socket.emit("todo_create", item.new_val);
@@ -32,14 +32,17 @@ io.sockets.on("connection", function(socket) {
         }else if(item.new_val == null && !!item.old_val) {
           socket.emit("todo_delete", item.old_val);
         }
+        return null;
       });
     })
     .error(function(err){
     	console.log("Changefeeds Failure: ", err);
+      return null;
     });
 
     socket.on('disconnect', function(data) {
       console.log('A WebSocket client disconnnected with ID: ' + socket.client.id);
+      return null;
     });
 });
 
@@ -56,5 +59,4 @@ require('./routes')(app);
 
 // Start koa
 server.listen(config.koa.port);
-
 console.log('listening on port ' + config.koa.port);

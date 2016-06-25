@@ -1,5 +1,5 @@
 /*eslint-disable no-var,no-unused-vars*/
-var Promise = require('bluebird'); // Promise polyfill for IE11
+var Promise = require('bluebird').config({longStackTraces: false, warnings: false}); // Promise polyfill for IE11
 
 import { bootstrap } from 'aurelia-bootstrapper-webpack';
 import AuthService from './AuthService';

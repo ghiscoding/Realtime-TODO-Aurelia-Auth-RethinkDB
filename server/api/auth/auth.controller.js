@@ -4,7 +4,7 @@
 const parse = require('co-body');
 
 // Load config for RethinkDB and koa
-const config = require("../../config.js");
+const config = require("../../config");
 
 // Import rethinkdbdash
 const r = require('rethinkdbdash')(config.rethinkdb);

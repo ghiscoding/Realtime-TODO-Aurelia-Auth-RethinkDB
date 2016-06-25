@@ -1,6 +1,6 @@
 {
   "name": "node-rethinkdb",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Node RethinkDB Boilerplate",
   "author": "Ghislain B.",
   "license": "MIT",
@@ -20,7 +20,7 @@
     "parsebool": "^0.1.0",
     "path": "^0.12.7",
     "rethinkdbdash": "^2.2.18",
-    "socket.io": "^1.4.6"
+    "socket.io": "^1.4.8"
   },
   "devDependencies": {
     "koa-cors": "0.0.16",
