@@ -2,6 +2,7 @@
   <div id="applicationHost" class="container col-md-6">
     <header>
       <h1>Todos <small>with Aurelia &amp; RethinkDB</small></h1>
+      <p>Double-click to edit a todo</p>
       <hr/>
       <form submit.delegate="addItem()">
         <input type="text" value.bind="newTodoDescription" class="form-control" placeholder="What needs to be done?">
@@ -23,7 +24,7 @@
             <span click.delegate="toggleComplete(item)">
               <i class="fa fa-lg ${item.completed ? 'fa-check-square-o' : 'fa-square-o'}"></i>
             </span>
-            <label class="${item.completed ? 'done': ''} ${item.archived ? 'archived' : ''}" click.delegate="editBegin(item)">
+            <label class="${item.completed ? 'done': ''} ${item.archived ? 'archived' : ''}" dblclick.delegate="editBegin(item)">
               ${item.title}
             </label>
             <a href="#" click.delegate="deleteItem(item)"><i class="glyphicon glyphicon-trash"></i></a>
