@@ -41,7 +41,7 @@ label {
   font-size: 0.40em;
 }
 
-section {
+section.todo {
     position: relative;
     left: 50%;
     margin-left: -275px;
@@ -50,45 +50,45 @@ section {
     width: 550px;
 }
 
-section .mark-all {
+section.todo .mark-all {
     position: relative;
     top: -15px;
 }
 
-section .mark-all label {
+section.todo .mark-all label {
     font-size: .25em;
 }
 
-section li {
+section.todo li {
     padding: 16px 0 16px 0;
     border-bottom: 1px solid rgb(191, 191, 191);
 }
 
-section li:last-child {
+section.todo li:last-child {
     border-bottom: 0;
 }
 
-section label.done {
+section.todo label.done {
       /*Hack for IE9 repaint bug*/
     padding: 1px;
     text-decoration: line-through;
 }
 
-section label.archived {
+section.todo label.archived {
     color: tan;
 }
 
-section li a {
+section.todo li a {
     float: right;
     display: none;
     text-decoration: none;
 }
 
-section li:hover a{
+section.todo li:hover a{
     display: block;
 }
 
-section li input[type="text"] {
+section.todo li input[type="text"] {
     font-size: 1em;
     width: 548px;
 }
@@ -168,22 +168,22 @@ footer a {
         padding: 4px;
     }
 
-    section {
+    section.todo {
         margin-left: -140px;
         font-size: 1.5em;
         width: 280px;
     }
 
-    section .mark-all {
+    section.todo .mark-all {
         position: relative;
         top: -10px;
     }
 
-    section .mark-all label {
+    section.todo .mark-all label {
         font-size: .50em;
     }
 
-    section li input[type="text"] {
+    section.todo li input[type="text"] {
         font-size: 1em;
         width: 270px;
     }
