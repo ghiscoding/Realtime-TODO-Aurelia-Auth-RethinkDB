@@ -26,7 +26,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   plugins: [
-    new AureliaWebpackPlugin(),
+    new AureliaWebpackPlugin( { nameExternalModules: false }),
     new ProvidePlugin({
       Promise: 'bluebird',
       $: 'jquery',

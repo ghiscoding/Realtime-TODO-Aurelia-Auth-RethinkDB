@@ -1,0 +1,25 @@
+section.todo label.done {
+    color: #d9d9d9;
+    text-decoration: line-through;
+}
+
+section.todo li {
+  cursor: pointer;
+  list-style-type: none;
+  padding: 16px 0 16px 0;
+  border-bottom: 1px solid rgb(191, 191, 191);
+}
+section.todo li a {
+  float: right;
+  display: none;
+  text-decoration: none;
+}
+
+section.todo li:hover a{
+  display: block;
+}
+
+.todo-timestamp {
+  color: grey;
+  display: block;
+}
