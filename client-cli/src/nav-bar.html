@@ -1,0 +1,13 @@
+<template bindable="router">
+  <nav class="navbar navbar-fixed-top navbar-light bg-faded">
+    <a class="navbar-brand" href="#">
+      <i class="fa fa-home"></i>
+      <span>${router.title}</span>
+    </a>
+      <ul class="nav navbar-nav">
+        <li repeat.for="row of router.navigation" class="nav-item ${row.isActive ? 'active' : ''}">
+          <a class="nav-link" data-target="#skeleton-navigation-navbar-collapse.in" href.bind="row.href">${row.title}</a>
+        </li>
+      </ul>
+</nav>
+</template>

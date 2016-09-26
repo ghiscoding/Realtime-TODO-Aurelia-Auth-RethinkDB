@@ -4,15 +4,17 @@ var path = require('path');
 var AureliaWebpackPlugin = require('aurelia-webpack-plugin');
 var ProvidePlugin = require('webpack/lib/ProvidePlugin');
 var nodeRoot = path.join( __dirname, 'node_modules' );
+var portApi = 4081;
+var portWeb = 4080;
 
 module.exports = {
   devServer: {
     host: '127.0.0.1',
-    port: 4081,
+    port: portWeb,
     historyApiFallback: true,
     proxy: {
       '/api/*': {
-        target: 'http://127.0.0.1:4080/'
+        target: `http://127.0.0.1:${portApi}/`
       }
     }
   },

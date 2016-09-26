@@ -11,6 +11,6 @@ module.exports = {
   tableTodo: "todos",
   tableAuth: "users",
   koa: {
-      port: 4080
+      port: 4081
   }
 }
