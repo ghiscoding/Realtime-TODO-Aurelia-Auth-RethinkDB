@@ -16,6 +16,7 @@
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
 node_modules
-cient/node_modules
+client-cli/node_modules
+client-wp/node_modules
 build
 src/jspm_packages
