@@ -1,7 +1,7 @@
 {
-  "name": "node-rethinkdb",
+  "name": "Realtime-TODO-Aurelia-RethinkDB",
   "version": "1.1.0",
-  "description": "Node RethinkDB Boilerplate",
+  "description": "Realtime TODO App with Aurelia and RethinkDB",
   "author": "Ghislain B.",
   "license": "MIT",
   "main": "app.js",
