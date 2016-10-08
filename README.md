@@ -1,19 +1,22 @@
 A Realtime TODO App with [Aurelia](http://aurelia.io), [Socket.IO](http://socket.io/), [Node.js](http://www.nodejs.org/), [Koa](http://koajs.com/) and [RethinkDB](https://www.rethinkdb.com/).
 
 A summary of tech stack:
-* **Client**: Aurelia, Twitter Bootstrap & Font-Awesome.
-* **Server**: Koa for RESTful API serving on Node.js.
-* **Socket.IO** along with JSON-RPC is used for real-time client-server communication and browser sync.
-* **RethinkDB** as the best database for realtime web.
+* **Client**: [Aurelia](http://aurelia.io/), [Twitter Bootstrap](http://getbootstrap.com/) & [Font-Awesome](http://fontawesome.io/).
+* **Server**: [Koa](http://koajs.com/) for RESTful API serving on [Node.js](https://nodejs.org/).
+* **[Socket.IO](http://socket.io/)** along with JSON-RPC is used for real-time client-server communication and browser sync.
+* **[RethinkDB](https://rethinkdb.com/)** as the best open-source database for the realtime web.
 
 ## Getting Started
-Make sure that you have Node.js v4.x or higher, and RethinkDB v2.3.x or higher installed on your computer.
+Make sure to have [Node.js](https://nodejs.org/) v4.x or higher, and [RethinkDB](https://rethinkdb.com/) v2.3.x or higher installed on your computer.
 
-**Note:** Since I added the `CLI` bundle afterward, it varies a little bit from the `WebPack` version. I wanted to test out the new [Bootstrap 4 alpha](http://v4-alpha.getbootstrap.com/) with `SASS` support, while the `WebPack` version uses the stable [Bootstrap 3](http://getbootstrap.com/).
+**Note:** Since I recently added the `CLI` bundle, it varies a little bit from the `WebPack` version. I wanted to test out the new [Bootstrap 4 alpha](http://v4-alpha.getbootstrap.com/) with `SASS` support and [Aurelia-CLI](https://github.com/aurelia/cli), while the [Aurelia-WebPack](https://github.com/aurelia/skeleton-navigation) version uses the stable [Bootstrap 3](http://getbootstrap.com/).
 
-#### Server (NodeJS - KOA)
+#### Git Clone (downloading)
 ```html
 git clone https://github.com/ghiscoding/Realtime-TODO-Aurelia-RethinkDB
+```
+#### Server (NodeJS - KOA)
+```html
 cd Realtime-TODO-Aurelia-RethinkDB
 npm install
 npm start
@@ -25,8 +28,8 @@ cd Realtime-TODO-Aurelia-RethinkDB/client-cli
 npm install
 au run --watch
 ```
-The `CLI` installation is built with `SASS` as pre-processor. To create and use any stylesheets, you will need to use the `scss` extension while calling them as `css` in your project (because they are transpiled when bundled, refer to `Aurelia CLI` for further information).
-With the use of `SASS`, I was then able to try out the new [Bootstrap 4](http://v4-alpha.getbootstrap.com/).
+_The `CLI` installation is built with `SASS` as pre-processor. To create and use any stylesheets, you will need to use the `scss` extension while calling them as `css` in your project (because they are transpiled when bundled, refer to [Aurelia CLI](http://aurelia.io/hub.html#/doc/article/aurelia/framework/latest/the-aurelia-cli) for further information).
+With the use of `SASS`, I was then able to try out the new [Bootstrap 4](http://v4-alpha.getbootstrap.com/)._
 
 #### Client (WebPack)
 ```html
@@ -54,16 +57,16 @@ Client configurations are specified in the [/client-cli/src/config.js](https://g
 #### Server
 Server configurations are specified in the [/server/config](https://github.com/ghiscoding/Realtime-TODO-Aurelia-RethinkDB/blob/master/server/config/) directory. When running `npm start` it will load the configuration that is defined in your `process.env.NODE_ENV` (environment variable, if unset it will use `development` by default).
 
-#### Default Ports
+### Default Ports
 Default ports for this application are `4080` for the WebUI and `4081` for the API (server) calls.
 You can change these ports by going into
 ##### CLI
-You can change them by going into [/client-cli/aurelia_project/run.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-RethinkDB/blob/master/client-cli/aurelia_project/run.js) via the variables `portApi` and `portWeb`.
+You can change the port by going into [/client-cli/aurelia_project/run.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-RethinkDB/blob/master/client-cli/aurelia_project/run.js) via the variables `portApi` and `portWeb`.
 ##### WebPack
-You can change them by going into [/client-wp/webpack.config.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-RethinkDB/blob/master/client-wp/webpack.config.js) via the variables `portApi` and `portWeb`.
+You can change the port by going into [/client-wp/webpack.config.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-RethinkDB/blob/master/client-wp/webpack.config.js) via the variables `portApi` and `portWeb`.
 
 ## Contributions
-Contributions are welcome, I use this project as placeholder and to help (and be helped by) people. So please feel free to make any PR. 
+Contributions are welcome, I use this project as placeholder to help (and be helped by) people. So please feel free to make any PR.
 
 ## License
 MIT
