@@ -17,7 +17,7 @@ git clone https://github.com/ghiscoding/Realtime-TODO-Aurelia-RethinkDB
 ```
 #### Server (NodeJS - KOA)
 ```html
-cd Realtime-TODO-Aurelia-RethinkDB
+cd Realtime-TODO-Aurelia-RethinkDB/server
 npm install
 npm start
 ```

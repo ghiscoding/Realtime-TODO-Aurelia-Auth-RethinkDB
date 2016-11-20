@@ -7,7 +7,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server/app.js"
+    "start": "nodemon --inspect app.js"
   },
   "dependencies": {
     "body-parser": "1.0.2",

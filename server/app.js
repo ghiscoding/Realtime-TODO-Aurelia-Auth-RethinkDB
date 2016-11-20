@@ -25,6 +25,7 @@ io.sockets.on("connection", function(socket) {
         if(item == null) {
           return null;
         }
+
         if (!!item.new_val && item.old_val == null) {
           socket.emit("todo_create", item.new_val);
         }else if (!!item.new_val && !!item.old_val) {

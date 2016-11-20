@@ -46,7 +46,7 @@ exports.createItem = function* () {
             {returnChanges: true}
         );
 
-        todo = result.changes[0].new_val; // todo now contains the previous todo + a field `id` and `createdAt`
+        todo = (result.changes.length > 0) ? result.changes[0].new_val : {}; // todo now contains the previous todo + a field `id` and `createdAt`
         this.body = JSON.stringify(todo);
     }
     catch(e) {
@@ -82,7 +82,7 @@ exports.updateItem = function* () {
             {returnChanges: true}
         );
 
-        result = result.changes[0].new_val;
+        result = (result.changes.length > 0) ? result.changes[0].new_val : {};
         this.body = JSON.stringify(result);
     }
     catch(e) {

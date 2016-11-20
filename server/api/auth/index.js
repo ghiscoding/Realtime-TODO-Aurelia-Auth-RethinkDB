@@ -11,7 +11,6 @@
 
 var controller = require('./auth.controller');
 var Router = require('koa-router');
-
 var router = new Router();
 
 // routes
