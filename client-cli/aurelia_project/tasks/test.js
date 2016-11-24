@@ -1,3 +1,4 @@
+import gulp from 'gulp';
 import {Server as Karma} from 'karma';
 import {CLIOptions} from 'aurelia-cli';
 

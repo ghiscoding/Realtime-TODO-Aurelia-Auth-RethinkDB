@@ -12,41 +12,39 @@
     "fileExtension": ".js",
     "options": {
       "plugins": [
-        "transform-class-properties",
-        "transform-decorators-legacy",
         "transform-es2015-modules-amd"
       ]
     },
-    "source": "src\\**\\*.js"
+    "source": "src/**/*.js"
   },
   "markupProcessor": {
     "id": "none",
     "displayName": "None",
     "fileExtension": ".html",
-    "source": "src\\**\\*.html"
+    "source": "src/**/*.html"
   },
   "cssProcessor": {
     "id": "sass",
     "displayName": "Sass",
     "fileExtension": ".scss",
-    "source": "src\\**\\*.scss"
+    "source": "src/**/*.scss"
   },
   "editor": {
-    "id": "atom",
-    "displayName": "Atom"
+    "id": "vscode",
+    "displayName": "Visual Studio Code"
   },
   "unitTestRunner": {
     "id": "karma",
     "displayName": "Karma",
-    "source": "test\\unit\\**\\*.js"
+    "source": "test/unit/**/*.js"
   },
   "paths": {
     "root": "src",
-    "resources": "src\\resources",
-    "elements": "src\\resources\\elements",
-    "attributes": "src\\resources\\attributes",
-    "valueConverters": "src\\resources\\value-converters",
-    "bindingBehaviors": "src\\resources\\binding-behaviors"
+    "resources": "src/resources",
+    "elements": "src/resources/elements",
+    "attributes": "src/resources/attributes",
+    "valueConverters": "src/resources/value-converters",
+    "bindingBehaviors": "src/resources/binding-behaviors"
   },
   "testFramework": {
     "id": "jasmine",
@@ -121,7 +119,6 @@
           "aurelia-templating-binding",
           "jquery",
           "moment",
-          "nprogress",
           "tether",
           {
             "name": "bootstrap",
