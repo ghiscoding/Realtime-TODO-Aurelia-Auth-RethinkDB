@@ -1,57 +1,27 @@
-# aurelia-skeleton-navigation-webpack
-
 ## Getting Started
 
-Before you start, make sure you have a working [NodeJS](http://nodejs.org/) environment, preferably with NPM 3.
-
-From the project folder, execute the following command:
-
-```shell
+### Client install
+```bash
+cd Realtime-TODO-Aurelia-Auth-RethinkDB/client-wp
 npm install
+npm start
 ```
 
-This will install all required dependencies, including a local version of Webpack that is going to
-build and bundle the app. There is no need to install Webpack globally.
+### Web UI
+If everything goes well, your application should now run locally on the port `4000`. So, in your browser just go to [http://localhost:4000](http://localhost:4000).
 
-To run the app execute the following command:
+## Configuration
+### Client
+Client configurations are specified in the [/client-cli/src/config.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/client-cli/src/config.js) file.
 
-```shell
-npm run dev
-```
+### Default Ports
+Default ports for this application are `4000` for the WebUI and `5000` for the API (server) calls.
+You can change these ports by going into
+#### WebPack
+You can change the port by going into [/client-wp/webpack.config.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/client-wp/webpack.config.js) via the variables `portBackEnd` and `portFrontEnd`. 
 
-This command starts the Webpack development server that serves the built bundles.
-You can now browse the skeleton app at http://localhost:3000. Changes in the code
-will automatically build and reload the app.
+## Contributions
+Contributions are welcome, I use this project as a placeholder to help (and be helped by) people. So please feel free to make any PR.
 
-> **Note**: when using NPM 2.x, you might encounter a run-time error like '_aureliaPal.DOM.injectStyles is not a function'.
-To work around this issue, execute the command *npm dedupe*.
-
-## Bundling
-
-To build a development bundle (output to /build) execute:
-
-```shell
-npm run build
-```
-
-To build an optimized, minified production bundle (output to /dist) execute:
-
-```shell
-npm run prod
-```
-
-The production bundle includes all files that are required for deployment.
-
-
-## Plugin configuration
-The aurelia-webpack-plugin has its own configuration options that you may need to set.
-Please see https://github.com/aurelia/webpack-plugin for more information.
-
-## Testing
-To run the unit tests:
-
-```shell
-npm run test
-```
-
-> **Note**: The e2e tests aren't working yet
+## License
+MIT
