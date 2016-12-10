@@ -52,7 +52,7 @@ We are using RethinkDB as our favorite NoSQL DB Server, you can use the default 
 Also make sure to create a `test` database (if not yet created) with a `todos` and `users` tables. Running the project and adding a new Todo, should in theory, create the table structure.
 
 ## OAuth Authentication with Aurelia-Auth
-We will use [Aurelia-Auth](https://github.com/paulvanbladel/aurelia-auth) for OAuth login so that we can use Google, Facebook, and more to login to our application. The configuration of the OAuth secret keys will be under `server/config/config.development.js`, this file is however excluded from the project (for obvious reason). Simply go under the folder `/server/config` and rename the file from `config.development.template.js` to `config.development.js` and then put in your OAuth secret keys.
+We will use [Aurelia-Auth](https://github.com/paulvanbladel/aurelia-auth) for OAuth login so that we can use (Google, Facebook, GitHub, LinkedIn, Windows Live or Twitter) to login to our application. The configuration of the OAuth secret keys will be under `server/config/config.development.js`, this file is however excluded from the project (for obvious reason). Simply go under the folder `/server/config` and rename the file from `config.development.template.js` to `config.development.js` and then put in your OAuth secret keys.
 
 ## Web UI
 If everything goes well, your application should now run locally on port `4000`. Open your browser and go to [http://localhost:4000](http://localhost:4000).
