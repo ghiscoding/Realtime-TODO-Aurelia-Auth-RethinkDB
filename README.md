@@ -65,7 +65,7 @@ Server configurations are specified in the [/server/config](https://github.com/g
 Default ports for this application are `4000` for the WebUI and `5000` for the API (server) calls.
 You can change these ports by going into
 #### CLI
-You can change the port by going into [/client-cli/aurelia_project/run.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/client-cli/aurelia_project/run.js) via the variables `portBackEnd` and `portFrontEnd`.
+You can change the port by going into [/client-cli/aurelia_project/tasks/run.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/client-cli/aurelia_project/tasks/run.js) via the variables `portBackEnd` and `portFrontEnd`.
 #### WebPack
 You can change the port by going into [/client-wp/webpack.config.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/client-wp/webpack.config.js) via the variables `portBackEnd` and `portFrontEnd`. 
 
