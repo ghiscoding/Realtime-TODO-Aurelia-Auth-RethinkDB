@@ -1,4 +1,4 @@
-<template bindable="router">
+<template>
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#skeleton-navigation-navbar-collapse">
@@ -15,9 +15,18 @@
 
     <div class="collapse navbar-collapse" id="skeleton-navigation-navbar-collapse">
       <ul class="nav navbar-nav">
-        <li repeat.for="row of router.navigation" class="${row.isActive ? 'active' : ''}">
+        <li repeat.for="row of router.navigation | authFilter: isAuthenticated" class="${row.isActive ? 'active' : ''}">
           <a data-toggle="collapse" data-target="#skeleton-navigation-navbar-collapse.in" href.bind="row.href">${row.title}</a>
         </li>
+      </ul>
+
+      <ul if.bind="!isAuthenticated" class="nav navbar-nav navbar-right">
+        <li><a href="/#/login">Login</a></li>
+        <li><a href="/#/signup">Sign up</a></li>
+      </ul>
+      <ul if.bind="isAuthenticated" class="nav navbar-nav navbar-right">
+        <li><a href="/#/profile">Welcome ${displayName}</a></li>
+        <li><a href="/#/logout">Logout</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">

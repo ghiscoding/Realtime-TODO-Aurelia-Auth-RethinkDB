@@ -30,8 +30,8 @@
     "source": "src/**/*.scss"
   },
   "editor": {
-    "id": "vscode",
-    "displayName": "Visual Studio Code"
+    "id": "atom",
+    "displayName": "Atom"
   },
   "unitTestRunner": {
     "id": "karma",
@@ -91,7 +91,7 @@
           "node_modules/bluebird/js/browser/bluebird.core.js",
           "node_modules/tether/dist/js/tether.min.js",
           "node_modules/whatwg-fetch/fetch.js",
-          "scripts/require.js"
+          "node_modules/requirejs/require.js"
         ],
         "dependencies": [
           "aurelia-binding",
@@ -120,27 +120,12 @@
           "jquery",
           "moment",
           "tether",
+          "text",
+          "extend",
           {
-            "name": "bootstrap",
-            "path": "../node_modules/bootstrap/dist",
-            "main": "js/bootstrap.min",
-            "deps": ["jquery", "tether"],
-            "exports": "$",
-            "resources": [
-              "css/bootstrap.css"
-            ]
-          },
-          {
-            "name": "nprogress",
-            "path": "../node_modules/nprogress",
-            "main": "nprogress",
-            "resources": [
-              "nprogress.css"
-            ]
-          },
-          {
-            "name": "text",
-            "path": "../scripts/text"
+            "name": "aurelia-auth",
+            "path": "../node_modules/aurelia-auth/dist/amd",
+            "main": "aurelia-auth"
           },
           {
             "name": "aurelia-templating-resources",
@@ -159,9 +144,27 @@
             "env": "dev"
           },
           {
+            "name": "bootstrap",
+            "path": "../node_modules/bootstrap/dist",
+            "main": "js/bootstrap.min",
+            "deps": ["jquery"],
+            "exports": "$",
+            "resources": [
+              "css/bootstrap.css"
+            ]
+          },
+          {
               "name": "lodash",
               "path": "../node_modules/lodash",
               "main": "lodash.min"
+          },
+          {
+            "name": "nprogress",
+            "path": "../node_modules/nprogress",
+            "main": "nprogress",
+            "resources": [
+              "nprogress.css"
+            ]
           },
           {
               "name": "socket.io-client",

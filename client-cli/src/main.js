@@ -1,5 +1,6 @@
 import 'bootstrap';
 import 'tether';
+import config from './authConfig';
 import environment from './environment';
 
 //Configure Bluebird Promises.
@@ -13,7 +14,10 @@ Promise.config({
 export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
-    .feature('resources');
+    .feature('resources')
+    .plugin('aurelia-auth', (baseConfig)=> {
+    	baseConfig.configure(config);
+    });
 
   if (environment.debug) {
     aurelia.use.developmentLogging();

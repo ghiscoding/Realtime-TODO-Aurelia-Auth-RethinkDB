@@ -1,20 +1,32 @@
-/**
- * Using Rails-like standard naming convention for endpoints.
- * GET     /items              ->  index
- * POST    /items              ->  create
- * GET     /items/:id          ->  show
- * PUT     /items/:id          ->  update
- * DELETE  /items/:id          ->  destroy
- */
-
 'use strict';
 
-var controller = require('./auth.controller');
-var Router = require('koa-router');
-var router = new Router();
+const authUtils = require('./authUtils');
+const meController = require('./me.controller');
+const github = require('./github');
+const google = require('./google');
+const facebook = require('./facebook');
+const linkedin = require('./linkedin');
+const live = require('./live');
+const twitter = require('./twitter');
+const Router = require('koa-router');
+const router = new Router({
+  prefix: '/auth'
+});
+
 
 // routes
-router.post('/api/auth', controller.login);
+router.post('/github', github.authenticate);
+router.post('/google', google.authenticate);
+router.post('/facebook', facebook.authenticate);
+router.post('/linkedin', linkedin.authenticate);
+router.post('/live', live.authenticate);
+router.post('/twitter', twitter.authenticate);
+
+//auth only appied for following paths, not the paths above
+router.use(['/me', '/unlink'], authUtils.ensureAuthenticated);
+router.get('/me', meController.getMe );
+router.put('/me', meController.updateMe );
+router.get('/unlink/:provider', meController.unlink);
 
 // export Router
 module.exports = router;

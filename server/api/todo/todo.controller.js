@@ -5,7 +5,7 @@ const parse = require('co-body');
 var parseBool = require("parsebool");
 
 // Load config for RethinkDB and koa
-const config = require("../../config");
+const config = require('../../config');
 
 // Import rethinkdbdash
 const r = require('rethinkdbdash')(config.rethinkdb);
@@ -13,7 +13,7 @@ const r = require('rethinkdbdash')(config.rethinkdb);
 // Retrieve all todo items
 exports.getAll = function* () {
     try {
-        var result = yield r.table(config.tableTodo).orderBy({index: r.desc("createdAt")});
+        var result = yield r.table(config.tableTodo).orderBy({index: r.desc("createdAt")}).filter({ userId: this.request.userId });
         this.body = JSON.stringify(result);
     }
     catch(e) {
@@ -25,7 +25,7 @@ exports.getAll = function* () {
 // Retrieve all todo items
 exports.getAllNonArchived = function* () {
     try {
-        var result = yield r.table(config.tableTodo).orderBy({index: r.desc("createdAt")}).filter({ archived: false });
+        var result = yield r.table(config.tableTodo).orderBy({index: r.desc("createdAt")}).filter({ archived: false, userId: this.request.userId });
         this.body = JSON.stringify(result);
     }
     catch(e) {
@@ -40,6 +40,7 @@ exports.createItem = function* () {
         var todo = yield parse(this);
         var result = yield r.table(config.tableTodo).insert(
             r.expr(todo).merge({
+                userId: this.request.userId,
                 archived: false,
                 createdAt: r.now() // The date r.now(0 gets computed on the server -- new Date() would have work fine too
             }),
@@ -78,7 +79,7 @@ exports.updateItem = function* () {
         var id = todo.id;
 
         var result = yield r.table(config.tableTodo).get(id).update(
-            {title: todo.title, completed: todo.completed, archived: false},
+            {title: todo.title, completed: todo.completed, archived: false, userId: this.request.userId},
             {returnChanges: true}
         );
 
@@ -94,7 +95,7 @@ exports.updateItem = function* () {
 // Archive all the todo items
 exports.archiveAllCompleted = function* () {
     try{
-        var result = yield r.table(config.tableTodo).filter({ completed: true, archived: false }).update(
+        var result = yield r.table(config.tableTodo).filter({ completed: true, archived: false, userId: this.request.userId }).update(
             { archived: true }
         );
         this.body = JSON.stringify({ archived: true, count: result.replaced });
@@ -108,7 +109,7 @@ exports.archiveAllCompleted = function* () {
 // Purge all the archived items
 exports.purgeArchiveItems = function* () {
     try{
-        var result = yield r.table(config.tableTodo).filter({ archived: true }).delete();
+        var result = yield r.table(config.tableTodo).filter({ archived: true, userId: this.request.userId }).delete();
         this.body = JSON.stringify({ purged: true, count: result.deleted });
     }
     catch(e) {
@@ -121,7 +122,7 @@ exports.purgeArchiveItems = function* () {
 exports.toggleAllItemToComplete = function* () {
     try{
         var flag = parseBool(this.params.flag);
-        var result = yield r.table(config.tableTodo).filter({ completed: flag }).update(
+        var result = yield r.table(config.tableTodo).filter({ completed: flag, userId: this.request.userId }).update(
             {completed: !flag} // toggle the inverse flag
         );
         this.body = JSON.stringify({ completed: !flag, count: result.replaced });

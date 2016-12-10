@@ -5,3 +5,11 @@ node_modules
 scripts/app-bundle.js
 scripts/app-bundle.js.map
 scripts/vendor-bundle.js
+
+node_modules
+jspm_packages
+bower_components
+.idea
+.DS_STORE
+/dist
+build/reports

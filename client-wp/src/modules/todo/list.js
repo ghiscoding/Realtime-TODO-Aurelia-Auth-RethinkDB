@@ -3,7 +3,7 @@ import _ from 'lodash';
 import {TodoData} from "./todoData";
 import io from 'socket.io-client';
 
-var socket = io('http://localhost:4080');
+var socket = io('http://localhost:5000/todo-socket');
 
 @inject(TodoData, ObserverLocator)
 export class List {

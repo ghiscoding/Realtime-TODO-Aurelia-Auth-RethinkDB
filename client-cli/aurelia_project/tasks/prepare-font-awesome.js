@@ -5,6 +5,7 @@ import project from '../aurelia.json';
 
 export default function prepareFontAwesome() {
   const source = 'node_modules/font-awesome';
+  console.log(source);
 
   const taskCss = gulp.src(`${source}/css/font-awesome.min.css`)
     .pipe(changedInPlace({ firstPass: true }))

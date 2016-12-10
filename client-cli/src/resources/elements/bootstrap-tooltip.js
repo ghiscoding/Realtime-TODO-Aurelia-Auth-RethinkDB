@@ -13,6 +13,6 @@ export class BootstrapTooltip {
   }
 
   unbind() {
-    $(this.element).tooltip('destroy');
+    $(this.element).tooltip('dispose');
   }
 }

@@ -1,21 +1,35 @@
-/*eslint-disable no-var,no-unused-vars*/
-var Promise = require('bluebird').config({longStackTraces: false, warnings: false}); // Promise polyfill for IE11
-
-import { bootstrap } from 'aurelia-bootstrapper-webpack';
-import AuthService from './AuthService';
-
 import 'bootstrap';
+import 'tether';
+import config from './authConfig';
+import environment from './environment';
+import { bootstrap } from 'aurelia-bootstrapper-webpack';
+
+//Configure Bluebird Promises.
+//Note: You may want to use environment-specific configuration.
+Promise.config({
+  warnings: {
+    wForgottenReturn: false
+  }
+});
 
 bootstrap(function(aurelia) {
   aurelia.use
     .standardConfiguration()
     .developmentLogging()
-    .feature('resources');
+    .feature('resources')
+    .plugin('aurelia-auth', (baseConfig)=> {
+    	baseConfig.configure(config);
+    });
+
+    if (environment.debug) {
+      aurelia.use.developmentLogging();
+    }
+
+    if (environment.testing) {
+      //aurelia.use.plugin('aurelia-testing');
+    }
 
     aurelia.start().then(() => {
-      var auth = aurelia.container.get(AuthService);
-      //let root = auth.isAuthenticated() ? 'app' : 'login';
-      let root = 'app'; // to use Login credentials, uncomment previous line of code and make sure to have a valid user
-      aurelia.setRoot(root, document.body);
+      aurelia.setRoot('app', document.body);
     });
 });

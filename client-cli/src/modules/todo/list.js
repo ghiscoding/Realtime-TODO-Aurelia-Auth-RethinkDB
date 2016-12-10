@@ -3,7 +3,7 @@ import _ from 'lodash';
 import {TodoData} from "./todoData";
 import io from 'socket.io-client';
 
-var socket = io('http://localhost:4081');
+var socket = io('http://localhost:5000/todo-socket');
 
 @inject(TodoData, ObserverLocator)
 export class List {
@@ -150,6 +150,7 @@ export class List {
 
     // update item
     socket.on("todo_update", data => {
+      console.log('socket.io-client, todo update');
       let pos = arrayFindObjectIndex(this.items, 'id', data.id);
       if(pos >= 0) {
         this.items.splice(pos, 1, data);

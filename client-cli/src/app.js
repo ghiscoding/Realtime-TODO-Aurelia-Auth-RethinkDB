@@ -1,12 +1,19 @@
-export class App {
-  configureRouter(config, router) {
-    config.title = 'Aurelia';
-    config.map([
-      { route: ['', 'welcome'], name: 'home',     moduleId: 'welcome',                nav: true, title: 'Welcome' },
-      { route: 'contacts',      name: 'contacts', moduleId: 'modules/contacts/index', nav: true,  title: 'Contacts' },
-      { route: 'todo',          name: 'TODO',     moduleId: 'modules/todo/index',     nav: true,  title: 'TODO' }
-    ]);
+import {AuthorizeStep} from 'aurelia-auth';
+import {inject} from 'aurelia-framework';
+import {FetchConfig} from 'aurelia-auth';
+import {Router} from 'aurelia-router';
+import AppRouterConfig from './app.router.config';
 
-    this.router = router;
-  }
+@inject(Router, FetchConfig, AppRouterConfig)
+export class App {
+  constructor(router, fetchConfig, appRouterConfig) {
+        this.router = router;
+        this.appRouterConfig = appRouterConfig;
+        this.fetchConfig = fetchConfig;
+    }
+
+    activate() {
+        this.appRouterConfig.configure();
+        this.fetchConfig.configure();
+    }
 }

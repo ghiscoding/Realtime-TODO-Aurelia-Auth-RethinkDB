@@ -1,108 +1,82 @@
 import {inject} from "aurelia-framework";
-import {HttpClient} from "aurelia-http-client";
+import {HttpClient, json} from 'aurelia-fetch-client';
 
-let baseUrl = "/api/todos";
+let baseUrl = "/api/todo";
 
 @inject(HttpClient)
 export class TodoData {
+  baseUrl = 'api/todo';
 
-  constructor(HttpClient) {
-    //let headers = {Authorization: 'Bearer ' + sessionService.getCurrentToken()};
-    let headers = {};
-    headers['Accepts'] = 'application/json';
-    headers['Content-Type'] = 'application/x-www-form-urlencoded';
-
-    HttpClient.configure(http => {
-        http.withHeader('Content-Type', 'application/json');
-        http.withBaseUrl(baseUrl);
-    });
-
-    this.headers = headers;
-    this.http = HttpClient;
+  constructor(httpClient) {
+    this.http = httpClient;
   }
 
   getById(id) {
-    return this.http.get(`${id}`)
-      .then(response => {
-        return response.content;
-      });
+    return this.http.fetch(`${this.baseUrl}/${id}`)
+      .then(response =>  response.json());
   }
 
   getAll(includeArchived) {
     let url = (!!includeArchived) ? '' : 'archived';
-    return this.http.get(url, {headers: this.headers})
-      .then(response => {
-        return response.content;
-      });
+    return this.http.fetch(`${this.baseUrl}/${url}`)
+      .then(response =>  response.json());
   }
 
   create(todo) {
-    var request = this.http.createRequest();
-    request.asPost()
-      //TODO check if withHeader still necessary
-      .withHeader("Accept", "application/json")
-      .withHeader("Content-Type", "application/json")
-      .withContent(todo);
-
-    return request.send().then(response => response.content);
+    return this.http.fetch(`${this.baseUrl}`, {
+      method: 'post',
+      body: json(todo)
+    })
+    .then(response => response.json());
   }
 
   delete(id) {
-      return this.http.createRequest(`${id}`).asDelete().send().then(response => id);
+    return this.http.fetch(`${this.baseUrl}/${id}`, {
+      method: 'post',
+      body: json(todo)
+    })
+    .then(response => id);
   }
 
   save(todo) {
-    var request = this.http.createRequest();
     if (todo.id) {
-      request.asPut()
-        .withUrl(`${todo.id}`)
-        //TODO check if withHeader still necessary
-        .withHeader("Accept", "application/json")
-        .withHeader("Content-Type", "application/json")
-        .withContent(todo);
+      return this.http.fetch(`${this.baseUrl}/${todo.id}`, {
+        method: 'put',
+        body: json(todo)
+      })
+      .then(response => response.json());
     }
     else {
-      request.asPost()
-        //TODO check if withHeader still necessary
-        .withHeader("Accept", "application/json")
-        .withHeader("Content-Type", "application/json")
-        .withContent(todo);
+      return this.http.fetch(`${this.baseUrl}`, {
+        method: 'post',
+        body: json(todo)
+      })
+      .then(response => response.json());
     }
-
-    return request.send().then(response => response.content);
   }
 
   archiveAllCompleted() {
-    var request = this.http.createRequest();
-    request.asPost()
-      .withUrl(`archive-all-completed`)
-      //TODO check if withHeader still necessary
-      .withHeader("Accept", "application/json")
-      .withHeader("Content-Type", "application/json");
-
-    return request.send().then(response => response.content);
+    return this.http.fetch(`${this.baseUrl}/archive-all-completed`, {
+      method: 'post',
+      body: json(todo)
+    })
+    .then(response => response.json());
   }
 
   purgeArchiveItems() {
-    var request = this.http.createRequest();
-    request.asPost()
-      .withUrl(`purge-archived-items`)
-      //TODO check if withHeader still necessary
-      .withHeader("Accept", "application/json")
-      .withHeader("Content-Type", "application/json");
-
-    return request.send().then(response => response.content);
+    return this.http.fetch(`${this.baseUrl}/purge-archived-items`, {
+      method: 'post',
+      body: json(todo)
+    })
+    .then(response => response.json());
   }
 
   markAllCompleted(flag) {
-    var request = this.http.createRequest();
-    request.asPost()
-      .withUrl(`mark-all-completed/${flag}`)
-      //TODO check if withHeader still necessary
-      .withHeader("Accept", "application/json")
-      .withHeader("Content-Type", "application/json");
-
-    return request.send().then(response => response.content);
+    return this.http.fetch(`${this.baseUrl}/mark-all-completed/${flag}`, {
+      method: 'post',
+      body: json(todo)
+    })
+    .then(response => response.json());
   }
 
 }

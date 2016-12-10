@@ -1,6 +1,3 @@
-//import '../../../styles/reset.css';
-//import '../../../styles/todos.css';
-
 export class Index {
   configureRouter(config, router) {
     config.map([

@@ -1,3 +1,7 @@
-export function configure(aurelia) {
-  aurelia.globalResources("./date-format");
+export function configure(config) {
+  config.globalResources([
+    //'./elements/loading-indicator',
+    './value-converters/authenticatedFilter',
+    './value-converters/date-format'
+  ]);
 }

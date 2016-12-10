@@ -5,16 +5,27 @@ import project from '../aurelia.json';
 import build from './build';
 import {CLIOptions} from 'aurelia-cli';
 import url from 'url';
+import loadPlugin from 'gulp-load-plugins';
 import proxy from 'proxy-middleware';
+import nodemon from 'gulp-nodemon';
 
-var portApi = 4081;
-var portWeb = 4080;
+var portBackEnd = 5000;
+var portFrontEnd = 4000;
+var plugin = new loadPlugin({lazy: true});
 
-var proxyOptions = url.parse(`http://localhost:${portApi}/api`);
-    proxyOptions.route = '/api';
+var proxyOptionsAccessControl = function(req,res, next){
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      next();
+};
 
-function log(message) {
-  console.log(message); //eslint-disable-line no-console
+var proxyOptionsApiRoute = url.parse(`http://localhost:${portBackEnd}/api`);
+    proxyOptionsApiRoute.route = '/api';
+
+var proxyOptionsAuthRoute = url.parse(`http://localhost:${portBackEnd}/auth`);
+    proxyOptionsAuthRoute.route = '/auth';
+
+function log(msg) {
+    plugin.util.log(plugin.util.colors.cyan(msg));
 }
 
 function onChange(path) {
@@ -32,20 +43,19 @@ let serve = gulp.series(
     browserSync({
       online: false,
       open: false,
-      port: portWeb,
+      port: portFrontEnd,
       notify: true,
       logLevel: 'silent',
       server: {
         baseDir: ['.'],
         middleware: [
-          proxy(proxyOptions), function(req, res, next) {
-          next();
-        },
-        historyApiFallback(), function(req, res, next) {
-          res.setHeader('Access-Control-Allow-Origin', '*');
-          next();
-        }
-      ]
+          proxyOptionsAccessControl,
+          proxy(proxyOptionsApiRoute),
+          proxy(proxyOptionsAuthRoute)
+        ]
+      },
+      socket: {
+        namespace: `http://localhost:${portFrontEnd}/bs`
       }
     }, function(err, bs) {
       let urls = bs.options.get('urls').toJS();
@@ -61,6 +71,33 @@ let refresh = gulp.series(
   reload
 );
 
+let node = function() {
+    var nodeOptions = {
+      execMap: {
+        "js": "node --inspect --harmony"
+      },
+      script: './../server/app.js',
+      delayTime: 1,
+      watch: ["./../server/**/*", "**/*"]
+    };
+
+    nodemon(nodeOptions)
+        .on('change', function () {
+            log('nodemon detected change...!')
+        })
+        .on('restart', function () {
+            log('node application is restarted!')
+        })
+        .on('restart', function(ev) {
+            log('*** nodemon restarted');
+            log('files changed on restart:\n' + ev);
+            setTimeout(function() {
+                browserSync.notify('reloading now ...');
+                browserSync.reload({stream: false});
+            }, 1000);
+        })
+};
+
 let watch = function() {
   gulp.watch(project.transpiler.source, refresh).on('change', onChange);
   gulp.watch(project.markupProcessor.source, refresh).on('change', onChange);
@@ -69,7 +106,18 @@ let watch = function() {
 
 let run;
 
-if (CLIOptions.hasFlag('watch')) {
+if (CLIOptions.hasFlag('node') && CLIOptions.hasFlag('watch')) {
+  run = gulp.series(
+    serve,
+    node,
+    watch
+  );
+} else if (CLIOptions.hasFlag('node')) {
+  run = gulp.series(
+    node,
+    serve
+  );
+} else if (CLIOptions.hasFlag('watch')) {
   run = gulp.series(
     serve,
     watch

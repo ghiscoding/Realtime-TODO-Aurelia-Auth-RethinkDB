@@ -9,20 +9,23 @@
 
 'use strict';
 
-var controller = require('./todo.controller');
-var Router = require('koa-router');
-
-var router = new Router();
+const authUtils = require('../../auth/authUtils');
+const controller = require('./todo.controller');
+const Router = require('koa-router');
+const router = new Router({
+  prefix: '/api/todo'
+});
 
 // routes
-router.get('/api/todos/archived', controller.getAllNonArchived);
-router.get('/api/todos', controller.getAll);
-router.post('/api/todos', controller.createItem);
-router.put('/api/todos/:id', controller.updateItem);
-router.post('/api/todos/archive-all-completed', controller.archiveAllCompleted);
-router.post('/api/todos/purge-archived-items', controller.purgeArchiveItems);
-router.post('/api/todos/mark-all-completed/:flag', controller.toggleAllItemToComplete);
-router.delete('/api/todos/:id', controller.deleteItem);
+router.use(['/', '/archived'], authUtils.ensureAuthenticated);
+router.get('/archived', controller.getAllNonArchived);
+router.get('/', controller.getAll);
+router.post('/', controller.createItem);
+router.put('/:id', controller.updateItem);
+router.post('/archive-all-completed', controller.archiveAllCompleted);
+router.post('/purge-archived-items', controller.purgeArchiveItems);
+router.post('/mark-all-completed/:flag', controller.toggleAllItemToComplete);
+router.delete('/:id', controller.deleteItem);
 
 // export Router
 module.exports = router;
