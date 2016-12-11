@@ -1,4 +1,3 @@
-import {AuthorizeStep} from 'aurelia-auth';
 import {inject} from 'aurelia-framework';
 import {FetchConfig} from 'aurelia-auth';
 import {Router} from 'aurelia-router';
@@ -6,7 +5,7 @@ import AppRouterConfig from './app.router.config';
 
 @inject(Router, FetchConfig, AppRouterConfig)
 export class App {
-  constructor(router, fetchConfig, appRouterConfig) {
+    constructor(router, fetchConfig, appRouterConfig) {
         this.router = router;
         this.appRouterConfig = appRouterConfig;
         this.fetchConfig = fetchConfig;

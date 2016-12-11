@@ -2,18 +2,16 @@ import {AuthService} from 'aurelia-auth';
 import {inject} from 'aurelia-framework';
 @inject(AuthService )
 
-export class Login{
-	constructor(auth){
+export class Login {
+	constructor(auth) {
 		this.auth = auth;
 	};
 
 	heading = 'Login';
+	email = '';
+	password = '';
 
-	email='';
-	password='';
-	login(){
-
-
+	login() {
 	    var creds = "grant_type=password&email=" + this.email + "&password=" + this.password;
 		return this.auth.login(this.email, this.password)
         //return this.auth.login(creds)
@@ -28,11 +26,10 @@ export class Login{
 		});
 	};
 
-	authenticate(name){
+	authenticate(name) {
 		return this.auth.authenticate(name, false, null)
-		.then((response)=>{
+			.then((response)=>{
 			//console.log(response);
-		});
-
+			});
 	}
 }
