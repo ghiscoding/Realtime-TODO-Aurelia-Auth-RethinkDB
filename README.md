@@ -10,7 +10,7 @@ A summary of tech stack:
 Make sure to have [Node.js](https://nodejs.org/) v4.x or higher, and [RethinkDB](https://rethinkdb.com/) v2.3.x or higher installed on your computer.
 
 #### Note
-The `CLI` was created afterward and it varies a little bit from the `WebPack` version. I wanted to test out the new [Bootstrap 4 alpha](http://v4-alpha.getbootstrap.com/) with `SASS` support and [Aurelia-CLI](https://github.com/aurelia/cli), while the [Aurelia-WebPack](https://github.com/aurelia/skeleton-navigation) version uses the stable [Bootstrap 3](http://getbootstrap.com/). The `WebPack` version is however not really up to date, if someone want to update all packages to latest and test it out, then please make a PR.
+The `CLI` version was created afterward and it varies a little bit compare to the `WebPack` one. The main difference is that, I wanted to try out the new [Bootstrap 4 alpha](http://v4-alpha.getbootstrap.com/) with `SASS` support with [Aurelia-CLI](https://github.com/aurelia/cli), while the [Aurelia-WebPack](https://github.com/aurelia/skeleton-navigation) on the other end uses the stable [Bootstrap 3](http://getbootstrap.com/). The `WebPack` version is however not really up to date (compare to the Aurelia Skeleton), if someone want to try it out and update, then please make PR.
 
 ### Git Clone (downloading)
 ```bash
