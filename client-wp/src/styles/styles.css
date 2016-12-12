@@ -68,6 +68,11 @@ section {
   max-width: 425px;
 }
 
+.timestamp {
+  color: grey;
+  font-style: italic;
+}
+
 /* animate page transitions */
 section.au-enter-active {
   -webkit-animation: fadeInRight 1s;

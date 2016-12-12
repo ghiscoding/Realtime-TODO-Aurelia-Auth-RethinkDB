@@ -93,6 +93,8 @@ export class List {
   }
 
   deleteItem (item) {
+    let confirmed = confirm(`Are you sure you want to delete this TODO item: ${item.title}?`);
+    if(confirmed) {
 	    this.service.delete(item.id).then(data => {
         let pos = arrayFindObjectIndex(this.items, 'id', data.id);
         if(pos >= 0) {
@@ -101,6 +103,7 @@ export class List {
       }).catch(function() {
           alert("Failed to delete this TODO");
       });
+    }
 	}
 
   editBegin(item) {

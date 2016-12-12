@@ -17,9 +17,8 @@ export default class{
 	    config.map([
 				{ route: ['','welcome'],  moduleId: './welcome',      				nav: true, 	title:'Welcome' },
 	      { route: 'child-router',  moduleId: './child-router', 				nav: true, 	title:'Child Router' },
-				{ route: 'customer',      moduleId: './customer', nav: true, 	title:'CRM', 				auth:true },
-				{ route: 'customer2',     moduleId: './customer2',      			nav: true, 	title:'CRM Custom', auth:true },				
-	      { route: 'signup',        moduleId: 'modules/auth/signup',    nav: false, title:'Signup' },
+				{ route: 'customer',      moduleId: 'modules/customer/index', nav: true, 	title:'CRM', 				auth:true },
+				{ route: 'signup',        moduleId: 'modules/auth/signup',    nav: false, title:'Signup' },
 				{ route: 'login',         moduleId: 'modules/auth/login',     nav: false, title:'Login' },
 				{ route: 'logout',        moduleId: 'modules/auth/logout',    nav: false, title:'Logout' },
 				{ route: 'profile',       moduleId: 'modules/auth/profile',   nav: false, title:'Profile' },
