@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/aurelia/skeleton-navigation#readme",
   "dependencies": {
-    "aurelia-auth": "^3.0.4",
+    "aurelia-auth": "^3.0.5",
     "aurelia-bootstrapper-webpack": "^1.1.0",
     "aurelia-event-aggregator": "^1.0.1",
     "aurelia-fetch-client": "^1.0.0",
