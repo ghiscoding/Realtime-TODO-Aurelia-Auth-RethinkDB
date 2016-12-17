@@ -78,7 +78,7 @@ let node = function() {
       },
       script: './../server/app.js',
       delayTime: 1,
-      watch: ["./../server/**/*", "**/*"]
+      watch: ["./../server/**/*", "**/server/*"]
     };
 
     nodemon(nodeOptions)
@@ -99,6 +99,7 @@ let node = function() {
 };
 
 let watch = function() {
+  console.log('add client watch');
   gulp.watch(project.transpiler.source, refresh).on('change', onChange);
   gulp.watch(project.markupProcessor.source, refresh).on('change', onChange);
   gulp.watch(project.cssProcessor.source, refresh).on('change', onChange);
@@ -109,8 +110,7 @@ let run;
 if (CLIOptions.hasFlag('node') && CLIOptions.hasFlag('watch')) {
   run = gulp.series(
     serve,
-    node,
-    watch
+    gulp.parallel(node, watch)
   );
 } else if (CLIOptions.hasFlag('node')) {
   run = gulp.series(
