@@ -1,6 +1,7 @@
 import {inject} from "aurelia-framework";
 import {CustomerData} from "./customerData";
 import {Router} from "aurelia-router";
+import { default as swal } from 'sweetalert2';
 //import {Validation} from "aurelia-validation";
 
 @inject(CustomerData, Router)
@@ -48,14 +49,27 @@ export class Edit {
   };
 
   delete() {
-    let confirmed = confirm(`Are you sure you want to delete the customer: ${this.customer.firstName} ${this.customer.lastName}?`);
-    if(confirmed) {
-      this.data.delete(this.customer)
+    let self = this;
+
+    swal({
+      title: `Are you sure you want to delete this customer?`,
+      text: `${this.customer.firstName} ${this.customer.lastName}`,
+      type: 'question',
+      animation: false,
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      width: 750
+    }).then(function () {
+      self.data.delete(self.customer)
         .then(customer => {
-          this.original = customer;
-          this.router.navigate("list");
-        });
-    }
+          self.original = customer;
+          self.router.navigate("list");
+        }).catch(function() {
+          swal('Oops...', 'Something went wrong!', 'error');
+      });
+      swal('Deleted!', 'Your customer has been deleted.', 'success');
+    });
   };
 
   areEqual(obj1, obj2) {

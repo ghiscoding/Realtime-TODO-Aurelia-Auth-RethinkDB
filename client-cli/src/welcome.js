@@ -1,15 +1,13 @@
-import {computedFrom} from 'aurelia-framework';
 import {ObserverLocator} from 'aurelia-framework';  // or 'aurelia-framework'
 import {inject} from 'aurelia-framework';
 @inject(ObserverLocator )
-export class Welcome{
+export class Welcome {
 
   constructor(observerLocator){
     this.observerLocator = observerLocator;
     this.heading = 'Welcome to the Aurelia-CLI Navigation App!';
     this.firstName = 'John';
     this.lastName = 'Doe';
-   ;
   }
 
   //Getters can't be observed with Object.observe, so they must be dirty checked.
@@ -21,8 +19,8 @@ export class Welcome{
   }
 
   activate(){
-    this.subscription = this.observerLocator.getObserver(this,'lastName')
-    .subscribe((newValue,oldValue)=>{
+    this.subscription = this.observerLocator.getObserver(this, 'lastName')
+    .subscribe((newValue, oldValue)=>{
       console.log(`new value : ${newValue}  old value : ${oldValue}`);
     });
   }

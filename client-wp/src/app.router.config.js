@@ -16,13 +16,12 @@ export default class{
 
 	    config.map([
 				{ route: ['','welcome'],  moduleId: './welcome',      				nav: true, 	title:'Welcome' },
-	      { route: 'customer',      moduleId: './customer',       			nav: true, 	title:'CRM', 				auth:true },
-				{ route: 'customer2',     moduleId: './customer2',      			nav: true, 	title:'CRM Custom', auth:true },
-				{ route: 'child-router',  moduleId: './child-router', 				nav: true, 	title:'Child Router' },
-	      { route: 'signup',        moduleId: './signup',       				nav: false, title:'Signup' },
-				{ route: 'login',         moduleId: './login',       					nav: false, title:'Login' },
-				{ route: 'logout',        moduleId: './logout',       				nav: false, title:'Logout' },
-				{ route: 'profile',       moduleId: './profile',       				nav: false, title:'Profile' },
+	      { route: 'child-router',  moduleId: './child-router', 				nav: true, 	title:'Child Router' },
+				{ route: 'customer',      moduleId: 'modules/customer/index', nav: true, 	title:'CRM', 				auth:true },
+				{ route: 'signup',        moduleId: 'modules/auth/signup',    nav: false, title:'Signup' },
+				{ route: 'login',         moduleId: 'modules/auth/login',     nav: false, title:'Login' },
+				{ route: 'logout',        moduleId: 'modules/auth/logout',    nav: false, title:'Logout' },
+				{ route: 'profile',       moduleId: 'modules/auth/profile',   nav: false, title:'Profile' },
 	      { route: 'contacts',      moduleId: 'modules/contacts/index', nav: true,  title: 'Contacts', 	auth: true },
 	      { route: 'todo',          moduleId: 'modules/todo/index',     nav: true,  title: 'TODO', 			auth:true }
 	    ]);

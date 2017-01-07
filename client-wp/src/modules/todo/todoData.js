@@ -32,8 +32,7 @@ export class TodoData {
 
   delete(id) {
     return this.http.fetch(`${this.baseUrl}/${id}`, {
-      method: 'post',
-      body: json(todo)
+      method: 'delete'
     })
     .then(response => id);
   }

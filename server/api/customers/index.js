@@ -4,7 +4,7 @@ const authUtils = require('../../auth/authUtils');
 const controller = require('./customer.controller');
 const Router = require('koa-router');
 const router = new Router({
-  prefix: '/api/customer'
+  prefix: '/api/customers'
 });
 
 router.use(authUtils.ensureAuthenticated); //auth only appied for following paths, not the paths above
@@ -14,7 +14,6 @@ router.post('/', controller.create);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
-router.get('/dto/quickList',controller.myMethod);
 
 // export Router
 module.exports = router;

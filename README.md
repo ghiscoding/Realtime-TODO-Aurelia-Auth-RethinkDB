@@ -17,6 +17,15 @@ The `CLI` version was created afterward and it varies a little bit compare to th
 git clone https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB
 ```
 
+### OAuth Authentication with Aurelia-Auth
+We will use [Aurelia-Auth](https://github.com/paulvanbladel/aurelia-auth) for OAuth login so that we can use (Google, Facebook, GitHub, LinkedIn, Windows Live or Twitter) to login to our application. The configuration of the OAuth secret keys will be under `server/config/config.development.js`, this file is however excluded from the project (for obvious reason). Simply go under the folder `/server/config` and rename the file from `config.development.template.js` to `config.development.js` and then put in your OAuth secret keys.
+
+The `Aurelia-Auth`is based on `Satellizer` and uses the same configurations, so you could refer to their [GitHub Satellizer](https://github.com/sahat/satellizer) repo for more details.
+
+### Database (RethinkDB)
+We are using RethinkDB as our favorite NoSQL DB Server, you can use the default port of `28015`.
+Also make sure to create a `test` database (if not yet created) with a `todos` and `users` tables. Running the project and adding a new Todo, should in theory, create the table structure.
+
 ### Client (CLI)
 ```bash
 cd Realtime-TODO-Aurelia-Auth-RethinkDB/client-cli
@@ -45,14 +54,7 @@ npm install
 npm start
 ```
 
-_**Note**: running `npm start` is optional if you already started the client (CLI) with the `--node` option._
-
-### Database (RethinkDB)
-We are using RethinkDB as our favorite NoSQL DB Server, you can use the default port of `28015`.
-Also make sure to create a `test` database (if not yet created) with a `todos` and `users` tables. Running the project and adding a new Todo, should in theory, create the table structure.
-
-## OAuth Authentication with Aurelia-Auth
-We will use [Aurelia-Auth](https://github.com/paulvanbladel/aurelia-auth) for OAuth login so that we can use (Google, Facebook, GitHub, LinkedIn, Windows Live or Twitter) to login to our application. The configuration of the OAuth secret keys will be under `server/config/config.development.js`, this file is however excluded from the project (for obvious reason). Simply go under the folder `/server/config` and rename the file from `config.development.template.js` to `config.development.js` and then put in your OAuth secret keys.
+_**Note**: running the server here is optional, since you might have already started it with the `--node` option with CLI client._
 
 ## Web UI
 If everything goes well, your application should now run locally on port `4000`. Open your browser and go to [http://localhost:4000](http://localhost:4000).
@@ -70,7 +72,7 @@ You can change the port by going into [/client-cli/aurelia_project/tasks/run.js]
 You can change the port by going into [/client-wp/webpack.config.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/client-wp/webpack.config.js) via the variables `portBackEnd` and `portFrontEnd`. 
 
 ## Contributions
-Contributions are welcome, I use this project as a placeholder to help (and be helped by) people. So please feel free to make any PR (Pull Request).
+Contributions are welcome. I use this project as a placeholder to help (and be helped by) people, which is all about the open community. So please feel free to make any PR (Pull Request).
 
 ## License
 MIT

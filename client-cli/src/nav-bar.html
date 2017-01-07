@@ -1,36 +1,25 @@
 <template>
-  <header class="navbar navbar-fixed-top navbar-light bg-faded bd-navbar">
-  <div class="container">
-    <nav>
-    <nav>
-      <div class="clearfix">
-        <button class="navbar-toggler float-md-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#bd-main-nav" aria-controls="bd-main-nav" aria-expanded="false" aria-label="Toggle navigation"></button>
-        <a class="navbar-brand hidden-lg-up" href="/">
-          <span>${router.title}</span>
-        </a>
-      </div>
-      <div class="collapse navbar-toggleable-md" id="bd-main-nav">
-        <a class="navbar-brand" href="#">
-          <i class="fa fa-home"></i>
-          <span>${router.title}</span>
-        </a>
-        <ul class="nav navbar-nav">
-          <li repeat.for="row of router.navigation | authFilter: isAuthenticated" class="nav-item ${row.isActive ? 'active' : ''}">
-            <a class="nav-link ${row.isActive ? 'active' : ''}" data-target="#skeleton-navigation-navbar-collapse.in" href.bind="row.href">${row.title}</a>
-          </li>
-        </ul>
+  <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse mb-4">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">${router.title}</a>
 
-        <ul if.bind="!isAuthenticated" class="nav navbar-nav float-xs-right">
-          <li class="nav-item"><a class="nav-link" href="/#/login">Login</a></li>
-          <li class="nav-item"><a class="nav-link" href="/#/signup">Sign up</a></li>
-        </ul>
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav mr-auto">
+        <li repeat.for="row of router.navigation | authFilter: isAuthenticated" class="nav-item ${row.isActive ? 'active' : ''}">
+          <a class="nav-link" href.bind="row.href">${row.title}</a>
+        </li>
+      </ul>
+      <ul if.bind="!isAuthenticated" class="navbar-nav ">
+        <li class="nav-item"><a class="nav-link" href="/#/login">Login</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#/signup">Sign up</a></li>
+      </ul>
 
-        <ul if.bind="isAuthenticated" class="nav navbar-nav navbar-right float-xs-right">
-          <li class="nav-item"><a class="nav-link" href="/#/profile">Welcome ${displayName}</a></li>
-          <li class="nav-item"><a class="nav-link" href="/#/logout">Logout</a></li>
-        </ul>
-      </div>
-    </nav>
-  </div>
-  </header>
+      <ul if.bind="isAuthenticated" class="navbar-nav ">
+        <li class="nav-item"><a class="nav-link" href="/#/profile">Welcome ${displayName}</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#/logout">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
 </template>

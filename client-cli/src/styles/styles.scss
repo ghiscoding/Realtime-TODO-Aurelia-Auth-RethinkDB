@@ -1,5 +1,3 @@
-body { padding-top: 70px; }
-
 $brand-primary:             #0275d8 !default;
 
 section {
@@ -13,6 +11,9 @@ a:focus {
 .bd-navbar .navbar-nav .nav-link.active {
     font-weight: 500;
     color: #121314;
+}
+.navbar {
+  margin-bottom: 20px;
 }
 .navbar-right {
   padding-right: 15px
@@ -28,12 +29,13 @@ a:focus {
 .btn-group-vertical.padded {
   padding-top: 10px;
 }
-.btn-social.btn-sm i.fa {
-  font-size: 1rem;
-}
 .btn-social {
+  cursor: pointer;
   padding-left: 44px !important;
   text-align: left !important;
+}
+.btn-social.btn-sm i.fa {
+  font-size: 1rem;
 }
 .btn-social.btn-lg {
   padding-left: 61px !important;
@@ -63,6 +65,11 @@ a:focus {
 }
 .panel {
   margin: 20px;
+}
+
+.timestamp {
+  color: grey;
+  font-style: italic;
 }
 
 .button-bar {

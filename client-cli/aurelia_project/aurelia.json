@@ -170,6 +170,14 @@
               "name": "socket.io-client",
               "path": "../node_modules/socket.io-client",
               "main": "socket.io"
+          },
+          {
+            "name": "sweetalert2",
+            "path": "../node_modules/sweetalert2/dist",
+            "main": "sweetalert2.min",
+            "resources": [
+              "sweetalert2.css"
+            ]
           }
         ]
       }

@@ -1,6 +1,6 @@
 import 'bootstrap';
 import 'tether';
-import config from './authConfig';
+import authConfig from './modules/auth/authConfig';
 import environment from './environment';
 import { bootstrap } from 'aurelia-bootstrapper-webpack';
 
@@ -18,7 +18,7 @@ bootstrap(function(aurelia) {
     .developmentLogging()
     .feature('resources')
     .plugin('aurelia-auth', (baseConfig)=> {
-    	baseConfig.configure(config);
+    	baseConfig.configure(authConfig);
     });
 
     if (environment.debug) {
