@@ -49,6 +49,7 @@ npm start
 ```
 
 ### Server (NodeJS - KOA)
+**This section is totally optional if you run (client-cli) with `au run --watch --node` or (client-wp) with `npm start` since the backend was already started with these flags.**
 ```bash
 cd Realtime-TODO-Aurelia-Auth-RethinkDB/server
 npm install
