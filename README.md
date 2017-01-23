@@ -49,14 +49,14 @@ npm start
 ```
 
 ### Server (NodeJS - KOA)
-**This section is totally optional if you run (client-cli) with `au run --watch --node` or (client-wp) with `npm start` since the backend was already started with these flags.**
+**Optional, see the note below**
 ```bash
 cd Realtime-TODO-Aurelia-Auth-RethinkDB/server
 npm install
 npm start
 ```
 
-_**Note**: running the server here is optional, since you might have already started it with the `--node` option with CLI client._
+_**Note**: running the server here is totally optional, since you might have already started it with the `--node` flag with CLI client or `npm start` with Webpack client._
 
 ## Web UI
 If everything goes well, your application should now run locally on port `4000`. Open your browser and go to [http://localhost:4000](http://localhost:4000).
