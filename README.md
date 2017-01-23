@@ -10,7 +10,7 @@ A summary of tech stack:
 Make sure to have [Node.js](https://nodejs.org/) v4.x or higher, and [RethinkDB](https://rethinkdb.com/) v2.3.x or higher installed on your computer.
 
 #### Note
-The `CLI` version was created afterward and it varies a little bit compare to the `WebPack` one. The main difference is that, I wanted to try out the new [Bootstrap 4 alpha](http://v4-alpha.getbootstrap.com/) with `SASS` support with [Aurelia-CLI](https://github.com/aurelia/cli), while the [Aurelia-WebPack](https://github.com/aurelia/skeleton-navigation) on the other end uses the stable [Bootstrap 3](http://getbootstrap.com/). The `WebPack` version is however not really up to date (compare to the Aurelia Skeleton), if someone want to try it out and update, then please make PR.
+The `CLI` version was created afterward and it varies a little bit compare to the `WebPack` one. The main difference is that, I wanted to try out the new [Bootstrap 4 alpha](http://v4-alpha.getbootstrap.com/) with `SASS` support with [Aurelia-CLI](https://github.com/aurelia/cli), while the [Aurelia-WebPack](https://github.com/aurelia/skeleton-navigation) on the other end uses the stable [Bootstrap 3](http://getbootstrap.com/).
 
 ### Git Clone (downloading)
 ```bash
@@ -41,6 +41,7 @@ _The `CLI` installation is built with `SASS` as pre-processor. To create and use
 With the use of `SASS`, I was then able to try out the new [Bootstrap 4](http://v4-alpha.getbootstrap.com/)._
 
 ### Client (WebPack)
+Please note that the `Webpack` version was modified to run both the frontend/backend with just `npm start`. However if you just want to run the frontend (client), you can do so by calling `npm run start:client-only`.
 ```bash
 cd Realtime-TODO-Aurelia-Auth-RethinkDB/client-wp
 npm install
@@ -67,9 +68,9 @@ Server configurations are specified in the [/server/config](https://github.com/g
 Default ports for this application are `4000` for the WebUI and `5000` for the API (server) calls.
 You can change these ports by going into
 #### CLI
-You can change the port by going into [/client-cli/aurelia_project/tasks/run.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/client-cli/aurelia_project/tasks/run.js) via the variables `portBackEnd` and `portFrontEnd`.
+You can change the ports by going into [/client-cli/aurelia_project/tasks/run.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/client-cli/aurelia_project/tasks/run.js) via the variables `portBackEnd` and `portFrontEnd`.
 #### WebPack
-You can change the port by going into [/client-wp/webpack.config.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/client-wp/webpack.config.js) via the variables `portBackEnd` and `portFrontEnd`.
+You can change the ports by going into [/client-wp/webpack.config.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/client-wp/webpack.config.babel.js) via the variables `portBackEnd`, however the client/frontend port will have to be updated in the [/client/wp/package.json](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/client-wp/package.json) file by changing the variable `WEBPACK_PORT=4000` to whichever port you want (you might also want to update `serve-backend:start-when-ready` line).
 
 ## Contributions
 Contributions are welcome. I use this project as a placeholder to help (and be helped by) people, which is all about the open community. So please feel free to make any PR (Pull Request).

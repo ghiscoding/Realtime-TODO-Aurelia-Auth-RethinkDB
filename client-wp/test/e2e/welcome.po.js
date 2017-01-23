@@ -1,3 +1,5 @@
+import regeneratorRuntime from 'regenerator-runtime';
+
 export class PageObjectWelcome {
 
   constructor() {
@@ -25,8 +27,10 @@ export class PageObjectWelcome {
   }
 
   openAlertDialog() {
-    return browser.wait(() => {
-      this.pressSubmitButton();
+    return browser.wait(async () => {
+      await this.pressSubmitButton();
+
+      await browser.wait(ExpectedConditions.alertIsPresent(), 5000);
 
       return browser.switchTo().alert().then(
         // use alert.accept instead of alert.dismiss which results in a browser crash

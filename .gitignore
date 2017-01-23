@@ -4,5 +4,6 @@ bower_components
 .idea
 .DS_STORE
 confidential
+npm-debug.log
 server/config/config.development.js
 server/config/config.development.js

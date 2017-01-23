@@ -1,12 +1,24 @@
 {
   "name": "Aurelia-Auth-TODO-RethinkDB",
   "version": "1.1.0",
-  "description": "An Aurelia realtime TODO application built with WebPack.",
+  "description": "An Aurelia realtime TODO application connected to RethinkDB and built with Aurelia-CLI.",
+  "main": "dist/main.js",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/ghiscoding/Realtime-TODO-Aurelia-RethinkDB.git"
+    "url": "git+ssh://git@github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB.git"
   },
+  "keywords": [
+    "aurelia",
+    "todo",
+    "rethinkdb",
+    "auth"
+  ],
   "license": "MIT",
+  "author": "Ghislain B.",
+  "bugs": {
+    "url": "https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/issues"
+  },
+  "homepage": "https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB",
   "dependencies": {
     "aurelia-animator-css": "^1.0.1",
     "aurelia-auth": "^3.0.5",

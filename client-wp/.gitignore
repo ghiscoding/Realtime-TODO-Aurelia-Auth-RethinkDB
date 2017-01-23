@@ -1,4 +1,11 @@
 node_modules
 .DS_STORE
-dist
-build
+npm-debug.log*
+/dist
+/build
+/typings
+/.awcache
+/electron.js*
+/release
+/test/coverage
+yarn.lock
