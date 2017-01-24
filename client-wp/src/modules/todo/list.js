@@ -2,6 +2,7 @@ import {inject, ObserverLocator} from 'aurelia-framework';
 import _ from 'lodash';
 import {TodoData} from "./todoData";
 import io from 'socket.io-client';
+import { default as swal } from 'sweetalert2';
 
 var socket = io('http://localhost:5000/todo-socket');
 
@@ -93,17 +94,28 @@ export class List {
   }
 
   deleteItem (item) {
-    let confirmed = confirm(`Are you sure you want to delete this TODO item: ${item.title}?`);
-    if(confirmed) {
-	    this.service.delete(item.id).then(data => {
-        let pos = arrayFindObjectIndex(this.items, 'id', data.id);
+    let self = this;
+
+    swal({
+      title: `Are you sure you want to delete this TODO?`,
+      text: `${item.title}`,
+      type: 'question',
+      animation: false,
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      width: 700
+    }).then(function () {
+      self.service.delete(item.id).then(data => {
+        let pos = arrayFindObjectIndex(self.items, 'id', data.id);
         if(pos >= 0) {
-          this.items.splice(pos, 1);
+          self.items.splice(pos, 1);
         }
       }).catch(function() {
-          alert("Failed to delete this TODO");
+          swal('Oops...', 'Something went wrong!', 'error');
       });
-    }
+      swal('Deleted!', 'Your item has been deleted.', 'success');
+    });
 	}
 
   editBegin(item) {
@@ -153,6 +165,7 @@ export class List {
 
     // update item
     socket.on("todo_update", data => {
+      console.log('socket.io-client, todo update');
       let pos = arrayFindObjectIndex(this.items, 'id', data.id);
       if(pos >= 0) {
         this.items.splice(pos, 1, data);
