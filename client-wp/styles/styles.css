@@ -1,5 +1,12 @@
-body {
-  margin: 0;
+.signup-or-separator span {
+  padding: 5px;
+}
+.signup-or-separator span:nth-child(1) {
+  margin-left:5px;
+}
+.signup-or-separator .text {
+  top: 5px;
+  font-weight: 500;
 }
 
 .splash {
@@ -21,6 +28,11 @@ body {
   display: inline-block;
   font-size: 72px;
   margin-top: 50px;
+}
+
+timestamp {
+  color: grey;
+  font-style: italic;
 }
 
 .page-host {
@@ -47,6 +59,10 @@ body {
 
 section {
   margin: 0 20px;
+}
+
+.navbar-right {
+  padding-right: 15px
 }
 
 .navbar-nav li.loader {

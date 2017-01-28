@@ -1,11 +1,12 @@
 // we want font-awesome to load as soon as possible to show the fa-spinner
-import '../styles/styles.css';
+import 'bootstrap';
 import 'font-awesome/css/font-awesome.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-social/bootstrap-social.css';
-import 'bootstrap';
 import 'nprogress/nprogress.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import '../styles/styles.css';
+import '../styles/app.scss';
 import authConfig from './modules/auth/authConfig';
 import environment from './environment';
 

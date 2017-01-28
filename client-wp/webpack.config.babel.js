@@ -11,6 +11,7 @@ import aurelia from '@easy-webpack/config-aurelia'
 import babel from '@easy-webpack/config-babel'
 import html from '@easy-webpack/config-html'
 import css from '@easy-webpack/config-css'
+import scss from '@easy-webpack/config-sass'
 import fontAndImages from '@easy-webpack/config-fonts-and-images'
 import globalBluebird from '@easy-webpack/config-global-bluebird'
 import globalJquery from '@easy-webpack/config-global-jquery'
@@ -111,7 +112,8 @@ let config = generateConfig(
 
   babel({ options: { /* uses settings from .babelrc */ } }),
   html(),
-  css({ filename: 'styles.css', allChunks: true, sourceMap: false }),
+  scss({ filename: 'app.css', allChunks: true, sourceMap: false }),
+  css({ filename: 'styles.css', allChunks: true, sourceMap: false }),  
   fontAndImages(),
   globalBluebird(),
   globalJquery(),

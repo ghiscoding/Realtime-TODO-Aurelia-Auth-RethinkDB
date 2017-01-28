@@ -5,5 +5,7 @@ bower_components
 .DS_STORE
 confidential
 npm-debug.log
+scripts/css/
+scripts/fonts/
 server/config/config.development.js
 server/config/config.development.js

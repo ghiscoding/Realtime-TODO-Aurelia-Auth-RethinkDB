@@ -1,3 +1,5 @@
+import './todo.scss';
+
 export class Index {
   configureRouter(config, router) {
     config.map([

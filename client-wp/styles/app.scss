@@ -1,0 +1,23 @@
+/* use same primary color as Bootstrap */
+$brand-primary:             #0275d8 !default;
+
+/* nprogress color change with brand-primary */
+$nprogress-color:   darken($brand-primary, 10%);
+
+/* Make clicks pass-through */
+#nprogress .bar {
+  background: $nprogress-color;
+  height: 2px;
+}
+
+/* Fancy blur effect */
+#nprogress .peg {
+  box-shadow: 0 0 10px $nprogress-color, 0 0 5px $nprogress-color;
+}
+
+#nprogress .spinner-icon {
+  width: 24px;
+  height: 24px;
+  border-top-color: $nprogress-color;
+  border-left-color: $nprogress-color;
+}
