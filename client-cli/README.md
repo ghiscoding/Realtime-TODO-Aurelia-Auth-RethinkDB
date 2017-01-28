@@ -1,8 +1,5 @@
 ## Getting Started
 
-#### Note
-The `CLI` was created afterward and it varies a little bit from the `WebPack` version. I wanted to test out the new [Bootstrap 4 alpha](http://v4-alpha.getbootstrap.com/) with `SASS` support and [Aurelia-CLI](https://github.com/aurelia/cli).
-
 ### Client install
 ```html
 cd Realtime-TODO-Aurelia-Auth-RethinkDB/client-cli
