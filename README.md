@@ -1,16 +1,13 @@
 A Realtime TODO App with [Aurelia](http://aurelia.io), [Socket.IO](http://socket.io/), [Node.js](http://www.nodejs.org/), [Koa](http://koajs.com/) and [RethinkDB](https://www.rethinkdb.com/).
 
 A summary of tech stack:
-* **Client**: [Aurelia](http://aurelia.io/), [Twitter Bootstrap](http://getbootstrap.com/) & [Font-Awesome](http://fontawesome.io/).
+* **Client**: [Aurelia](http://aurelia.io/), [Twitter Bootstrap 4 (alpha)](http://v4-alpha.getbootstrap.com/) & [Font-Awesome](http://fontawesome.io/).
 * **Server**: [Koa](http://koajs.com/) for RESTful API serving on [Node.js](https://nodejs.org/).
 * **[Socket.IO](http://socket.io/)** along with JSON-RPC is used for real-time client-server communication and browser sync.
 * **[RethinkDB](https://rethinkdb.com/)** as the best open-source database for the realtime web.
 
 ## Getting Started
 Make sure to have [Node.js](https://nodejs.org/) v4.x or higher, and [RethinkDB](https://rethinkdb.com/) v2.3.x or higher installed on your computer.
-
-#### Note
-The `CLI` version was created afterward and it varies a little bit compare to the `WebPack` one. The main difference is that, I wanted to try out the new [Bootstrap 4 alpha](http://v4-alpha.getbootstrap.com/) with `SASS` support with [Aurelia-CLI](https://github.com/aurelia/cli), while the [Aurelia-WebPack](https://github.com/aurelia/skeleton-navigation) on the other end uses the stable [Bootstrap 3](http://getbootstrap.com/).
 
 ### Git Clone (downloading)
 ```bash
@@ -37,7 +34,7 @@ The `run` process also has a `node` server option, so if you want, you could run
 ```bash
 au run --watch --node
 ```
-_The `CLI` installation is built with `SASS` as pre-processor. To create and use any stylesheets, you will need to use the `scss` extension while calling them as `css` in your project (because they are transpiled when bundled, refer to [Aurelia CLI](http://aurelia.io/hub.html#/doc/article/aurelia/framework/latest/the-aurelia-cli) for further information).
+_Note: The `CLI` installation is built with `SASS` as pre-processor. To create and use any stylesheets, you will need to use the `scss` extension while calling them as `css` in your project (because they are transpiled when bundled, refer to [Aurelia CLI](http://aurelia.io/hub.html#/doc/article/aurelia/framework/latest/the-aurelia-cli) for further information).
 With the use of `SASS`, I was then able to try out the new [Bootstrap 4](http://v4-alpha.getbootstrap.com/)._
 
 ### Client (WebPack)
@@ -47,6 +44,7 @@ cd Realtime-TODO-Aurelia-Auth-RethinkDB/client-wp
 npm install
 npm start
 ```
+_Note: The `WebPack` is now configured to support both `SASS` and `CSS`, just `import` the file you want in your `main.js` or anywhere else you need them. I added `SASS` mainly for supporting [Bootstrap 4](http://v4-alpha.getbootstrap.com/)._
 
 ### Server (NodeJS - KOA)
 **Optional, see the note below**

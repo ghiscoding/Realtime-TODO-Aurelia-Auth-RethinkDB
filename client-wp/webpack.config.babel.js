@@ -24,6 +24,7 @@ import generateCoverage from '@easy-webpack/config-test-coverage-istanbul'
 
 process.env.BABEL_ENV = 'webpack'
 const ENV = process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase() || (process.env.NODE_ENV = 'development')
+const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 
 // basic configuration:
 const title = 'Aurelia Navigation Skeleton'
@@ -82,7 +83,16 @@ let config = generateConfig(
     },
     output: {
       path: outDir
-    }
+    },
+    plugins: [
+      new ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery",
+        'window.jQuery': 'jquery',
+        'window.Tether': 'tether',
+        Tether: 'tether'
+    })
+    ]
   },
   {
     devServer: {
@@ -104,6 +114,7 @@ let config = generateConfig(
    * For Webpack docs, see: https://webpack.js.org/configuration/
    */
 
+
   ENV === 'test' || ENV === 'development' ?
     envDev(ENV !== 'test' ? {} : {devtool: 'inline-source-map'}) :
     envProd({ /* devtool: '...' */ }),
@@ -113,7 +124,7 @@ let config = generateConfig(
   babel({ options: { /* uses settings from .babelrc */ } }),
   html(),
   scss({ filename: 'app.css', allChunks: true, sourceMap: false }),
-  css({ filename: 'styles.css', allChunks: true, sourceMap: false }),  
+  css({ filename: 'styles.css', allChunks: true, sourceMap: false }),
   fontAndImages(),
   globalBluebird(),
   globalJquery(),

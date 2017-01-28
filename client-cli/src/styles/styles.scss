@@ -8,10 +8,6 @@ a:focus {
   outline: none;
 }
 
-.bd-navbar .navbar-nav .nav-link.active {
-    font-weight: 500;
-    color: #121314;
-}
 .navbar {
   margin-bottom: 20px;
 }
@@ -21,9 +17,16 @@ a:focus {
 .navbar-nav li.loader {
     margin: 12px 24px 0 6px;
 }
+.nav-item.active {
+  font-weight: 500;
+}
 
 .no-selection {
   margin: 20px;
+}
+
+.btn {
+  cursor: pointer;
 }
 
 .btn-group-vertical.padded {
@@ -98,7 +101,7 @@ li.list-group-item.active > a {
 }
 
 /* nprogress color change with brand-primary */
-$nprogress-color:   lighten($brand-primary, 30%);
+$nprogress-color:   darken($brand-primary, 10%);
 
 /* Make clicks pass-through */
 #nprogress .bar {

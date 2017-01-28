@@ -1,14 +1,3 @@
-.signup-or-separator span {
-  padding: 5px;
-}
-.signup-or-separator span:nth-child(1) {
-  margin-left:5px;
-}
-.signup-or-separator .text {
-  top: 5px;
-  font-weight: 500;
-}
-
 .splash {
   text-align: center;
   margin: 10% 0 0 0;
@@ -30,16 +19,11 @@
   margin-top: 50px;
 }
 
-timestamp {
-  color: grey;
-  font-style: italic;
-}
-
 .page-host {
   position: absolute;
   left: 0;
   right: 0;
-  top: 50px;
+  top: 70px;
   bottom: 0;
   overflow-x: hidden;
   overflow-y: auto;
@@ -69,6 +53,10 @@ section {
   margin: 12px 24px 0 6px;
 }
 
+.nav-item.active {
+  font-weight: 500;
+}
+
 .pictureDetail {
   max-width: 425px;
 }
@@ -83,64 +71,6 @@ div.au-stagger {
   /* 50ms will be applied between each successive enter operation */
   -webkit-animation-delay: 50ms;
   animation-delay: 50ms;
-}
-
-.card-container.au-enter {
-  opacity: 0 !important;
-}
-
-.card-container.au-enter-active {
-  -webkit-animation: fadeIn 2s;
-  animation: fadeIn 2s;
-}
-
-.card {
-  overflow: hidden;
-  position: relative;
-  border: 1px solid #CCC;
-  border-radius: 8px;
-  text-align: center;
-  padding: 0;
-  background-color: #337ab7;
-  color: rgb(136, 172, 217);
-  margin-bottom: 32px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, .5);
-}
-
-.card .content {
-  margin-top: 10px;
-}
-
-.card .content .name {
-  color: white;
-  text-shadow: 0 0 6px rgba(0, 0, 0, .5);
-  font-size: 18px;
-}
-
-.card .header-bg {
-  /* This stretches the canvas across the entire hero unit */
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 70px;
-  border-bottom: 1px #FFF solid;
-  border-radius: 6px 6px 0 0;
-}
-
-.card .avatar {
-  position: relative;
-  margin-top: 15px;
-  z-index: 100;
-}
-
-.card .avatar img {
-  width: 100px;
-  height: 100px;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  border-radius: 50%;
-  border: 2px #FFF solid;
 }
 
 /* animation definitions */
