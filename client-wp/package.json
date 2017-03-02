@@ -32,7 +32,7 @@
     "build:prod": "cross-env NODE_ENV=production npm run webpack -- --progress --profile",
     "start": "concurrently --success first --kill-others \"npm run serve-backend:start-when-ready\" \"npm run server:dev\"",
     "start:client-only": "npm run server:dev",
-    "serve-backend:start-when-ready": "wait-on --timeout 120000 http-get://localhost:4000/index.html && nodemon --inspect ../server/app.js",
+    "serve-backend:start-when-ready": "wait-on --timeout 120000 http-get://localhost:4000/index.html && nodemon --watch ../server --inspect ../server/app.js",
     "server": "npm run server:dev",
     "server:dev": "cross-env WEBPACK_PORT=4000 NODE_ENV=development npm run webpack-dev-server -- --inline --progress --profile --watch",
     "server:dev:hmr": "npm run server:dev -- --hot",

@@ -9,3 +9,5 @@ scripts/css/
 scripts/fonts/
 server/config/config.development.js
 server/config/config.development.js
+yarn-error.log
+yarn.lock
