@@ -52,17 +52,27 @@ module.exports = {
     },
     build: 'nps webpack.build',
     backend: {
-      default: concurrent({
-        webpack: `nps webpack`,
-        node: 'nps backend.whenReady',
-      }) + ' --kill-others --success first',
-      node: {
+      default: {
         default: 'nodemon --watch ../server --inspect ../server/app.js',
-        noflag: 'nodemon ../server ../server/app.js'
       },
+      noflag: 'nodemon ../server ../server/app.js'
+    },
+    withBackend: {
+      default: concurrent({
+        webpack: `nps webpack.server`,
+        node: 'nps withBackend.whenReady',
+      }) + ' --kill-others --success first',
+      noflag: concurrent({
+        webpack: `nps webpack.server`,
+        node: 'nps withBackend.whenReadyNoFlag',
+      }) + ' --kill-others --success first',
       whenReady: series(
         `wait-on --timeout 120000 http-get://localhost:${WEB_UI_PORT}/index.html`,
-        'nps backend.node'
+        'nps backend'
+      ),
+      whenReadyNoFlag: series(
+        `wait-on --timeout 120000 http-get://localhost:${WEB_UI_PORT}/index.html`,
+        'nps backend.noflag'
       ),
     },
     webpack: {

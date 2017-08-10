@@ -15,9 +15,9 @@ npm start # or: yarn start
 What if you want to run both WebUI and WebAPI (`node` server) with 1 command?
 Easy, just use this command instead:
 ```bash
-npm start -- backend.node # or: yarn start -- backend.node
+npm start -- withBackend # or: yarn start -- withBackend
 ```
-**Note:** a final note when using the `backend.node`, it will use `nodemon` with 2 flags `--watch` and `--inspect`. If you do not want to start with any flags, you may use `backend.node.noflag`
+**Note:** a final note when using the `withBackend`, it will use `nodemon` with 2 flags `--watch` and `--inspect`. If you do not want to start with any flags, you may use `withBackend.noflag`
 
 ### Web UI
 If everything goes well, your application should now run locally on port `4000`. So, in your browser just go to [http://localhost:4000](http://localhost:4000).

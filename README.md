@@ -47,11 +47,11 @@ npm start
 _Note: The `WebPack` is now configured to support both `SASS` and `CSS`, just `import` the file you want in your `main.js` or anywhere else you need them. I added `SASS` mainly for supporting [Bootstrap 4](http://v4-alpha.getbootstrap.com/)._
 
 ### Client (TypeScript WebPack 3.x)
-Please note that the `TypeScript Webpack` with the command line `npm start` will ONLY run the WebUI. However if you want to run both the frontend/backend (WebUI + WebAPI), you can do so by calling `npm start -- backend.node`.
+Please note that the `TypeScript Webpack` with the command line `npm start` will ONLY run the WebUI. However if you want to run both the frontend/backend (WebUI + WebAPI), you can do so by calling `npm start -- withBackend`.
 ```bash
 cd Realtime-TODO-Aurelia-Auth-RethinkDB/client-ts-wp
 npm install # or: yarn install
-npm start -- backend.node # or: yarn start -- backend.node
+npm start -- withBackend # or: yarn start -- withBackend
 ```
 _Note: The `WebPack` is now configured to support both `SASS` and `CSS`, just `import` the file you want in your `main.js` or anywhere else you need them. I added `SASS` mainly for supporting [Bootstrap 4](http://v4-alpha.getbootstrap.com/)._
 
