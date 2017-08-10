@@ -49,7 +49,7 @@ _Note: The `WebPack` is now configured to support both `SASS` and `CSS`, just `i
 ### Client (TypeScript WebPack 3.x)
 Please note that the `TypeScript Webpack` with the command line `npm start` will ONLY run the WebUI. However if you want to run both the frontend/backend (WebUI + WebAPI), you can do so by calling `npm start -- backend.node`.
 ```bash
-cd Realtime-TODO-Aurelia-Auth-RethinkDB/client-wp
+cd Realtime-TODO-Aurelia-Auth-RethinkDB/client-ts-wp
 npm install # or: yarn install
 npm start -- backend.node # or: yarn start -- backend.node
 ```
