@@ -27,7 +27,8 @@ If everything goes well, your application should now run locally on port `4000`.
 ### Default Ports
 Default ports for this application are `4000` for the WebUI and `5000` for the WebAPI (server) calls.
 You can change these ports by going into
-#### WebPack
+
+#### TypeScript WebPack
 You can change the ports by editing the file [/client-ts-wp/config.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/client-ts-wp/config.js), the `webpack.config.js` and `package-scripts.js` were modifed to use the `config.js` configured ports.
 
 ## License
