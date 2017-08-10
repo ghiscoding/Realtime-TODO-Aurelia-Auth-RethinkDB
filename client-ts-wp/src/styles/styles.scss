@@ -1,0 +1,110 @@
+$brand-primary:             #0275d8 !default;
+
+section {
+  margin: 0 20px;
+}
+
+a:focus {
+  outline: none;
+}
+
+.bd-navbar .navbar-nav .nav-link.active {
+    font-weight: 500;
+    color: #121314;
+}
+.navbar-right {
+  padding-right: 15px
+}
+.navbar-nav li.loader {
+    margin: 12px 24px 0 6px;
+}
+
+.no-selection {
+  margin: 20px;
+}
+
+.btn-group-vertical.padded {
+  padding-top: 10px;
+}
+.btn-social {
+  cursor: pointer;
+  padding-left: 44px !important;
+  text-align: left !important;
+}
+.btn-social.btn-lg {
+  padding-left: 61px !important;
+  text-align: left !important;
+}
+.btn-social.btn-sm i.fa {
+  font-size: 1rem;
+}
+.contact-list {
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.input-group-addon.no-color {
+  background-color: #FFFFFF;
+  font-weight: bold;
+}
+
+.signup-or-separator span {
+  padding: 5px;
+}
+.signup-or-separator span:nth-child(1) {
+  margin-left:5px;
+}
+.signup-or-separator .text {
+  top: 5px;
+  font-weight: 500;
+}
+.panel {
+  margin: 20px;
+}
+
+.button-bar {
+  right: 0;
+  left: 0;
+  bottom: 0;
+  border-top: 1px solid #ddd;
+  background: white;
+}
+
+.button-bar > button {
+  float: right;
+  margin: 20px;
+}
+
+li.list-group-item {
+  list-style: none;
+}
+
+li.list-group-item > a {
+  text-decoration: none;
+}
+
+li.list-group-item.active > a {
+  color: white;
+}
+
+/* nprogress color change with brand-primary */
+$nprogress-color:   lighten($brand-primary, 30%);
+
+/* Make clicks pass-through */
+#nprogress .bar {
+  background: $nprogress-color;
+  height: 2px;
+}
+
+/* Fancy blur effect */
+#nprogress .peg {
+  box-shadow: 0 0 10px $nprogress-color, 0 0 5px $nprogress-color;
+}
+
+#nprogress .spinner-icon {
+  width: 24px;
+  height: 24px;
+  border-top-color: $nprogress-color;
+  border-left-color: $nprogress-color;
+}

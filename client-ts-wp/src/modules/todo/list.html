@@ -1,0 +1,59 @@
+<template>
+  <div id="applicationTodo">
+    <header>
+      <h1>Todos <small>with Aurelia &amp; RethinkDB</small></h1>
+      <p class="italic">Double-click to edit a todo</p>
+    </header>
+
+    <form submit.delegate="addItem()">
+      <input type="text" value.bind="newTodoDescription" class="form-control" placeholder="What needs to be done?">
+    </form>
+
+    <section class="todo">
+      <div class="mark-all" >
+        <input id="markAll" type="checkbox" checked.bind="markAllCompleted" if.bind="items.length">
+        <label for="markAll" if.bind="items.length">Mark all as complete</label>
+
+        <input id="includeArchived" type="checkbox" checked.bind="includeArchived">
+        <label for="includeArchived" class="archived">Show archived</label>
+      </div>
+
+      <ul class="list-unstyled">
+        <li repeat.for="item of items">
+          <div show.bind="!item.isEditing">
+            <span click.delegate="toggleComplete(item)">
+              <i class="fa ${item.completed ? 'fa-check-square-o' : 'fa-square-o'}"></i>
+            </span>
+            <label class="${item.completed ? 'done': ''} ${item.archived ? 'archived' : ''}" dblclick.delegate="editBegin(item)">
+              ${item.title}
+            </label>
+            <a href="#" click.delegate="deleteItem(item)"><i class="fa fa-trash"></i></a>
+            <small class="timestamp">
+              ${item.createdAt |  dateFormat:'MMM DD, YYYY - h:mm:ss a'}
+              &middot; <span class="fa fa-globe"></span>
+            </small>
+          </div>
+          <div show.bind="item.isEditing">
+            <form submit.delegate="editEnd(item)" novalidate="">
+              <input type="text" value.bind="item.title" focus.bind="item.isEditing" blur.trigger="editEnd()" autocomplete="off"  />
+            </form>
+          </div>
+        </li>
+      </ul>
+      <div class="controlLinks">
+        <div class="text-left col-md-6">
+          <a href="#" click.delegate="purge()">Purge</a>
+        </div>
+        <div class="text-right col-md-6">
+          <a href="#" click.delegate="archiveAllCompleted()">Archive ${itemDoneCount} completed items</a>
+        </div>
+      </div>
+
+    </section>
+
+    <footer>
+      <div show.bind="itemsLeftMessage">${itemsLeftMessage}</div>
+      <a href="#" show.bind="archiveCompletedMessage" click.delegate="archiveCompletedItems()">${archiveCompletedMessage}</a>
+    </footer>
+  </div>
+</template>
