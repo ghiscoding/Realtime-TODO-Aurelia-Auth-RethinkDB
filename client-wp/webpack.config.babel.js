@@ -89,8 +89,7 @@ let config = generateConfig(
         $: "jquery",
         jQuery: "jquery",
         'window.jQuery': 'jquery',
-        'window.Tether': 'tether',
-        Tether: 'tether'
+        Popper: 'popper.js'
     })
     ]
   },

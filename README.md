@@ -1,7 +1,7 @@
 A Realtime TODO App with [Aurelia](http://aurelia.io), [Socket.IO](http://socket.io/), [Node.js](http://www.nodejs.org/), [Koa](http://koajs.com/) and [RethinkDB](https://www.rethinkdb.com/).
 
 A summary of tech stack:
-* **Client**: [Aurelia](http://aurelia.io/), [Twitter Bootstrap 4 (alpha)](http://v4-alpha.getbootstrap.com/) & [Font-Awesome](http://fontawesome.io/).
+* **Client**: [Aurelia](http://aurelia.io/), [Twitter Bootstrap 4 (beta)](http://getbootstrap.com/) & [Font-Awesome](http://fontawesome.io/).
 * **Server**: [Koa](http://koajs.com/) for RESTful API serving on [Node.js](https://nodejs.org/).
 * **[Socket.IO](http://socket.io/)** along with JSON-RPC is used for real-time client-server communication and browser sync.
 * **[RethinkDB](https://rethinkdb.com/)** as the best open-source database for the realtime web.
@@ -26,7 +26,7 @@ Also make sure to create a `test` database (if not yet created) with a `todos` a
 ### Client (CLI)
 ```bash
 cd Realtime-TODO-Aurelia-Auth-RethinkDB/client-cli
-npm install
+npm install # or: yarn install
 au run --watch
 ```
 
@@ -35,16 +35,22 @@ The `run` process also has a `node` server option, so if you want, you could run
 au run --watch --node
 ```
 _Note: The `CLI` installation is built with `SASS` as pre-processor. To create and use any stylesheets, you will need to use the `scss` extension while calling them as `css` in your project (because they are transpiled when bundled, refer to [Aurelia CLI](http://aurelia.io/hub.html#/doc/article/aurelia/framework/latest/the-aurelia-cli) for further information).
-With the use of `SASS`, I was then able to try out the new [Bootstrap 4](http://v4-alpha.getbootstrap.com/)._
+With the use of `SASS`, I was then able to try out the new [Bootstrap 4](http://getbootstrap.com/)._
 
 ### Client (WebPack)
-Please note that the `Webpack` version was modified to run both the frontend/backend with just `npm start`. However if you just want to run the frontend (client), you can do so by calling `npm run start:client-only`.
+Please note that the `Webpack` version does no longer support the concurrent start of the WebUI/WebAPI in 1 commandm you will need to start the backend server separately.
 ```bash
 cd Realtime-TODO-Aurelia-Auth-RethinkDB/client-wp
-npm install
-npm start
+npm install # or: yarn install
+npm start # or: yarn start
 ```
-_Note: The `WebPack` is now configured to support both `SASS` and `CSS`, just `import` the file you want in your `main.js` or anywhere else you need them. I added `SASS` mainly for supporting [Bootstrap 4](http://v4-alpha.getbootstrap.com/)._
+To start the backend server (NodeJS), go into the server folder and run `npm start`
+```bash
+cd Realtime-TODO-Aurelia-Auth-RethinkDB/server
+npm start # or: yarn start
+```
+
+_Note: The `WebPack` is now configured to support both `SASS` and `CSS`, just `import` the file you want in your `main.js` or anywhere else you need them. I added `SASS` mainly for supporting [Bootstrap 4](http://getbootstrap.com/)._
 
 ### Client (TypeScript WebPack 3.x)
 Please note that the `TypeScript Webpack` with the command line `npm start` will ONLY run the WebUI. However if you want to run both the frontend/backend (WebUI + WebAPI), you can do so by calling `npm start -- withBackend`.
@@ -53,14 +59,14 @@ cd Realtime-TODO-Aurelia-Auth-RethinkDB/client-ts-wp
 npm install # or: yarn install
 npm start -- withBackend # or: yarn start -- withBackend
 ```
-_Note: The `WebPack` is now configured to support both `SASS` and `CSS`, just `import` the file you want in your `main.js` or anywhere else you need them. I added `SASS` mainly for supporting [Bootstrap 4](http://v4-alpha.getbootstrap.com/)._
+_Note: The `WebPack` is now configured to support both `SASS` and `CSS`, just `import` the file you want in your `main.js` or anywhere else you need them. I added `SASS` mainly for supporting [Bootstrap 4](http://getbootstrap.com/)._
 
 ### Server (NodeJS - KOA)
 **Optional, see the note below**
 ```bash
 cd Realtime-TODO-Aurelia-Auth-RethinkDB/server
-npm install
-npm start
+npm install # or: yarn install
+npm start # or: yarn start
 ```
 
 _**Note**: running the server here is totally optional, since you might have already started it with the `--node` flag with CLI client or `npm start` with Webpack client._
