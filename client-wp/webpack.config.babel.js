@@ -89,7 +89,7 @@ let config = generateConfig(
         $: "jquery",
         jQuery: "jquery",
         'window.jQuery': 'jquery',
-        Popper: 'popper.js'
+        Popper: ['popper.js', 'default']
     })
     ]
   },

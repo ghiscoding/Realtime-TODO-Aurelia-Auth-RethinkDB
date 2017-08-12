@@ -1,5 +1,6 @@
 jspm_packages
 bower_components
+.chrome
 .idea
 screenshots
 client-cli

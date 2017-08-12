@@ -119,7 +119,8 @@ module.exports = ({production, server, extractCss, coverage} = {}) => ({
       '$': 'jquery',
       'jQuery': 'jquery',
       'window.jQuery': 'jquery',
-      'window.$': 'jquery'
+      'window.$': 'jquery',
+      Popper: ['popper.js', 'default']
     }),
     new TsConfigPathsPlugin(),
     new CheckerPlugin(),
