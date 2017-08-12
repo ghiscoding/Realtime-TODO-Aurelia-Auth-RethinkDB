@@ -30,7 +30,7 @@ npm install # or: yarn install
 au run --watch
 ```
 
-The `run` process also has a `node` server option, so if you want, you could run `NodeJS` server directly from the `au run` command by adding the `--node` option (make sure you ran the [Server installation](#server) prior to launching this command)..
+The `run` process also has a `node` server option, so if you want, you could run `NodeJS` server directly from the `au run` command by adding the `--node` option.
 ```bash
 au run --watch --node
 ```
@@ -50,17 +50,17 @@ cd Realtime-TODO-Aurelia-Auth-RethinkDB/server
 npm start # or: yarn start
 ```
 
-### Client (TypeScript WebPack 3.x)
-Please note that the `TypeScript Webpack` with the command line `npm start` will ONLY run the WebUI (Aurelia). 
+_Note: The `WebPack` is now configured to support both `SASS` and `CSS`, just `import` the file you want in your `main.js` or anywhere else you need them. I added `SASS` mainly for supporting [Bootstrap 4](http://getbootstrap.com/)._
 
-**Note:** If you want to run both the frontend/backend (WebUI w/Aurelia + WebAPI w/NodeJS), you can do so by calling `npm start -- withBackend` (make sure to follow the [Server installation](#server) prior to launching this command).
+### Client (TypeScript WebPack 3.x)
+Please note that the `TypeScript Webpack` with the command line `npm start` will ONLY run the WebUI. However if you want to run both the frontend/backend (WebUI + WebAPI), you can do so by calling `npm start -- withBackend`.
 ```bash
 cd Realtime-TODO-Aurelia-Auth-RethinkDB/client-ts-wp
 npm install # or: yarn install
 npm start -- withBackend # or: yarn start -- withBackend
 ```
+_Note: The `WebPack` is now configured to support both `SASS` and `CSS`, just `import` the file you want in your `main.js` or anywhere else you need them. I added `SASS` mainly for supporting [Bootstrap 4](http://getbootstrap.com/)._
 
-<a name="server"></a>
 ### Server (NodeJS - KOA)
 **Optional, see the note below**
 ```bash
@@ -72,7 +72,7 @@ npm start # or: yarn start
 _**Note**: running the server here is totally optional, since you might have already started it with the `--node` flag with CLI client or `npm start` with Webpack client._
 
 ## Web UI
-If everything goes well, your application should now run locally on port `4000`. Open your browser and go at the URL [http://localhost:4000](http://localhost:4000).
+If everything goes well, your application should now run locally on port `4000`. Open your browser and go to [http://localhost:4000](http://localhost:4000).
 
 ## Configuration
 ### Server
