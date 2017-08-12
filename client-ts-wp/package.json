@@ -104,6 +104,7 @@
     "nodemon": "1.11.0",
     "nps": "5.6.0",
     "nps-utils": "1.2.0",
+    "opn-cli": "3.1.0",
     "postcss-loader": "2.0.6",
     "protractor": "5.1.2",
     "sass-loader": "6.0.6",

@@ -68,10 +68,12 @@ module.exports = {
       }) + ' --kill-others --success first',
       whenReady: series(
         `wait-on --timeout 120000 http-get://localhost:${WEB_UI_PORT}/index.html`,
+        `opn http://localhost:${WEB_UI_PORT}`,
         'nps backend'
       ),
       whenReadyNoFlag: series(
         `wait-on --timeout 120000 http-get://localhost:${WEB_UI_PORT}/index.html`,
+        `opn http://localhost:${WEB_UI_PORT}`,
         'nps backend.noflag'
       ),
     },
