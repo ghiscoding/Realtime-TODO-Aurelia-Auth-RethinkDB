@@ -1,7 +1,7 @@
 A Realtime TODO App with [Aurelia](http://aurelia.io), [Socket.IO](http://socket.io/), [Node.js](http://www.nodejs.org/), [Koa](http://koajs.com/) and [RethinkDB](https://www.rethinkdb.com/).
 
 A summary of tech stack:
-* **Client**: [Aurelia](http://aurelia.io/), [Twitter Bootstrap 4 (beta)](http://getbootstrap.com/) & [Font-Awesome](http://fontawesome.io/).
+* **Client**: [Aurelia](http://aurelia.io/), [Twitter Bootstrap 4 (beta)](http://getbootstrap.com/), [Font-Awesome](http://fontawesome.io/) and [Aurelia-Bootstrap-Plugins](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins) (my creation :smile:).
 * **Server**: [Koa](http://koajs.com/) for RESTful API serving on [Node.js](https://nodejs.org/).
 * **[Socket.IO](http://socket.io/)** along with JSON-RPC is used for real-time client-server communication and browser sync.
 * **[RethinkDB](https://rethinkdb.com/)** as the best open-source database for the realtime web.
