@@ -1,5 +1,7 @@
 ## Getting Started
 
+**NOTE** This client sample was created with the older `@easy-webpack` and I might end up deleting it sooner than later, I recommened taking a look at my new sample [TypeScript WebPack 3.x](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/tree/master/client-ts-wp).
+
 ### Client install
 Please note that the `Webpack` version was modified to run both the frontend/backend with just `npm start`. However if you just want to run the frontend (client), you can do so by calling `npm run start:client-only`.
 ```bash

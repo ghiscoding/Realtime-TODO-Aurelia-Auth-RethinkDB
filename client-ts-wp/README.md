@@ -13,13 +13,12 @@ The simplest way of running the App is by typing the command (note: this will on
 npm start # or: yarn start
 ```
 What if you want to run both WebUI (Aurelia), WebAPI (`nodeJS` server) and even start the browser with 1 command?
-Easy, just use the following command (make sure to follow the [Server installation](#server) prior to launching this command). :
+Easy, just use the following command (make sure to follow the [Server installation](#backend-server-installation-nodejs) prior to launching this command). :
 ```bash
 npm start -- withBackend # or: yarn start -- withBackend
 ```
 **Note:** a final note when using the `withBackend`, it will use `nodemon` with 2 flags `--watch` and `--inspect`. If you do not want to start with any flags, you may use `withBackend.noflag`
 
-<a name="server"></a>
 ### Backend Server installation (NodeJS)
 To install and start the backend server (NodeJS), go into the server folder and run `npm start` (make sure you ran the `npm install` first)
 ```bash

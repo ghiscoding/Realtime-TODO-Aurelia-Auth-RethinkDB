@@ -50,17 +50,18 @@ cd Realtime-TODO-Aurelia-Auth-RethinkDB/server
 npm start # or: yarn start
 ```
 
-### Client (TypeScript WebPack 3.x)
-Please note that the `TypeScript Webpack` with the command line `npm start` will ONLY run the WebUI (Aurelia). 
+**NOTE** This client sample was created with the older `@easy-webpack` and I might end up deleting it sooner than later, I recommened taking a look at my new sample `TypeScript WebPack 3.x` as shown below.
 
-**Note:** If you want to run both the frontend/backend (WebUI w/Aurelia + WebAPI w/NodeJS), you can do so by calling `npm start -- withBackend` (make sure to follow the [Server installation](#server) prior to launching this command).
+### Client (TypeScript WebPack 3.x)
+Please note that the `TypeScript Webpack` with the command line `npm start` will ONLY run the WebUI (Aurelia).
+
+**Note:** If you want to run both the frontend/backend (WebUI w/Aurelia + WebAPI w/NodeJS), you can do so by calling `npm start -- withBackend` (make sure to follow the [Server installation](#server-nodejs---koa) prior to launching this command).
 ```bash
 cd Realtime-TODO-Aurelia-Auth-RethinkDB/client-ts-wp
 npm install # or: yarn install
 npm start -- withBackend # or: yarn start -- withBackend
 ```
 
-<a name="server"></a>
 ### Server (NodeJS - KOA)
 **Optional, see the note below**
 ```bash
