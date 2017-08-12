@@ -119,6 +119,7 @@
   },
   "dependencies": {
     "aurelia-auth": "3.0.5",
+    "aurelia-bootstrap-datetimepicker": "1.0.10",
     "aurelia-bootstrapper": "2.1.1",
     "aurelia-fetch-client": "1.1.2",
     "aurelia-framework": "1.1.4",

@@ -1,11 +1,19 @@
 import {autoinject, ObserverLocator} from 'aurelia-framework';
 import * as _ from 'lodash';
+import * as Moment from 'moment';
 import {Todo} from './todo';
 import {TodoData} from './todoData';
 import io from 'socket.io-client';
 import { default as swal } from 'sweetalert2';
 
 var socket = io('http://localhost:5000/todo-socket');
+
+// value interface
+interface NewTodo {
+  title: string,
+  dueDate: Date
+  dueDateObject: Date
+}
 
 @autoinject()
 export class List {
@@ -15,10 +23,9 @@ export class List {
   includeArchived: boolean = false;
   observerLocator: ObserverLocator;
   dataService: TodoData;
-  newTodoDescription: string;
+  newTodo: NewTodo;
   currentPage: number = 0;
   itemDoneCount: number = 0;
-  newTodoTitle: string = '';
   items: Todo[];
   originalTodo: Todo;
 
@@ -35,12 +42,13 @@ export class List {
   }
 
   addItem(): void {
-    let description = this.newTodoDescription;
+    let description = this.newTodo.title;
     if (!description) { return; }
 
     let newItem: Todo = new Todo();
     newItem.title = description.trim();
     newItem.completed = false;
+    newItem.dueDate = this.newTodo.dueDateObject;
 
     this.dataService.create(newItem).then(item => {
       item = (typeof item === 'string') ? JSON.parse(item) : item;
@@ -52,7 +60,7 @@ export class List {
         this.items.unshift(item);
       }
       // blank todo input
-      this.newTodoDescription = '';
+      this.newTodo.title = '';
     }).catch((error) => {
         alert('Failed to save the new TODO');
     });
@@ -129,6 +137,10 @@ export class List {
       item.isEditing = false;
       this.updateItem(item);
     }
+  }
+
+  dateLowerThan(date: Date): boolean {
+    return Moment(date).isBefore(Moment().startOf('day'));
   }
 
   purge(): void {

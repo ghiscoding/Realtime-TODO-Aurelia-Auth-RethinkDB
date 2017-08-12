@@ -2,7 +2,8 @@ export class Todo {
   id: number;
   archived: boolean;
   count: number;
-  createdAt: string;
+  createdAt: Date;
+  dueDate: Date;
   completed: boolean;
   isEditing: boolean;
   title: string;

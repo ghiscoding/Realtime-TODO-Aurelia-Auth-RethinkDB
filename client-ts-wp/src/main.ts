@@ -6,6 +6,7 @@ import 'nprogress/nprogress.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-social/bootstrap-social.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css';
 import 'styles/styles.scss';
 import 'styles/bootstrap.scss';
 import 'bootstrap'; // importing bootstrap.js
@@ -25,6 +26,10 @@ export async function configure(aurelia: Aurelia) {
     .feature(PLATFORM.moduleName('resources/index'))
     .developmentLogging();
 
+    aurelia.use.plugin(PLATFORM.moduleName('aurelia-bootstrap-datetimepicker'), config => {
+      config.extra.iconBase = 'font-awesome';
+      config.extra.withDateIcon = true;
+    });
     aurelia.use.plugin(PLATFORM.moduleName('aurelia-auth/auth-filter'));
     aurelia.use.plugin(PLATFORM.moduleName('aurelia-auth'), baseConfig => {
     	baseConfig.configure(authConfig);

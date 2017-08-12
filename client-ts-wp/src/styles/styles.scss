@@ -88,6 +88,10 @@ li.list-group-item.active > a {
   color: white;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 /* nprogress color change with brand-primary */
 $nprogress-color:   lighten($brand-primary, 30%);
 
