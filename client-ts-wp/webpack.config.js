@@ -41,7 +41,7 @@ module.exports = ({production, server, extractCss, coverage} = {}) => ({
   devtool: production ? 'source-map' : 'cheap-module-eval-source-map',
   entry: {
     app: ['aurelia-bootstrapper'],
-    vendor: ['bluebird', 'jquery', 'bootstrap'],
+    vendor: ['bluebird', 'jquery'],
   },
   output: {
     path: outDir,
@@ -121,18 +121,7 @@ module.exports = ({production, server, extractCss, coverage} = {}) => ({
       'jQuery': 'jquery',
       'window.jQuery': 'jquery',
       'window.$': 'jquery',
-      'Tether': 'tether',
-      Alert: 'exports-loader?Alert!bootstrap/js/dist/alert',
-      Button: 'exports-loader?Button!bootstrap/js/dist/button',
-      Carousel: 'exports-loader?Carousel!bootstrap/js/dist/carousel',
-      Collapse: 'exports-loader?Collapse!bootstrap/js/dist/collapse',
-      Dropdown: 'exports-loader?Dropdown!bootstrap/js/dist/dropdown',
-      Modal: 'exports-loader?Modal!bootstrap/js/dist/modal',
-      Popover: 'exports-loader?Popover!bootstrap/js/dist/popover',
-      Scrollspy: 'exports-loader?Scrollspy!bootstrap/js/dist/scrollspy',
-      Tab: 'exports-loader?Tab!bootstrap/js/dist/tab',
-      Tooltip: "exports-loader?Tooltip!bootstrap/js/dist/tooltip",
-      Util: 'exports-loader?Util!bootstrap/js/dist/util'
+      Popper: 'popper.js'
     }),
     new TsConfigPathsPlugin(),
     new CheckerPlugin(),

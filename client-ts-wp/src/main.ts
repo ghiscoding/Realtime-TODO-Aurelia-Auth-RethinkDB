@@ -8,10 +8,10 @@ import 'bootstrap-social/bootstrap-social.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import 'styles/styles.scss';
 import 'styles/bootstrap.scss';
+import 'bootstrap'; // importing bootstrap.js
 import { Aurelia } from 'aurelia-framework';
 import { PLATFORM } from 'aurelia-pal';
 import * as Bluebird from 'bluebird';
-import 'bootstrap' // importing bootstrap.js
 import authConfig from './modules/auth/authConfig';
 const BACKEND_SERVER_PORT: number = 5000;
 

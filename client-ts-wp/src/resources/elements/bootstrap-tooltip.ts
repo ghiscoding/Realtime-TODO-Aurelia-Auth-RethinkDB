@@ -5,7 +5,6 @@ import * as $ from 'jquery';
 @inject(Element)
 export class BootstrapTooltip {
   element: HTMLElement;
-  tether: any;
 
   constructor(element: HTMLElement) {
     this.element = element;
