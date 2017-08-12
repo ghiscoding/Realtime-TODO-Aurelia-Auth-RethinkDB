@@ -1,4 +1,4 @@
-const config = require("./config");
+const config = require('./config');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -7,7 +7,6 @@ const { AureliaPlugin } = require('aurelia-webpack-plugin');
 const { optimize: { CommonsChunkPlugin }, ProvidePlugin } = require('webpack');
 const { TsConfigPathsPlugin, CheckerPlugin } = require('awesome-typescript-loader');
 const WEB_API_PORT = config.webApiPort;
-
 
 // config helpers:
 const ensureArray = (config) => config && (Array.isArray(config) ? config : [config]) || []
@@ -120,8 +119,7 @@ module.exports = ({production, server, extractCss, coverage} = {}) => ({
       '$': 'jquery',
       'jQuery': 'jquery',
       'window.jQuery': 'jquery',
-      'window.$': 'jquery',
-      Popper: 'popper.js'
+      'window.$': 'jquery'
     }),
     new TsConfigPathsPlugin(),
     new CheckerPlugin(),
