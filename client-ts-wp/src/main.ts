@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-social/bootstrap-social.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css';
+import 'styles/bootstrap-datetimepicker-bs4.scss';
 import 'styles/styles.scss';
 import 'styles/bootstrap.scss';
 import 'bootstrap'; // importing bootstrap.js
