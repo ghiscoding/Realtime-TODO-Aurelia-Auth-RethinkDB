@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "taskName": "Aurelia (client only)",
+      "command": "yarn",
+      "type": "shell",
+      "args": ["start"]
+    },
+    {
+      "taskName": "Aurelia with NodeJS",
+      "command": "yarn",
+      "type": "shell",
+      "args": ["start", "-- withBackend"]
+    },
+    {
+      "taskName": "Start RethinkDB",
+      "type": "shell",
+      "windows": {
+          "command": "C:\\RethinkDB\\rethinkdb.exe",
+          "args": [
+            "-d c:\\RethinkDB\\rethinkdb_data"
+          ]
+      }
+    },
+  ]
+}
