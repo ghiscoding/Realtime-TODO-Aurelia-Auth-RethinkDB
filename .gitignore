@@ -12,3 +12,4 @@ server/config/config.development.js
 server/config/config.development.js
 yarn-error.log
 yarn.lock
+package-lock.json
