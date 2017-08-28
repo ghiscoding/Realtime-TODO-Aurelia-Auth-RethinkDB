@@ -7,6 +7,10 @@ cd Realtime-TODO-Aurelia-Auth-RethinkDB/client-ts-wp
 npm install # or: yarn install
 ```
 
+### VScode Workspaces
+If you use VSCode (Visual Studio Code) as your main editor, you can load the vscode workspace (requires version `1.16+`, `File -> Open Workspaces`). Once the workspace is loaded, you will then have access to multiple tasks (defined in `client-ts-wp/tasks.json`) which makes it easy to execute the code without even typing any command in the shell (you still have to make sure to `npm install` in both `client-ts-wp` and `server` folder).
+
+
 ### Running the App
 The simplest way of running the App is by typing the command (note: this will only start the WebUI)
 ```bash

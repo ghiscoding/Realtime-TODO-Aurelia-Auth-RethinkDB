@@ -50,17 +50,21 @@ cd Realtime-TODO-Aurelia-Auth-RethinkDB/server
 npm start # or: yarn start
 ```
 
-**NOTE** This client sample was created with the older `@easy-webpack` and I might end up deleting it sooner than later, I recommened taking a look at my new sample `TypeScript WebPack 3.x` as shown below.
+**NOTE** The `client-wp` sample was created with the older `@easy-webpack` and I might end up deleting it sooner than later, I recommened taking a look at my new sample `TypeScript WebPack 3.x` as shown below.
 
 ### Client (TypeScript WebPack 3.x)
 Please note that the `TypeScript Webpack` with the command line `npm start` will ONLY run the WebUI (Aurelia).
 
-**Note:** If you want to run both the frontend/backend (WebUI w/Aurelia + WebAPI w/NodeJS), you can do so by calling `npm start -- withBackend` (make sure to follow the [Server installation](#server-nodejs---koa) prior to launching this command).
+#### Install/Run trough shell
+If you want to run both the frontend/backend (WebUI w/Aurelia + WebAPI w/NodeJS), you can do so by calling `npm start -- withBackend` (make sure to follow the [Server installation](#server-nodejs---koa) prior to launching this command).
 ```bash
 cd Realtime-TODO-Aurelia-Auth-RethinkDB/client-ts-wp
 npm install # or: yarn install
 npm start -- withBackend # or: yarn start -- withBackend
 ```
+
+#### Install/Run through VSCode
+If you use VSCode (Visual Studio Code) as your main editor, you can load the vscode workspace (requires version `1.16+`, `File -> Open Workspaces`). Once the workspace is loaded, you will then have access to multiple tasks (defined in `client-ts-wp/tasks.json`) which makes it easy to execute the code without even typing any command in the shell (you still have to make sure to `npm install` in both `client-ts-wp` and `server` folder).
 
 ### Server (NodeJS - KOA)
 **Optional, see the note below**

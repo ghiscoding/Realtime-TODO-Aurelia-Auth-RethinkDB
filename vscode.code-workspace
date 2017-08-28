@@ -1,0 +1,45 @@
+{
+	"folders": [
+		{
+			"path": "./client-ts-wp"
+		},
+		{
+			"path": "./server"
+		}
+	],
+	"settings": {
+		"typescript.tsdk": "node_modules/typescript/lib"
+	},
+	"tasks": {
+		"tasks": [
+			{
+				"taskName": "Aurelia (client only)",
+				"command": "yarn",
+				"type": "shell",
+				"args": [
+					"start"
+				]
+			},
+			{
+				"taskName": "Aurelia with NodeJS",
+				"command": "yarn",
+				"type": "shell",
+				"args": [
+					"start",
+					"\"-- withBackend\""
+				],
+				"problemMatcher": []
+			},
+			{
+				"taskName": "Start RethinkDB",
+				"type": "shell",
+				"windows": {
+					"command": "C:\\RethinkDB\\rethinkdb.exe",
+					"args": [
+						"\"-d c:\\RethinkDB\\rethinkdb_data\""
+					]
+				}
+			}
+		]
+	}
+}

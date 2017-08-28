@@ -11,7 +11,7 @@
       "taskName": "Aurelia with NodeJS",
       "command": "yarn",
       "type": "shell",
-      "args": ["start", "-- withBackend"]
+      "args": ["start", "\"-- withBackend\""]
     },
     {
       "taskName": "Start RethinkDB",
@@ -19,9 +19,9 @@
       "windows": {
           "command": "C:\\RethinkDB\\rethinkdb.exe",
           "args": [
-            "-d c:\\RethinkDB\\rethinkdb_data"
+            "\"-d c:\\RethinkDB\\rethinkdb_data\""
           ]
       }
-    },
+    }
   ]
 }
