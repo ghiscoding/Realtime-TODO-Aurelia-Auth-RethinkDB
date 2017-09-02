@@ -1,11 +1,14 @@
 const config = require("./config")
-const {series, crossEnv, concurrent, rimraf} = require('nps-utils')
+const {series, crossEnv, concurrent, open, rimraf} = require('nps-utils')
 const {config: {port: E2E_PORT}} = require('./test/protractor.conf')
 const WEB_UI_PORT = config.webUiPort;
 
 module.exports = {
   scripts: {
-    default: 'nps webpack',
+    default: concurrent({
+      webpack: 'nps webpack',
+      openBrowser: 'nps browseWhenReady',
+    }) + ' --kill-others-on-fail --success first',
     test: {
       default: 'nps test.jest',
       jest: {
@@ -57,25 +60,25 @@ module.exports = {
       },
       noflag: 'nodemon ../server ../server/app.js'
     },
+    browseWhenReady: series(          
+      `wait-on --timeout 120000 http-get://localhost:${WEB_UI_PORT}/index.html`,
+      open(`http://localhost:${WEB_UI_PORT}`),
+    ),
+    openBrowser: concurrent({
+      webpack: 'nps webpack',
+      openBrowser: 'nps browseWhenReady',
+    }),
     withBackend: {
       default: concurrent({
-        webpack: `nps webpack.server`,
-        node: 'nps withBackend.whenReady',
-      }) + ' --kill-others --success first',
+        node: 'nps backend',
+        webpack: 'nps webpack',
+        openBrowser: 'nps browseWhenReady',
+      }) + ' --kill-others-on-fail --success first',
       noflag: concurrent({
-        webpack: `nps webpack.server`,
-        node: 'nps withBackend.whenReadyNoFlag',
-      }) + ' --kill-others --success first',
-      whenReady: series(
-        `wait-on --timeout 120000 http-get://localhost:${WEB_UI_PORT}/index.html`,
-        `opn http://localhost:${WEB_UI_PORT}`,
-        'nps backend'
-      ),
-      whenReadyNoFlag: series(
-        `wait-on --timeout 120000 http-get://localhost:${WEB_UI_PORT}/index.html`,
-        `opn http://localhost:${WEB_UI_PORT}`,
-        'nps backend.noflag'
-      ),
+        node: 'nps backend.noflag',
+        webpack: 'nps webpack',
+        openBrowser: 'nps browseWhenReady',
+      }) + ' --kill-others-on-fail --success first',
     },
     webpack: {
       default: 'nps webpack.server',
@@ -114,7 +117,7 @@ module.exports = {
       server: {
         default: `webpack-dev-server -d --port=${WEB_UI_PORT} --inline --env.server`,
         extractCss: `webpack-dev-server -d --port=${WEB_UI_PORT} --inline --env.server --env.extractCss`,
-        hmr: `webpack-dev-server -d --port=${WEB_UI_PORT} --inline --hot --env.server`
+        hmr: `webpack-dev-server -d --port=${WEB_UI_PORT} --inline --hot --env.server`     
       },
     },
     serve: 'http-server dist --cors',
