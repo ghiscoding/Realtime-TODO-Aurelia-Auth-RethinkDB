@@ -76,9 +76,11 @@ export class Edit {
     });
   };
 
-  areEqual(obj1: object, obj2: object): boolean {
+  areEqual(obj1: object | null, obj2: object | null): boolean {
     if(obj1 && !obj2) {
       return false;
+    } else if(!obj1 && !obj2) {
+      return true;
     }
     return Object.keys(obj1).every((key) => obj2.hasOwnProperty(key) && (obj1[key] === obj2[key]));
   }

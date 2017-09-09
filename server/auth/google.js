@@ -2,18 +2,20 @@
 
 // Middlewares
 const parse = require('co-body');
-const request = require('koa-request');
+const request = require('async-request');
 const jwt = require('jwt-simple');
 const config = require('../config');
 const authUtils = require('./authUtils');
 const User = require('./userRethink.js');
 
-exports.authenticate = function* (next) {
+exports.authenticate = async function (ctx, next) {
+  let token = '';
+
   try {
-    var auth = yield parse(this);
-    var accessTokenUrl = 'https://accounts.google.com/o/oauth2/token';
-    var peopleApiUrl = 'https://www.googleapis.com/plus/v1/people/me/openIdConnect';
-    var params = {
+    let auth = await parse(ctx);
+    let accessTokenUrl = 'https://accounts.google.com/o/oauth2/token';
+    let peopleApiUrl = 'https://www.googleapis.com/plus/v1/people/me/openIdConnect';
+    let params = {
       code: auth.code,
       client_id: auth.clientId,
       client_secret: config.GOOGLE_SECRET,
@@ -22,57 +24,60 @@ exports.authenticate = function* (next) {
     };
 
     // Step 1. Exchange authorization code for access token.
-    var response = yield request.post(accessTokenUrl, { json: true, form: params });
-    var accessToken = response.body.access_token;
-    var headers = { Authorization: 'Bearer ' + accessToken };
+    let postReponse = await request(accessTokenUrl, { method: 'POST', data: params });
+    let jsonPostResponse = JSON.parse(postReponse.body);
+
+    let accessToken = jsonPostResponse.access_token;
+    let headers = { Authorization: 'Bearer ' + accessToken };
 
     // Step 2. Retrieve profile information about the current user.
-    response = yield request.get(peopleApiUrl, { headers: headers, json: true });
-    var profile = response.body;
+    let getResponse = await request(peopleApiUrl, { method: 'GET', headers: headers });
+    let jsonGetResponse = JSON.parse(getResponse.body);
+    let profile = jsonGetResponse;
 
     // Step 3a. Link user accounts.
-    if (this.headers.authorization) {
-      var existingUser = yield User.findOne({ google: profile.sub });
+    if (ctx.headers.authorization) {
+      let existingUser = await User.findOne({ google: profile.sub });
 
       if (existingUser && existingUser.length !== 0) {
-        this.status = 409;
-        return this.body = { error: true, message: 'There is already a Google account that belongs to you' };
+        ctx.status = 409;
+        return ctx.body = { error: true, message: 'There is already a Google account that belongs to you' };
       }
-      var token = this.headers.authorization.split(' ')[1];
-      var payload = jwt.decode(token, config.TOKEN_SECRET);
+      token = ctx.headers.authorization.split(' ')[1];
+      let payload = jwt.decode(token, config.TOKEN_SECRET);
 
-      var user = yield User.findById(payload.sub);
+      let user = await User.findById(payload.sub);
       if (!user) {
-        this.status = 400;
-        return this.body = { error: true, message: 'User not found' };
+        ctx.status = 400;
+        return ctx.body = { error: true, message: 'User not found' };
       }
       user.google = profile.sub;
       user.picture = user.picture || profile.picture.replace('sz=50', 'sz=200');
       user.displayName = user.displayName || profile.name;
 
-      var outputUser = yield User.save(user);
-      var token = authUtils.createJWT(outputUser);
-      return this.body = JSON.stringify({ token: token });
-    }else {
+      let outputUser = await User.save(user);
+      token = authUtils.createJWT(outputUser);
+      return ctx.body = JSON.stringify({ token: token });
+    } else {
       // Step 3b. Create a new user account or return an existing one.
-      var existingUser = yield User.findOne({ google: profile.sub });
+      let existingUser = await User.findOne({ google: profile.sub });
       if (existingUser) {
-        var token = authUtils.createJWT(existingUser);
-        return this.body = JSON.stringify({ token: token });
+        token = authUtils.createJWT(existingUser);
+        return ctx.body = JSON.stringify({ token: token });
       }
 
-      var user = {
+      let user = {
         email: profile.email,
         google: profile.sub,
         picture: profile.picture.replace('sz=50', 'sz=200'),
         displayName: profile.name
       };
 
-      var updatedUser = yield User.save(user);
-      var token = authUtils.createJWT(updatedUser);
-      return this.body = JSON.stringify({ token: token });
+      let updatedUser = await User.save(user);
+      token = authUtils.createJWT(updatedUser);
+      return ctx.body = JSON.stringify({ token: token });
     }
-  } catch(e) {
-    return this.throw(500, e.message);
+  } catch (e) {
+    return ctx.throw(500, e.message);
   }
-}
+};

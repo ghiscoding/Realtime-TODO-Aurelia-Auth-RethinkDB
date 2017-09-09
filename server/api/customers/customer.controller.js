@@ -21,80 +21,80 @@ const config = require('../../config');
 const r = require('rethinkdbdash')(config.rethinkdb);
 
 // Get list of items
-exports.index = function* () {
-  try{
-    var result = yield r.table(config.tableCustomer);
-    this.body = JSON.stringify(result);
-  } catch(e) {
-      this.status = 500;
-      this.body = e.message || http.STATUS_CODES[this.status];
+exports.index = async function (ctx, next) {
+  try {
+    var result = await r.table(config.tableCustomer);
+    ctx.body = JSON.stringify(result);
+  } catch (e) {
+    ctx.body = e.message || http.STATUS_CODES[ctx.status];
+    ctx.status = err.status || 500;
   }
 };
 
 // Get a single item
-exports.show = function* (next) {
-    try{
-        var id = this.params.id;
-        var result = yield r.table(config.tableCustomer).get(id);
-        this.body = JSON.stringify(result);
-      } catch(e) {
-          this.status = 500;
-          this.body = e.message || http.STATUS_CODES[this.status];
-      }
-}
+exports.show = async function (ctx, next) {
+  try {
+    var id = ctx.params.id;
+    var result = await r.table(config.tableCustomer).get(id);
+    ctx.body = JSON.stringify(result);
+  } catch (e) {
+    ctx.status = 500;
+    ctx.body = e.message || http.STATUS_CODES[ctx.status];
+  }
+};
 
 // Creates a new item in the DB.
-exports.create = function* () {
-    try{
-        var customer = yield parse(this);
-        var result = yield r.table(config.tableCustomer).insert(
-            r.expr(customer).merge({
-                createdAt: r.now(),
-                updatedAt: r.now(),
-            }),
-            {returnChanges: true}
-        );
+exports.create = async function (ctx, next) {
+  try {
+    var customer = await parse(ctx);
+    var result = await r.table(config.tableCustomer).insert(
+      r.expr(customer).merge({
+        createdAt: r.now(),
+        updatedAt: r.now(),
+      }),
+      { returnChanges: true }
+    );
 
-        result = (result.changes.length > 0) ? result.changes[0].new_val : {}; // customer now contains the previous customer + a field `id` and `createdAt`
-        this.body = JSON.stringify(result);
-    }
-    catch(e) {
-        this.status = 500;
-        this.body = e.message || http.STATUS_CODES[this.status];
-    }
-}
+    result = (result.changes.length > 0) ? result.changes[0].new_val : {}; // customer now contains the previous customer + a field `id` and `createdAt`
+    ctx.body = JSON.stringify(result);
+  }
+  catch (e) {
+    ctx.status = 500;
+    ctx.body = e.message || http.STATUS_CODES[ctx.status];
+  }
+};
 
 // Updates an existing item in the DB.
-exports.update = function* () {
-    try{
-        var customer = yield parse(this);
-        var id = customer.id;
+exports.update = async function (ctx, next) {
+  try {
+    var customer = await parse(ctx);
+    var id = customer.id;
 
-        var result = yield r.table(config.tableCustomer)
-          .get(id)
-          .update(r.expr(customer).merge({
-              updatedAt: r.now(),
-          }), {returnChanges: true});
+    var result = await r.table(config.tableCustomer)
+      .get(id)
+      .update(r.expr(customer).merge({
+        updatedAt: r.now(),
+      }), { returnChanges: true });
 
-        result = (result.changes.length > 0) ? result.changes[0].new_val : {};
-        this.body = JSON.stringify(result);
-    }
-    catch(e) {
-        this.status = 500;
-        this.body = e.message || http.STATUS_CODES[this.status];
-    }
-}
+    result = (result.changes.length > 0) ? result.changes[0].new_val : {};
+    ctx.body = JSON.stringify(result);
+  }
+  catch (e) {
+    ctx.status = 500;
+    ctx.body = e.message || http.STATUS_CODES[ctx.status];
+  }
+};
 
 // Deletes an item from the DB.
-exports.destroy = function* (next) {
-    try{
-        var id = this.params.id;
-        var result = yield r.table(config.tableCustomer).get(id).delete();
-        this.body = JSON.stringify({ id: id });
-        yield next;
-    }
-    catch(e) {
-        this.status = 500;
-        this.body = e.message || http.STATUS_CODES[this.status];
-    }
-}
+exports.destroy = async function (ctx, next) {
+  try {
+    var id = ctx.params.id;
+    var result = await r.table(config.tableCustomer).get(id).delete();
+    ctx.body = JSON.stringify({ id: id });
+    await next;
+  }
+  catch (e) {
+    ctx.status = 500;
+    ctx.body = e.message || http.STATUS_CODES[ctx.status];
+  }
+};

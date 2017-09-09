@@ -1,39 +1,41 @@
 'use strict';
 
-var moment = require('moment');
-var jwt = require('jwt-simple');
-var config = require('../config');
+const moment = require('moment');
+const jwt = require('jwt-simple');
+const config = require('../config');
 
-exports.createJWT = function(user) {
-    var payload = {
-        sub: user.id,
-        iat: moment().unix(),
-        exp: moment().add(14, 'days').unix()
-    };
-    return jwt.encode(payload, config.TOKEN_SECRET);
+exports.createJWT = (user) => {
+  let payload = {
+    sub: user.id,
+    iat: moment().unix(),
+    exp: moment().add(14, 'days').unix()
+  };
+  return jwt.encode(payload, config.TOKEN_SECRET);
 };
 
-exports.ensureAuthenticated = function* (next) {
-  try{
-    if (!this.headers.authorization) {
-      return this.throw(401, 'missing_authorization_header', { message: 'Please make sure your request has an Authorization header' });
+exports.ensureAuthenticated = async function (ctx, next) {
+  try {
+    if (!ctx.headers.authorization) {
+      return ctx.throw(401, 'missing_authorization_header', { message: 'Please make sure your request has an Authorization header' });
     }
-    var token = this.headers.authorization.split(' ')[1];
-    var payload = null;
+    let token = ctx.headers.authorization.split(' ')[1];
+    let payload = null;
     try {
       payload = jwt.decode(token, config.TOKEN_SECRET);
     }
     catch (e) {
-      this.status = 401;
-      return this.body = { error: true, message: e.message };
+      ctx.status = 401;
+      return ctx.body = { error: true, message: e.message };
     }
 
     if (payload.exp <= moment().unix()) {
-      return this.throw(401, 'expired_token', { message: 'Token has expired' });
+      return ctx.throw(401, 'expired_token', { message: 'Token has expired' });
     }
-    this.request.userId = payload.sub;
-    yield next;
-  } catch(e) {
-      return this.throw(500, e.message);
+
+    // pass userId to the next middleware
+    ctx.state.userId = payload.sub;
+    await next(payload.sub);
+  } catch (e) {
+    return ctx.throw(500, e.message);
   }
 };
