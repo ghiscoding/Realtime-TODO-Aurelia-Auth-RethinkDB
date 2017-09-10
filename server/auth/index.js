@@ -13,7 +13,7 @@ const router = new Router({
   prefix: '/auth'
 });
 
-// routes
+// // routes
 router.post('/github', github.authenticate);
 router.post('/google', google.authenticate);
 router.post('/facebook', facebook.authenticate);
@@ -21,7 +21,7 @@ router.post('/linkedin', linkedin.authenticate);
 router.post('/live', live.authenticate);
 router.post('/twitter', twitter.authenticate);
 
-//auth only appied for following routes, not the routes above
+// //auth only applied for following routes, not the routes above
 router.use(['/me', '/unlink'], authUtils.ensureAuthenticated);
 router.get('/me', meController.getMe );
 router.put('/me', meController.updateMe );

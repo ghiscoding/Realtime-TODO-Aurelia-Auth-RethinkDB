@@ -2,68 +2,68 @@
 
 // Middlewares
 const parse = require('co-body');
-var _ = require('lodash');
-var jwt = require('jwt-simple');
-var User = require('./userRethink.js');
+const _ = require('lodash');
+const jwt = require('jwt-simple');
+const User = require('./userRethink.js');
 
-exports.getMe = function* () {
-  try{
-    var user = yield User.findById(this.request.userId);
-    if(!user) {
-      this.status = 404;
-      return this.body = { error: true, message: 'User not found' };
+exports.getMe = async function (ctx, next) {
+  try {
+    let user = await User.findById(ctx.state.userId);
+    if (!user) {
+      ctx.status = 404;
+      return ctx.body = { error: true, message: 'User not found' };
     }
-    this.body = user;
-    return this;
-  } catch(e) {
-      return this.throw(500, e.message);
+    ctx.body = user;
+    return ctx;
+  } catch (e) {
+    return ctx.throw(500, e.message);
   }
 };
 
-exports.updateMe = function* (next) {
+exports.updateMe = async function (ctx, next) {
   try {
-    var user = yield User.findById(this.user);
+    let user = await User.findById(ctx.user);
 
     if (!user) {
-      this.status = 400;
-      return this.body = { error: true, message: 'User not found' };
+      ctx.status = 400;
+      return ctx.body = { error: true, message: 'User not found' };
     }
-    user.displayName = this.body.displayName || user.displayName;
-    user.email = this.body.email || user.email;
+    user.displayName = ctx.body.displayName || user.displayName;
+    user.email = ctx.body.email || user.email;
 
-    var updatedUser = yield User.save(user);
-    if(updatedUser) {
-      this.status = 200;
+    let updatedUser = await User.save(user);
+    if (updatedUser) {
+      ctx.status = 200;
     }
-  } catch(e) {
-    return this.throw(500, e.message);
+  } catch (e) {
+    return ctx.throw(500, e.message);
   }
 };
 
-exports.unlink = function* (next){
+exports.unlink = async function (ctx, next) {
   try {
-    var provider = this.params.provider;
-    var providers = ['facebook', 'foursquare', 'google', 'github', 'linkedin', 'live', 'twitter', 'yahoo','identSrv'];
+    let provider = ctx.params.provider;
+    let providers = ['facebook', 'foursquare', 'google', 'github', 'linkedin', 'live', 'twitter', 'yahoo', 'identSrv'];
 
     if (providers.indexOf(provider) === -1) {
-      this.status = 404;
-      return this.body = { error: true, message: 'Unknown provider' };
+      ctx.status = 404;
+      return ctx.body = { error: true, message: 'Unknown provider' };
     }
 
-    var user = yield User.findById(this.request.userId);
-    if(!user) {
-      this.status = 404;
-      return this.body = { error: true, message: 'User not found' };
+    let user = await User.findById(ctx.state.userId);
+    if (!user) {
+      ctx.status = 404;
+      return ctx.body = { error: true, message: 'User not found' };
     }
 
     // make the provider null in DB
     user[provider] = null;
 
-    var updatedUser = yield User.save(user);
-    if(updatedUser) {
-      this.status = 200;
+    let updatedUser = await User.save(user);
+    if (updatedUser) {
+      ctx.status = 200;
     }
-  } catch(e) {
-    return this.throw(500, e.message);
+  } catch (e) {
+    return ctx.throw(500, e.message);
   }
 };

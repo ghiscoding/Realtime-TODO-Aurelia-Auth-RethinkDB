@@ -1,5 +1,6 @@
 // Middlewares
-const app = require('koa')();
+const Koa = require('koa');
+const app = new Koa();
 const serve = require('koa-static');
 const api = require('koa-router')();
 const assertTimeout = require('co-assert-timeout');
@@ -48,9 +49,10 @@ todoSocket.on("connection", function(socket) {
     });
 });
 
-app.use(function* (next) {
+app.use(async (ctx, next) => {
     // Each request has 5 seconds to return
-    yield assertTimeout(next, '5 seconds')
+    await next();
+    await assertTimeout(next, '5 seconds');
 });
 
 // load external routes
