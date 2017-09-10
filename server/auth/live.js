@@ -1,17 +1,19 @@
 'use strict';
 // Middlewares
 const parse = require('co-body');
-const request = require('koa-request');
+const request = require('koa2-request');
 const jwt = require('jwt-simple');
 const config = require('../config');
 const authUtils = require('./authUtils');
 const User = require('./userRethink.js');
 
-exports.authenticate = function* (next) {
+exports.authenticate = async function (ctx, next) {
+  let token = '';
+
   try {
-    var auth = yield parse(this);
-    var accessTokenUrl = 'https://login.live.com/oauth20_token.srf';
-    var params = {
+    let auth = await parse(ctx);
+    let accessTokenUrl = 'https://login.live.com/oauth20_token.srf';
+    let params = {
       code: auth.code,
       client_id: auth.clientId,
       client_secret: config.WINDOWS_LIVE_SECRET,
@@ -20,124 +22,58 @@ exports.authenticate = function* (next) {
     };
 
     // Step 1. Exchange authorization code for access token.
-    var response = yield request.post(accessTokenUrl, { json: true, form: params });
-    var accessToken = response.body;
+    let postReponse = await request(accessTokenUrl, { method: 'POST', json: true, form: params });
+    let accessToken = postReponse.body;
 
     // Step 2. Retrieve profile information about the current user.
-    var profileUrl = 'https://apis.live.net/v5.0/me?access_token=' + accessToken.access_token;
-    response = yield request.get(profileUrl, { json: true });
-    var profile = response.body;
+    let profileUrl = 'https://apis.live.net/v5.0/me?access_token=' + accessToken.access_token;
+    let getResponse = await request(profileUrl, { method: 'GET', json: true });
+    let profile = getResponse.body;
 
     // Step 3a. Link user accounts.
-    if (this.headers.authorization) {
-      var existingUser = yield User.findOne({ live: profile.id });
+    if (ctx.headers.authorization) {
+      let existingUser = await User.findOne({ live: profile.id });
 
       if (existingUser && existingUser.length !== 0) {
-        this.status = 409;
-        return this.body = { error: true, message: 'There is already a Windows Live account that belongs to you' };
+        ctx.status = 409;
+        return ctx.body = { error: true, message: 'There is already a Windows Live account that belongs to you' };
       }
-      var token = this.headers.authorization.split(' ')[1];
-      var payload = jwt.decode(token, config.TOKEN_SECRET);
+      token = ctx.headers.authorization.split(' ')[1];
+      let payload = jwt.decode(token, config.TOKEN_SECRET);
 
-      var user = yield User.findById(payload.sub);
+      let user = await User.findById(payload.sub);
       if (!user) {
-        this.status = 400;
-        return this.body = { error: true, message: 'User not found' };
+        ctx.status = 400;
+        return ctx.body = { error: true, message: 'User not found' };
       }
 
       user.live = profile.id;
       user.picture = user.picture || 'https://apis.live.net/v5.0/' + profile.id + '/picture?type=large';
       user.displayName = user.displayName || profile.name;
 
-      var outputUser = yield User.save(user);
-      var token = authUtils.createJWT(outputUser);
-      return this.body = JSON.stringify({ token: token });
-    }else {
+      let outputUser = await User.save(user);
+      token = authUtils.createJWT(outputUser);
+      return ctx.body = JSON.stringify({ token: token });
+    } else {
       // Step 3b. Create a new user account or return an existing one.
-      var existingUser = yield User.findOne({ live: profile.id });
+      let existingUser = await User.findOne({ live: profile.id });
       if (existingUser) {
-        var token = authUtils.createJWT(existingUser);
-        return this.body = JSON.stringify({ token: token });
+        token = authUtils.createJWT(existingUser);
+        return ctx.body = JSON.stringify({ token: token });
       }
 
-      var user = {
+      let user = {
         email: profile.emails.preferred,
         live: profile.id,
         picture: 'https://apis.live.net/v5.0/' + profile.id + '/picture?type=large',
         displayName: profile.name
       };
 
-      var updatedUser = yield User.save(user);
-      var token = authUtils.createJWT(updatedUser);
-      return this.body = JSON.stringify({ token: token });
+      let updatedUser = await User.save(user);
+      token = authUtils.createJWT(updatedUser);
+      return ctx.body = JSON.stringify({ token: token });
     }
-  } catch(e) {
-    return this.throw(500, e.message);
+  } catch (e) {
+    return ctx.throw(500, e.message);
   }
 }
-
-
-/*
-exports.authenticate = function (req, res) {
-  async.waterfall([
-    // Step 1. Exchange authorization code for access token.
-    function(done) {
-      var accessTokenUrl = 'https://login.live.com/oauth20_token.srf';
-      var params = {
-        code: req.body.code,
-        client_id: req.body.clientId,
-        client_secret: config.WINDOWS_LIVE_SECRET,
-        redirect_uri: req.body.redirectUri,
-        grant_type: 'authorization_code'
-      };
-      request.post(accessTokenUrl, { form: params, json: true }, function(err, response, accessToken) {
-        done(null, accessToken);
-      });
-    },
-    // Step 2. Retrieve profile information about the current user.
-    function(accessToken, done) {
-      var profileUrl = 'https://apis.live.net/v5.0/me?access_token=' + accessToken.access_token;
-      request.get({ url: profileUrl, json: true }, function(err, response, profile) {
-        done(err, profile);
-      });
-    },
-    function(profile) {
-      // Step 3a. Link user accounts.
-      if (req.headers.authorization) {
-        User.findOne({ live: profile.id }, function(err, user) {
-          if (user) {
-            return res.status(409).send({ message: 'There is already a Windows Live account that belongs to you' });
-          }
-          var token = req.headers.authorization.split(' ')[1];
-          var payload = jwt.decode(token, config.TOKEN_SECRET);
-          User.findById(payload.sub, function(err, existingUser) {
-            if (!existingUser) {
-              return res.status(400).send({ message: 'User not found' });
-            }
-            existingUser.live = profile.id;
-            existingUser.displayName = existingUser.displayName || profile.name;
-            existingUser.save(function() {
-              var token = authUtils.createJWT(existingUser);
-              res.send({ token: token });
-            });
-          });
-        });
-      } else {
-        // Step 3b. Create a new user or return an existing account.
-        User.findOne({ live: profile.id }, function(err, user) {
-          if (user) {
-            return res.send({ token: authUtils.createJWT(user) });
-          }
-          var newUser = new User();
-          newUser.live = profile.id;
-          newUser.displayName = profile.name;
-          newUser.save(function() {
-            var token = authUtils.createJWT(newUser);
-            res.send({ token: token });
-          });
-        });
-      }
-    }
-  ]);
-}
-*/

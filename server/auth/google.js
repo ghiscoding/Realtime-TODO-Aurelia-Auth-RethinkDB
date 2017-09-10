@@ -2,7 +2,7 @@
 
 // Middlewares
 const parse = require('co-body');
-const request = require('async-request');
+const request = require('koa2-request');
 const jwt = require('jwt-simple');
 const config = require('../config');
 const authUtils = require('./authUtils');
@@ -24,16 +24,13 @@ exports.authenticate = async function (ctx, next) {
     };
 
     // Step 1. Exchange authorization code for access token.
-    let postReponse = await request(accessTokenUrl, { method: 'POST', data: params });
-    let jsonPostResponse = JSON.parse(postReponse.body);
-
-    let accessToken = jsonPostResponse.access_token;
+    let postResponse = await request(accessTokenUrl, { method: 'POST', json: true, form: params });
+    let accessToken = postResponse.body.access_token;
     let headers = { Authorization: 'Bearer ' + accessToken };
 
     // Step 2. Retrieve profile information about the current user.
-    let getResponse = await request(peopleApiUrl, { method: 'GET', headers: headers });
-    let jsonGetResponse = JSON.parse(getResponse.body);
-    let profile = jsonGetResponse;
+    let getResponse = await request(peopleApiUrl, { method: 'GET', headers: headers, json: true });
+    let profile = getResponse.body;
 
     // Step 3a. Link user accounts.
     if (ctx.headers.authorization) {

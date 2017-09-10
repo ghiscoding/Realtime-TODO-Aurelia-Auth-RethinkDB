@@ -2,7 +2,7 @@
 
 // Middlewares
 const parse = require('co-body');
-var parseBool = require("parsebool");
+const parseBool = require("parsebool");
 
 // Load config for RethinkDB and koa
 const config = require('../../config');
@@ -11,124 +11,124 @@ const config = require('../../config');
 const r = require('rethinkdbdash')(config.rethinkdb);
 
 // Retrieve all todo items
-exports.getAll = function* () {
-    try {
-        var result = yield r.table(config.tableTodo).orderBy({index: r.desc("createdAt")}).filter({ userId: this.request.userId });
-        this.body = JSON.stringify(result);
-    }
-    catch(e) {
-        this.status = 500;
-        this.body = e.message || http.STATUS_CODES[this.status];
-    }
+exports.getAll = async function (ctx, next) {
+  try {
+    let result = await r.table(config.tableTodo).orderBy({ index: r.desc("createdAt") }).filter({ userId: ctx.request.userId });
+    ctx.body = JSON.stringify(result);
+  }
+  catch (e) {
+    ctx.status = 500;
+    ctx.body = e.message || http.STATUS_CODES[ctx.status];
+  }
 }
 
 // Retrieve all todo items
-exports.getAllNonArchived = function* () {
-    try {
-        var result = yield r.table(config.tableTodo).orderBy({index: r.desc("createdAt")}).filter({ archived: false, userId: this.request.userId });
-        this.body = JSON.stringify(result);
-    }
-    catch(e) {
-        this.status = 500;
-        this.body = e.message || http.STATUS_CODES[this.status];
-    }
+exports.getAllNonArchived = async function (ctx, next) {
+  try {
+    let result = await r.table(config.tableTodo).orderBy({ index: r.desc("createdAt") }).filter({ archived: false, userId: ctx.request.userId });
+    ctx.body = JSON.stringify(result);
+  }
+  catch (e) {
+    ctx.status = 500;
+    ctx.body = e.message || http.STATUS_CODES[ctx.status];
+  }
 }
 
 // Create a new todo item
-exports.createItem = function* () {
-    try{
-        var todo = yield parse(this);
-        var result = yield r.table(config.tableTodo).insert(
-            r.expr(todo).merge({
-                userId: this.request.userId,
-                archived: false,
-                createdAt: r.now() // The date r.now(0 gets computed on the server -- new Date() would have work fine too
-            }),
-            {returnChanges: true}
-        );
+exports.createItem = async function (ctx, next) {
+  try {
+    let todo = await parse(ctx);
+    let result = await r.table(config.tableTodo).insert(
+      r.expr(todo).merge({
+        userId: ctx.request.userId,
+        archived: false,
+        createdAt: r.now() // The date r.now(0 gets computed on the server -- new Date() would have work fine too
+      }),
+      { returnChanges: true }
+    );
 
-        todo = (result.changes.length > 0) ? result.changes[0].new_val : {}; // todo now contains the previous todo + a field `id` and `createdAt`
-        this.body = JSON.stringify(todo);
-    }
-    catch(e) {
-        this.status = 500;
-        this.body = e.message || http.STATUS_CODES[this.status];
-    }
+    todo = (result.changes.length > 0) ? result.changes[0].new_val : {}; // todo now contains the previous todo + a field `id` and `createdAt`
+    ctx.body = JSON.stringify(todo);
+  }
+  catch (e) {
+    ctx.status = 500;
+    ctx.body = e.message || http.STATUS_CODES[ctx.status];
+  }
 }
 
 // Delete a todo item
-exports.deleteItem = function* (next) {
-    try{
-        var id = this.params.id;
-        var result = yield r.table(config.tableTodo).get(id).delete();
-        this.body = JSON.stringify({ id: id });
-        yield next;
-    }
-    catch(e) {
-        this.status = 500;
-        this.body = e.message || http.STATUS_CODES[this.status];
-    }
+exports.deleteItem = async function (ctx, next) {
+  try {
+    let id = ctx.params.id;
+    let result = await r.table(config.tableTodo).get(id).delete();
+    ctx.body = JSON.stringify({ id: id });
+    await next;
+  }
+  catch (e) {
+    ctx.status = 500;
+    ctx.body = e.message || http.STATUS_CODES[ctx.status];
+  }
 }
 
 // Update a todo item
-exports.updateItem = function* () {
-    try{
-        var todo = yield parse(this);
+exports.updateItem = async function (ctx, next) {
+  try {
+    let todo = await parse(ctx);
 
-        //delete todo._saving;
-        var id = todo.id;
+    //delete todo._saving;
+    let id = todo.id;
 
-        var result = yield r.table(config.tableTodo).get(id).update(
-            {title: todo.title, completed: todo.completed, archived: false, userId: this.request.userId},
-            {returnChanges: true}
-        );
+    let result = await r.table(config.tableTodo).get(id).update(
+      { title: todo.title, completed: todo.completed, archived: false, userId: ctx.request.userId },
+      { returnChanges: true }
+    );
 
-        result = (result.changes.length > 0) ? result.changes[0].new_val : {};
-        this.body = JSON.stringify(result);
-    }
-    catch(e) {
-        this.status = 500;
-        this.body = e.message || http.STATUS_CODES[this.status];
-    }
+    result = (result.changes.length > 0) ? result.changes[0].new_val : {};
+    ctx.body = JSON.stringify(result);
+  }
+  catch (e) {
+    ctx.status = 500;
+    ctx.body = e.message || http.STATUS_CODES[ctx.status];
+  }
 }
 
 // Archive all the todo items
-exports.archiveAllCompleted = function* () {
-    try{
-        var result = yield r.table(config.tableTodo).filter({ completed: true, archived: false, userId: this.request.userId }).update(
-            { archived: true }
-        );
-        this.body = JSON.stringify({ archived: true, count: result.replaced });
-    }
-    catch(e) {
-        this.status = 500;
-        this.body = e.message || http.STATUS_CODES[this.status];
-    }
+exports.archiveAllCompleted = async function (ctx, next) {
+  try {
+    let result = await r.table(config.tableTodo).filter({ completed: true, archived: false, userId: ctx.request.userId }).update(
+      { archived: true }
+    );
+    ctx.body = JSON.stringify({ archived: true, count: result.replaced });
+  }
+  catch (e) {
+    ctx.status = 500;
+    ctx.body = e.message || http.STATUS_CODES[ctx.status];
+  }
 }
 
 // Purge all the archived items
-exports.purgeArchiveItems = function* () {
-    try{
-        var result = yield r.table(config.tableTodo).filter({ archived: true, userId: this.request.userId }).delete();
-        this.body = JSON.stringify({ purged: true, count: result.deleted });
-    }
-    catch(e) {
-        this.status = 500;
-        this.body = e.message || http.STATUS_CODES[this.status];
-    }
+exports.purgeArchiveItems = async function (ctx, next) {
+  try {
+    let result = await r.table(config.tableTodo).filter({ archived: true, userId: ctx.request.userId }).delete();
+    ctx.body = JSON.stringify({ purged: true, count: result.deleted });
+  }
+  catch (e) {
+    ctx.status = 500;
+    ctx.body = e.message || http.STATUS_CODES[ctx.status];
+  }
 }
 
 // Toggle all the todo items to complete
-exports.toggleAllItemToComplete = function* () {
-    try{
-        var flag = parseBool(this.params.flag);
-        var result = yield r.table(config.tableTodo).filter({ completed: flag, userId: this.request.userId }).update(
-            {completed: !flag} // toggle the inverse flag
-        );
-        this.body = JSON.stringify({ completed: !flag, count: result.replaced });
-    }
-    catch(e) {
-        this.status = 500;
-        this.body = e.message || http.STATUS_CODES[this.status];
-    }
+exports.toggleAllItemToComplete = async function (ctx, next) {
+  try {
+    let flag = parseBool(ctx.params.flag);
+    let result = await r.table(config.tableTodo).filter({ completed: flag, userId: ctx.request.userId }).update(
+      { completed: !flag } // toggle the inverse flag
+    );
+    ctx.body = JSON.stringify({ completed: !flag, count: result.replaced });
+  }
+  catch (e) {
+    ctx.status = 500;
+    ctx.body = e.message || http.STATUS_CODES[ctx.status];
+  }
 }

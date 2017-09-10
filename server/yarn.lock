@@ -99,14 +99,6 @@ async-each@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/async-each/-/async-each-1.0.1.tgz#19d386a1d9edc6e7c1c85d388aedbcc56d33602d"
 
-async-request@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/async-request/-/async-request-1.2.0.tgz#b407af8b972d0292af659f190097f121dfa6ac9a"
-  dependencies:
-    lodash "^3.5.0"
-    request "^2.53.0"
-    tough-cookie "^0.12.1"
-
 asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
@@ -1013,13 +1005,6 @@ koa-compose@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/koa-compose/-/koa-compose-4.0.0.tgz#2800a513d9c361ef0d63852b038e4f6f2d5a773c"
 
-koa-convert@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/koa-convert/-/koa-convert-1.2.0.tgz#da40875df49de0539098d1700b50820cebcd21d0"
-  dependencies:
-    co "^4.6.0"
-    koa-compose "^3.0.0"
-
 koa-cors@0.0.16:
   version "0.0.16"
   resolved "https://registry.yarnpkg.com/koa-cors/-/koa-cors-0.0.16.tgz#98107993a7909e34c042986c5ec6156d77f3432e"
@@ -1036,12 +1021,6 @@ koa-logger@^1.3.0:
     chalk "^1.1.3"
     humanize-number "0.0.2"
     passthrough-counter "^1.0.0"
-
-koa-request@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/koa-request/-/koa-request-1.0.0.tgz#19343352479d2cb965d7aff0a802b1a06d408e16"
-  dependencies:
-    request "*"
 
 koa-router@^7.2.1:
   version "7.2.1"
@@ -1075,6 +1054,10 @@ koa-static@^4.0.1:
   dependencies:
     debug "^2.6.8"
     koa-send "^4.1.0"
+
+koa2-request@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/koa2-request/-/koa2-request-1.0.1.tgz#e139f1ad7e0380d9239d5370944babb5612d2595"
 
 koa@^2.3.0:
   version "2.3.0"
@@ -1658,7 +1641,7 @@ repeating@^1.1.2:
   dependencies:
     is-finite "^1.0.0"
 
-request@*, request@^2.53.0, request@^2.79.0, request@^2.81.0:
+request@^2.53.0, request@^2.79.0, request@^2.81.0:
   version "2.81.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.81.0.tgz#c6928946a0e06c5f8d6f8a9333469ffda46298a0"
   dependencies:

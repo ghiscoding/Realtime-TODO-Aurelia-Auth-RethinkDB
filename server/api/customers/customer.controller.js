@@ -26,8 +26,8 @@ exports.index = async function (ctx, next) {
     var result = await r.table(config.tableCustomer);
     ctx.body = JSON.stringify(result);
   } catch (e) {
+    ctx.status = 500;
     ctx.body = e.message || http.STATUS_CODES[ctx.status];
-    ctx.status = err.status || 500;
   }
 };
 
