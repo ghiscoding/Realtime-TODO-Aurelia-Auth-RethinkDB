@@ -21,7 +21,7 @@ The `Aurelia-Auth`is based on `Satellizer` and uses the same configurations, so 
 
 ### Database (RethinkDB)
 We are using RethinkDB as our favorite NoSQL DB Server, you can use the default port of `28015`.
-Also make sure to create a `test` database (if not yet created) with a `todos` and `users` tables. Running the project and adding a new Todo, should in theory, create the table structure.
+Also make sure to create a `test` database (if not yet created) with the following tables (`todos`, `users`, `customers`).
 
 ### Client (CLI)
 ```bash
@@ -36,21 +36,6 @@ au run --watch --node
 ```
 _Note: The `CLI` installation is built with `SASS` as pre-processor. To create and use any stylesheets, you will need to use the `scss` extension while calling them as `css` in your project (because they are transpiled when bundled, refer to [Aurelia CLI](http://aurelia.io/hub.html#/doc/article/aurelia/framework/latest/the-aurelia-cli) for further information).
 With the use of `SASS`, I was then able to try out the new [Bootstrap 4](http://getbootstrap.com/)._
-
-### Client (WebPack)
-Please note that the `Webpack` version does no longer support the concurrent start of the WebUI/WebAPI in 1 commandm you will need to start the backend server separately.
-```bash
-cd Realtime-TODO-Aurelia-Auth-RethinkDB/client-wp
-npm install # or: yarn install
-npm start # or: yarn start
-```
-To start the backend server (NodeJS), go into the server folder and run `npm start`
-```bash
-cd Realtime-TODO-Aurelia-Auth-RethinkDB/server
-npm start # or: yarn start
-```
-
-**NOTE** The `client-wp` sample was created with the older `@easy-webpack` and I might end up deleting it sooner than later, I recommened taking a look at my new sample `TypeScript WebPack 3.x` as shown below.
 
 ### Client (TypeScript WebPack 3.x)
 Please note that the `TypeScript Webpack` with the command line `npm start` will ONLY run the WebUI (Aurelia).
@@ -90,10 +75,7 @@ You can change these ports by going into
 #### CLI
 You can change the ports by going into [/client-cli/aurelia_project/tasks/run.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/client-cli/aurelia_project/tasks/run.js) via the variables `portBackEnd` and `portFrontEnd`.
 
-#### WebPack
-You can change the ports by going into [/client-wp/webpack.config.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/client-wp/webpack.config.babel.js) via the variables `portBackEnd`, however the client/frontend port will have to be updated in the [/client/wp/package.json](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/client-wp/package.json) file by changing the variable `WEBPACK_PORT=4000` to whichever port you want (you might also want to update `serve-backend:start-when-ready` line).
-
-#### TypeScript WebPack
+#### WebPack with TypeScript
 You can change the ports by editing the file [/client-ts-wp/config.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/client-ts-wp/config.js), the `webpack.config.js` and `package-scripts.js` were modifed to use the `config.js` configured ports.
 
 ## Contributions
