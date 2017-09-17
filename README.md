@@ -1,7 +1,7 @@
 A Realtime TODO App with [Aurelia](http://aurelia.io), [Socket.IO](http://socket.io/), [Node.js](http://www.nodejs.org/), [Koa](http://koajs.com/) and [RethinkDB](https://www.rethinkdb.com/).
 
 A summary of tech stack:
-* **Client**: [Aurelia](http://aurelia.io/), [Twitter Bootstrap 4 (beta)](http://getbootstrap.com/), [Font-Awesome](http://fontawesome.io/) and [Aurelia-Bootstrap-Plugins](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins) (my creation :smile:).
+* **Client**: [Aurelia](http://aurelia.io/), [Bootstrap 4 (beta)](http://getbootstrap.com/), [Font-Awesome](http://fontawesome.io/) and [Aurelia-Bootstrap-Plugins](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins) ...my own creation :smile:.
 * **Server**: [Koa](http://koajs.com/) for RESTful API serving on [Node.js](https://nodejs.org/).
 * **[Socket.IO](http://socket.io/)** along with JSON-RPC is used for real-time client-server communication and browser sync.
 * **[RethinkDB](https://rethinkdb.com/)** as the best open-source database for the realtime web.
@@ -15,7 +15,9 @@ git clone https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB
 ```
 
 ### OAuth Authentication with Aurelia-Auth
-We will use [Aurelia-Auth](https://github.com/paulvanbladel/aurelia-auth) for OAuth login so that we can use (Google, Facebook, GitHub, LinkedIn, Windows Live or Twitter) to login to our application. The configuration of the OAuth secret keys will be under `server/config/config.development.js`, this file is however excluded from the project (for obvious reason). **Very important step to do, you will need to go under the folder `/server/config` and rename the file from `config.development.template.js` to `config.development.js` and then put in your OAuth secret keys.**
+We will use [Aurelia-Auth](https://github.com/paulvanbladel/aurelia-auth) for OAuth login so that we can use (Google, Facebook, GitHub, LinkedIn, Windows Live or Twitter) to login to our application. The configuration of the OAuth secret keys will be under `server/config/config.development.js`, this file is however excluded from the project (for obvious reason).
+
+**A very important step to do, go under the folder `/server/config` and rename the file from `config.development.template.js` to `config.development.js` and then fill in your OAuth secret keys.**
 
 The `Aurelia-Auth`is based on `Satellizer` and uses the same configurations, so you could refer to their [GitHub Satellizer](https://github.com/sahat/satellizer) repo for more details.
 
@@ -49,7 +51,7 @@ npm start -- withBackend # or: yarn start -- withBackend
 ```
 
 #### Install/Run through VSCode
-If you use VSCode (Visual Studio Code) as your main editor, you can load the vscode workspace (requires version `1.16+`, `File -> Open Workspaces`). Once the workspace is loaded, you will then have access to multiple tasks (defined in `client-ts-wp/tasks.json`) which makes it easy to execute the code without even typing any command in the shell (you still have to make sure to `npm install` in both `client-ts-wp` and `server` folder).
+If you use VSCode (Visual Studio Code) as your main editor, you can load the vscode workspace (requires version `1.18+`, `File -> Open Workspaces`). Once the workspace is loaded, you will then have access to multiple tasks (defined in `client-ts-wp/tasks.json`) which makes it easy to execute the code without even typing any command in the shell (you still have to make sure to `npm install` in both `client-ts-wp` and `server` folders prior to running a task).
 
 ### Server (NodeJS - KOA)
 **Optional, see the note below**
@@ -59,10 +61,10 @@ npm install # or: yarn install
 npm start # or: yarn start
 ```
 
-_**Note**: running the server here is totally optional, since you might have already started it with the `--node` flag with CLI client or `npm start` with Webpack client._
+_**Note**: running the server here is totally optional, since you might have already started it with the `--node` flag with CLI client or `-- withBackend` with Webpack client._
 
 ## Web UI
-If everything goes well, your application should now run locally on port `4000`. Open your browser and go at the URL [http://localhost:4000](http://localhost:4000).
+If everything goes well, your application should now run locally on port `4000`. Open your browser and go to the URL [http://localhost:4000](http://localhost:4000).
 
 ## Configuration
 ### Server
@@ -73,10 +75,10 @@ Default ports for this application are `4000` for the WebUI and `5000` for the A
 You can change these ports by going into
 
 #### CLI
-You can change the ports by going into [/client-cli/aurelia_project/tasks/run.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/client-cli/aurelia_project/tasks/run.js) via the variables `portBackEnd` and `portFrontEnd`.
+You can change the ports by going into [/client-cli/aurelia_project/tasks/run.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/client-cli/aurelia_project/tasks/run.js) and change the variables `portBackEnd` and `portFrontEnd`.
 
 #### WebPack with TypeScript
-You can change the ports by editing the file [/client-ts-wp/config.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/client-ts-wp/config.js), the `webpack.config.js` and `package-scripts.js` were modifed to use the `config.js` configured ports.
+You can change the ports by editing the file [/client-ts-wp/config.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/client-ts-wp/config.js). Please note that the `webpack.config.js` and `package-scripts.js` were modifed to use the `config.js` to make it easier to configure.
 
 ## Contributions
 Contributions are welcome. I use this project as a placeholder to help (and be helped by) people, which is all about the open community. So please feel free to make any PR (Pull Request).
