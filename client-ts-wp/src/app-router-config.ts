@@ -24,7 +24,7 @@ export default class {
         { route: 'signup',        name: 'signup',       moduleId: PLATFORM.moduleName('./modules/auth/signup'),     nav: false, title: 'Signup' },
         { route: 'contacts',      name: 'contacts',     moduleId: PLATFORM.moduleName('./modules/contacts/index'),  nav: true,  title: 'Contacts',  auth: true },
         { route: 'customers',     name: 'customers',    moduleId: PLATFORM.moduleName('./modules/customers/index'), nav: true, 	title: 'CRM', 			auth: true },
-        { route: 'todos',         name: 'todos',        moduleId: PLATFORM.moduleName('./modules/todos/index'),     nav: true,  title: 'TODO', 			auth: true }
+        { route: 'todos',         name: 'todos',        moduleId: PLATFORM.moduleName('./modules/todos/index'),     nav: true,  title: 'TODOs',			auth: true }
       ]);
 	  };
 
