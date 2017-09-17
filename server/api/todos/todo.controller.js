@@ -3,6 +3,7 @@
 // Middlewares
 const parse = require('co-body');
 const parseBool = require("parsebool");
+const TABLE_NAME = 'todos';
 
 // Load config for RethinkDB and koa
 const config = require('../../config');
@@ -13,11 +14,15 @@ const r = require('rethinkdbdash')(config.rethinkdb);
 // Retrieve all todo items
 exports.getAll = async function (ctx, next) {
   try {
-    let result = await r.table(config.tableTodo).orderBy({ index: r.desc("createdAt") }).filter({ userId: ctx.request.userId });
+    let userId = ctx.state.userId;
+    if(!userId) {
+      ctx.throw(400, 'userId required');
+    }
+    let result = await r.table(TABLE_NAME).orderBy('createdAt').filter({ userId: userId });
     ctx.body = JSON.stringify(result);
   }
   catch (e) {
-    ctx.status = 500;
+    ctx.status = e.status || 500;
     ctx.body = e.message || http.STATUS_CODES[ctx.status];
   }
 }
@@ -25,11 +30,15 @@ exports.getAll = async function (ctx, next) {
 // Retrieve all todo items
 exports.getAllNonArchived = async function (ctx, next) {
   try {
-    let result = await r.table(config.tableTodo).orderBy({ index: r.desc("createdAt") }).filter({ archived: false, userId: ctx.request.userId });
+    let userId = ctx.state.userId;
+    if(!userId) {
+      ctx.throw(400, 'userId required');
+    }
+    let result = await r.table(TABLE_NAME).filter({ archived: false, userId: userId }).orderBy('createdAt');
     ctx.body = JSON.stringify(result);
   }
   catch (e) {
-    ctx.status = 500;
+    ctx.status = e.status || 500;
     ctx.body = e.message || http.STATUS_CODES[ctx.status];
   }
 }
@@ -38,9 +47,13 @@ exports.getAllNonArchived = async function (ctx, next) {
 exports.createItem = async function (ctx, next) {
   try {
     let todo = await parse(ctx);
-    let result = await r.table(config.tableTodo).insert(
+    let userId = ctx.state.userId;
+    if(!userId || !todo) {
+      ctx.throw(400, 'userId required');
+    }
+    let result = await r.table(TABLE_NAME).insert(
       r.expr(todo).merge({
-        userId: ctx.request.userId,
+        userId: userId,
         archived: false,
         createdAt: r.now() // The date r.now(0 gets computed on the server -- new Date() would have work fine too
       }),
@@ -51,7 +64,7 @@ exports.createItem = async function (ctx, next) {
     ctx.body = JSON.stringify(todo);
   }
   catch (e) {
-    ctx.status = 500;
+    ctx.status = e.status || 500;
     ctx.body = e.message || http.STATUS_CODES[ctx.status];
   }
 }
@@ -60,12 +73,16 @@ exports.createItem = async function (ctx, next) {
 exports.deleteItem = async function (ctx, next) {
   try {
     let id = ctx.params.id;
-    let result = await r.table(config.tableTodo).get(id).delete();
+    let userId = ctx.state.userId;
+    if(!id || !userId) {
+      ctx.throw(400, 'userId required');
+    }
+    let result = await r.table(TABLE_NAME).get(id).delete();
     ctx.body = JSON.stringify({ id: id });
     await next;
   }
   catch (e) {
-    ctx.status = 500;
+    ctx.status = e.status || 500;
     ctx.body = e.message || http.STATUS_CODES[ctx.status];
   }
 }
@@ -74,12 +91,15 @@ exports.deleteItem = async function (ctx, next) {
 exports.updateItem = async function (ctx, next) {
   try {
     let todo = await parse(ctx);
+    let userId = ctx.state.userId;
+    if(!todo || !todo.id || !userId) {
+      ctx.throw(400, 'userId required');
+    }
 
     //delete todo._saving;
     let id = todo.id;
-
-    let result = await r.table(config.tableTodo).get(id).update(
-      { title: todo.title, completed: todo.completed, archived: false, userId: ctx.request.userId },
+    let result = await r.table(TABLE_NAME).get(id).update(
+      { title: todo.title, completed: todo.completed, archived: false, userId: userId },
       { returnChanges: true }
     );
 
@@ -87,7 +107,7 @@ exports.updateItem = async function (ctx, next) {
     ctx.body = JSON.stringify(result);
   }
   catch (e) {
-    ctx.status = 500;
+    ctx.status = e.status || 500;
     ctx.body = e.message || http.STATUS_CODES[ctx.status];
   }
 }
@@ -95,13 +115,17 @@ exports.updateItem = async function (ctx, next) {
 // Archive all the todo items
 exports.archiveAllCompleted = async function (ctx, next) {
   try {
-    let result = await r.table(config.tableTodo).filter({ completed: true, archived: false, userId: ctx.request.userId }).update(
+    let userId = ctx.state.userId;
+    if(!userId) {
+      ctx.throw(400, 'userId required');
+    }
+    let result = await r.table(TABLE_NAME).filter({ completed: true, archived: false, userId: userId }).update(
       { archived: true }
     );
     ctx.body = JSON.stringify({ archived: true, count: result.replaced });
   }
   catch (e) {
-    ctx.status = 500;
+    ctx.status = e.status || 500;
     ctx.body = e.message || http.STATUS_CODES[ctx.status];
   }
 }
@@ -109,11 +133,15 @@ exports.archiveAllCompleted = async function (ctx, next) {
 // Purge all the archived items
 exports.purgeArchiveItems = async function (ctx, next) {
   try {
-    let result = await r.table(config.tableTodo).filter({ archived: true, userId: ctx.request.userId }).delete();
+    let userId = ctx.state.userId;
+    if(!userId) {
+      ctx.throw(400, 'userId required');
+    }
+    let result = await r.table(TABLE_NAME).filter({ archived: true, userId: userId }).delete();
     ctx.body = JSON.stringify({ purged: true, count: result.deleted });
   }
   catch (e) {
-    ctx.status = 500;
+    ctx.status = e.status || 500;
     ctx.body = e.message || http.STATUS_CODES[ctx.status];
   }
 }
@@ -122,13 +150,17 @@ exports.purgeArchiveItems = async function (ctx, next) {
 exports.toggleAllItemToComplete = async function (ctx, next) {
   try {
     let flag = parseBool(ctx.params.flag);
-    let result = await r.table(config.tableTodo).filter({ completed: flag, userId: ctx.request.userId }).update(
+    let userId = ctx.state.userId;
+    if(!flag || !userId) {
+      ctx.throw(400, 'userId required');
+    }
+    let result = await r.table(TABLE_NAME).filter({ completed: flag, userId: userId }).update(
       { completed: !flag } // toggle the inverse flag
     );
     ctx.body = JSON.stringify({ completed: !flag, count: result.replaced });
   }
   catch (e) {
-    ctx.status = 500;
+    ctx.status = e.status || 500;
     ctx.body = e.message || http.STATUS_CODES[ctx.status];
   }
 }

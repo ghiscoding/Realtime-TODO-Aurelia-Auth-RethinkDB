@@ -18,13 +18,13 @@ export default class {
 	    config.map([
         { route: ['', 'welcome'], name: 'welcome',      moduleId: PLATFORM.moduleName('./welcome'),                 nav: true,  title: 'Welcome' },
         { route: 'child-router',  name: 'child-router', moduleId: PLATFORM.moduleName('./child-router'),            nav: true,  title: 'Child Router' },
-        { route: 'customers',     name: 'customers',    moduleId: PLATFORM.moduleName('./modules/customers/index'), nav: true, 	title:'CRM', 				auth:true },
-        { route: 'login',         name: 'login',        moduleId: PLATFORM.moduleName('./modules/auth/login'),      nav: false, title:'Login' },
-        { route: 'logout',        name: 'logout',       moduleId: PLATFORM.moduleName('./modules/auth/logout'),     nav: false, title:'Logout' },
-        { route: 'profile',       name: 'profile',      moduleId: PLATFORM.moduleName('./modules/auth/profile'),    nav: false, title:'Profile' },
-        { route: 'signup',        name: 'signup',       moduleId: PLATFORM.moduleName('./modules/auth/signup'),     nav: false, title:'Signup' },
-        { route: 'contacts',      name: 'contacts',     moduleId: PLATFORM.moduleName('./modules/contacts/index'),  nav: true,  title: 'Contacts', 	auth: true },
-        { route: 'todo',          name: 'todo',         moduleId: PLATFORM.moduleName('./modules/todo/index'),      nav: true,  title: 'TODO', 			auth:true }
+        { route: 'login',         name: 'login',        moduleId: PLATFORM.moduleName('./modules/auth/login'),      nav: false, title: 'Login' },
+        { route: 'logout',        name: 'logout',       moduleId: PLATFORM.moduleName('./modules/auth/logout'),     nav: false, title: 'Logout' },
+        { route: 'profile',       name: 'profile',      moduleId: PLATFORM.moduleName('./modules/auth/profile'),    nav: false, title: 'Profile' },
+        { route: 'signup',        name: 'signup',       moduleId: PLATFORM.moduleName('./modules/auth/signup'),     nav: false, title: 'Signup' },
+        { route: 'contacts',      name: 'contacts',     moduleId: PLATFORM.moduleName('./modules/contacts/index'),  nav: true,  title: 'Contacts',  auth: true },
+        { route: 'customers',     name: 'customers',    moduleId: PLATFORM.moduleName('./modules/customers/index'), nav: true, 	title: 'CRM', 			auth: true },
+        { route: 'todos',         name: 'todos',        moduleId: PLATFORM.moduleName('./modules/todos/index'),     nav: true,  title: 'TODO', 			auth: true }
       ]);
 	  };
 

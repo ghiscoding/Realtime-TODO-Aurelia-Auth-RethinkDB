@@ -7,6 +7,7 @@ const assertTimeout = require('co-assert-timeout');
 const http = require('http');
 const server = http.createServer(app.callback());
 const io = require('socket.io')(server);
+const TABLE_NAME_TODO = 'todos';
 
 // Load config for RethinkDB and koa
 const config = require("./config");
@@ -24,7 +25,7 @@ todoSocket.on("connection", function(socket) {
     return null;
   });
 
-  return r.table(config.tableTodo)
+  return r.table(TABLE_NAME_TODO)
     .changes()
     .run()
     .then(function(cursor) {

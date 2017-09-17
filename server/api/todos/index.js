@@ -13,7 +13,7 @@ const authUtils = require('../../auth/authUtils');
 const controller = require('./todo.controller');
 const Router = require('koa-router');
 const router = new Router({
-  prefix: '/api/todo'
+  prefix: '/api/todos'
 });
 
 // routes
