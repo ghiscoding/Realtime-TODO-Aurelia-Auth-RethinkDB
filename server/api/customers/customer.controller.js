@@ -13,6 +13,7 @@
 const _ = require('lodash');
 const parse = require('co-body');
 var parseBool = require("parsebool");
+const TABLE_NAME = 'customers';
 
 // Load config for RethinkDB and koa
 const config = require('../../config');
@@ -23,7 +24,7 @@ const r = require('rethinkdbdash')(config.rethinkdb);
 // Get list of items
 exports.index = async function (ctx, next) {
   try {
-    var result = await r.table(config.tableCustomer);
+    var result = await r.table(TABLE_NAME);
     ctx.body = JSON.stringify(result);
   } catch (e) {
     ctx.status = 500;
@@ -35,7 +36,7 @@ exports.index = async function (ctx, next) {
 exports.show = async function (ctx, next) {
   try {
     var id = ctx.params.id;
-    var result = await r.table(config.tableCustomer).get(id);
+    var result = await r.table(TABLE_NAME).get(id);
     ctx.body = JSON.stringify(result);
   } catch (e) {
     ctx.status = 500;
@@ -47,7 +48,7 @@ exports.show = async function (ctx, next) {
 exports.create = async function (ctx, next) {
   try {
     var customer = await parse(ctx);
-    var result = await r.table(config.tableCustomer).insert(
+    var result = await r.table(TABLE_NAME).insert(
       r.expr(customer).merge({
         createdAt: r.now(),
         updatedAt: r.now(),
@@ -70,7 +71,7 @@ exports.update = async function (ctx, next) {
     var customer = await parse(ctx);
     var id = customer.id;
 
-    var result = await r.table(config.tableCustomer)
+    var result = await r.table(TABLE_NAME)
       .get(id)
       .update(r.expr(customer).merge({
         updatedAt: r.now(),
@@ -89,7 +90,7 @@ exports.update = async function (ctx, next) {
 exports.destroy = async function (ctx, next) {
   try {
     var id = ctx.params.id;
-    var result = await r.table(config.tableCustomer).get(id).delete();
+    var result = await r.table(TABLE_NAME).get(id).delete();
     ctx.body = JSON.stringify({ id: id });
     await next;
   }

@@ -20,8 +20,6 @@ module.exports = {
   TWITTER_SECRET: process.env.TWITTER_SECRET || 'Twitter Consumer Secret',
   TWITTER_CALLBACK: process.env.TWITTER_CALLBACK || 'Twitter Callback URL',
   YAHOO_SECRET: process.env.YAHOO_SECRET || 'Yahoo Client Secret',
-  tableTodo: "todos",
-  tableAuth: "users",
   koa: {
       port: 5000
   }
