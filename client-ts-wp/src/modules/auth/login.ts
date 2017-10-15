@@ -1,15 +1,14 @@
 import {inject} from 'aurelia-framework';
 import {AuthService} from 'aurelia-auth';
+import { default as swal } from 'sweetalert2';
 
 @inject(AuthService)
 export class Login {
-	auth: AuthService;
 	heading: string = 'Login';
 	email: string = '';
   password: string = '';
 
-  constructor(auth: AuthService) {
-    this.auth = auth;
+  constructor(private auth: AuthService) {
   }
 
 	login(): Promise<void> {
@@ -21,8 +20,8 @@ export class Login {
         console.log(`success logged ${response}`);
       })
       .catch(err => {
-        err.json().then(function(e){
-          console.log(`login failure : ${e.message}`);
+        err.json().then(e => {
+          swal('Oops...', e.message, 'error');
         });
       });
 	};
@@ -31,8 +30,8 @@ export class Login {
 		return this.auth.authenticate(name, false, null)
       .then(response => {
         //console.log(response);
-      }).catch(err=>{
-        console.log(`authenticate failure in login.js => ${err}`);
+      }).catch(err => {
+        swal('Oops...', `authenticate failure in login.js => ${err}`, 'error');
       });
 	}
 }

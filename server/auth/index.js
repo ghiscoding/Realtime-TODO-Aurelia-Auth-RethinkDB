@@ -1,6 +1,7 @@
 'use strict';
 
 const authUtils = require('./authUtils');
+const authController = require('./auth.controller');
 const meController = require('./me.controller');
 const github = require('./github');
 const google = require('./google');
@@ -13,7 +14,9 @@ const router = new Router({
   prefix: '/auth'
 });
 
-// // routes
+// routes
+router.post('/login', authController.login);
+router.post('/signup', authController.signup);
 router.post('/github', github.authenticate);
 router.post('/google', google.authenticate);
 router.post('/facebook', facebook.authenticate);
@@ -21,7 +24,7 @@ router.post('/linkedin', linkedin.authenticate);
 router.post('/live', live.authenticate);
 router.post('/twitter', twitter.authenticate);
 
-// //auth only applied for following routes, not the routes above
+//auth only applied for following routes, not the routes above
 router.use(['/me', '/unlink'], authUtils.ensureAuthenticated);
 router.get('/me', meController.getMe );
 router.put('/me', meController.updateMe );
