@@ -28,6 +28,7 @@ export async function configure(aurelia: Aurelia) {
     .developmentLogging();
 
     aurelia.use.plugin(PLATFORM.moduleName('aurelia-bootstrap-datetimepicker'), config => {
+      config.extra.bootstrapVersion = 4;
       config.extra.iconBase = 'font-awesome';
       config.extra.withDateIcon = true;
     });

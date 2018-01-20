@@ -118,7 +118,7 @@
   },
   "dependencies": {
     "aurelia-auth": "3.0.5",
-    "aurelia-bootstrap-datetimepicker": "1.0.10",
+    "aurelia-bootstrap-datetimepicker": "1.1.1",
     "aurelia-bootstrapper": "2.1.1",
     "aurelia-fetch-client": "1.1.2",
     "aurelia-framework": "1.1.4",
@@ -133,7 +133,7 @@
     "aurelia-templating-resources": "1.4.0",
     "aurelia-templating-router": "1.1.0",
     "bluebird": "3.5.0",
-    "bootstrap": "v4.0.0-beta",
+    "bootstrap": "4.0.0",
     "bootstrap-social": "5.1.1",
     "eonasdan-bootstrap-datetimepicker": "4.17.47",
     "font-awesome": "4.7.0",

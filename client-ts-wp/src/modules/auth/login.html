@@ -8,13 +8,21 @@
           <form method="post" name="loginForm">
             <div class="form-group has-feedback">
               <div class="input-group">
-                <span class="input-group-addon no-color"><i class="fa fa-envelope-o fa-fw"></i></span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text no-color" id="btnGroupAddon">
+                      <i class="fa fa-envelope-o fa-fw"></i>
+                    </div>
+                </div>
                 <input class="form-control input-lg" type="text" name="email" value.bind="email" placeholder="Email" required autofocus>
               </div>
             </div>
             <div class="form-group has-feedback">
               <div class="input-group has-feedback">
-                <span class="input-group-addon no-color"><i class="fa fa-lock fa-fw"></i></span>
+                  <div class="input-group-prepend">
+                      <div class="input-group-text no-color" id="btnGroupAddon">
+                        <i class="fa fa-lock fa-fw"></i>
+                      </div>
+                  </div>
                 <input class="form-control input-lg" type="password" name="password" value.bind="password" placeholder="Password" required>
               </div>
             </div>

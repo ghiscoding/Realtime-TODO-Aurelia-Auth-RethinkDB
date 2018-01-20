@@ -377,14 +377,14 @@ aurelia-binding@^1.0.0, aurelia-binding@^1.0.9, aurelia-binding@^1.1.0:
     aurelia-pal "^1.0.0"
     aurelia-task-queue "^1.0.0"
 
-aurelia-bootstrap-datetimepicker@1.0.10:
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/aurelia-bootstrap-datetimepicker/-/aurelia-bootstrap-datetimepicker-1.0.10.tgz#a5ce05f4596456e216bfdac5f9b48cf828b649ba"
+aurelia-bootstrap-datetimepicker@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/aurelia-bootstrap-datetimepicker/-/aurelia-bootstrap-datetimepicker-1.1.1.tgz#6e294e0a6f3282747dfe7142e323b96a1987fb05"
   dependencies:
     bootstrap "^3.3.7"
-    eonasdan-bootstrap-datetimepicker "^4.17.46"
+    eonasdan-bootstrap-datetimepicker "^4.17.47"
     jquery "^3.1.1"
-    moment "^2.17.1"
+    moment "^2.18.1"
 
 aurelia-bootstrapper@2.1.1:
   version "2.1.1"
@@ -959,13 +959,13 @@ bootstrap-social@5.1.1:
     bootstrap "~3"
     font-awesome "~4.7"
 
+bootstrap@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.0.0.tgz#ceb03842c145fcc1b9b4e15da2a05656ba68469a"
+
 bootstrap@^3.3, bootstrap@^3.3.7, bootstrap@~3:
   version "3.3.7"
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-3.3.7.tgz#5a389394549f23330875a3b150656574f8a9eb71"
-
-bootstrap@v4.0.0-beta:
-  version "4.0.0-beta"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.0.0-beta.tgz#dc5928175d2e71310bc668cf9e05a907211b72a6"
 
 brace-expansion@^1.0.0, brace-expansion@^1.1.7:
   version "1.1.7"
@@ -2193,7 +2193,7 @@ entities@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.1.tgz#6e5c2d0a5621b5dadaecef80b90edfb5cd7772f0"
 
-eonasdan-bootstrap-datetimepicker@4.17.47, eonasdan-bootstrap-datetimepicker@^4.17.46:
+eonasdan-bootstrap-datetimepicker@4.17.47, eonasdan-bootstrap-datetimepicker@^4.17.47:
   version "4.17.47"
   resolved "https://registry.yarnpkg.com/eonasdan-bootstrap-datetimepicker/-/eonasdan-bootstrap-datetimepicker-4.17.47.tgz#7a49970044065276e7965efd16f822735219e735"
   dependencies:
@@ -4496,9 +4496,13 @@ moment-timezone@^0.4.0:
   dependencies:
     moment ">= 2.6.0"
 
-moment@2.x.x, "moment@>= 2.6.0", moment@^2.10, moment@^2.17.1:
+moment@2.x.x, "moment@>= 2.6.0", moment@^2.10:
   version "2.18.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
+
+moment@^2.18.1:
+  version "2.20.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.20.1.tgz#d6eb1a46cbcc14a2b2f9434112c1ff8907f313fd"
 
 ms@0.7.1:
   version "0.7.1"
