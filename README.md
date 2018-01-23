@@ -2,9 +2,10 @@ A Realtime TODO App with [Aurelia](http://aurelia.io), [Socket.IO](http://socket
 
 A summary of tech stack:
 * **Client**: [Aurelia](http://aurelia.io/), [Bootstrap 4](http://getbootstrap.com/), [Font-Awesome](http://fontawesome.io/) and [Aurelia-Bootstrap-Plugins](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins) ...my own creation :smile:.
-* **Server**: [Koa](http://koajs.com/) for RESTful API serving on [Node.js](https://nodejs.org/).
+* **Server**: [Koa 2](http://koajs.com/) for RESTful API serving on [Node.js](https://nodejs.org/).
 * **[Socket.IO](http://socket.io/)** along with JSON-RPC is used for real-time client-server communication and browser sync.
 * **[RethinkDB](https://rethinkdb.com/)** as the best open-source database for the realtime web.
+* **[TypeScript](https://www.typescriptlang.org)** is used for both Aurelia & NodeJS sides
 
 ## Getting Started
 Make sure to have [Node.js](https://nodejs.org/) v8.x or higher, and [RethinkDB](https://rethinkdb.com/) v2.3.x or higher installed on your computer.
