@@ -1,0 +1,74 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start frontend only (Aurelia)",
+      "command": "npm",
+      "type": "shell",
+      "args": [
+        "start"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Start frontend + backend (Aurelia/NodeJS)",
+      "command": "npm",
+      "type": "shell",
+      "args": [
+        "start",
+        "withBackend"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Start backend only (NodeJS)",
+      "command": "npm",
+      "type": "shell",
+      "args": [
+        "start",
+        "backend"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Build backend (NodeJS)",
+      "command": "npm",
+      "type": "shell",
+      "args": [
+        "start",
+        "backend.build"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Build frontend Prod (Aurelia Dev)",
+      "command": "npm",
+      "type": "shell",
+      "args": [
+        "start",
+        "frontend.build.development"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Build frontend Prod (Aurelia Prod)",
+      "command": "npm",
+      "type": "shell",
+      "args": [
+        "start",
+        "frontend.build.production"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Start RethinkDB",
+      "type": "shell",
+      "windows": {
+        "command": "C:\\RethinkDB\\rethinkdb.exe",
+        "args": [
+          "\"-d c:\\RethinkDB\\rethinkdb_data\""
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "name": "realtime-todo-aurelia-rethinkdb",
+  "version": "1.2.0",
+  "description": "An Aurelia realtime TODO application connected to RethinkDB and built with Aurelia-WebPack.",
+  "main": "dist/app.bundle.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB.git"
+  },
+  "keywords": [
+    "aurelia",
+    "auth",
+    "nodejs",
+    "todo",
+    "rethinkdb",
+    "typescript"
+  ],
+  "license": "MIT",
+  "author": "Ghislain B.",
+  "bugs": {
+    "url": "https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/issues"
+  },
+  "homepage": "https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB",
+  "aurelia": {
+    "build": {
+      "resources": []
+    }
+  },
+  "engines": {
+    "node": ">= 6.0.0"
+  },
+  "scripts": {
+    "start": "nps",
+    "client:start": "cd client-ts-wp && yarn start",
+    "client:start-with-node": "concurrently \"yarn run server:watch\" \"yarn run client:start\"",
+    "server:build": "cd server && yarn run build-server",
+    "server:watch": "cd server && yarn run watch-server"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^3.5.1",
+    "nps": "^5.7.1",
+    "nps-utils": "^1.5.0",
+    "wait-on": "^2.1.0"
+  }
+}
