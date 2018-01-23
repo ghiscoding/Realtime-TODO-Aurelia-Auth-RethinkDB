@@ -1,11 +1,11 @@
 jspm_packages
 bower_components
-.chrome
 .idea
 screenshots
-client-cli
-client-wp
+client-ts-wp/dist
+server/config/config.development.js
+server/config/config.development.ts
+server/dist
 npm-debug.log
 yarn-error.log
 yarn.lock
-package-lock.json

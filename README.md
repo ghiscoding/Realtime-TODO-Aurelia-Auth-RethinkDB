@@ -7,7 +7,7 @@ A summary of tech stack:
 * **[RethinkDB](https://rethinkdb.com/)** as the best open-source database for the realtime web.
 
 ## Getting Started
-Make sure to have [Node.js](https://nodejs.org/) v4.x or higher, and [RethinkDB](https://rethinkdb.com/) v2.3.x or higher installed on your computer.
+Make sure to have [Node.js](https://nodejs.org/) v8.x or higher, and [RethinkDB](https://rethinkdb.com/) v2.3.x or higher installed on your computer.
 
 ### Git Clone (downloading)
 ```bash
@@ -25,33 +25,29 @@ The `Aurelia-Auth`is based on `Satellizer` and uses the same configurations, so 
 We are using RethinkDB as our favorite NoSQL DB Server, you can use the default port of `28015`.
 Also make sure to create a `test` database (if not yet created) with the following tables (`todos`, `users`, `customers`).
 
-### Client (CLI)
-```bash
-cd Realtime-TODO-Aurelia-Auth-RethinkDB/client-cli
-npm install # or: yarn install
-au run --watch
-```
-
-The `run` process also has a `node` server option, so if you want, you could run `NodeJS` server directly from the `au run` command by adding the `--node` option (make sure you ran the [Server installation](#server) prior to launching this command)..
-```bash
-au run --watch --node
-```
-_Note: The `CLI` installation is built with `SASS` as pre-processor. To create and use any stylesheets, you will need to use the `scss` extension while calling them as `css` in your project (because they are transpiled when bundled, refer to [Aurelia CLI](http://aurelia.io/hub.html#/doc/article/aurelia/framework/latest/the-aurelia-cli) for further information).
-With the use of `SASS`, I was then able to try out the new [Bootstrap 4](http://getbootstrap.com/)._
-
 ### Client (TypeScript WebPack 3.x)
 Please note that the `TypeScript Webpack` with the command line `npm start` will ONLY run the WebUI (Aurelia).
 
 #### Install/Run trough shell
 If you want to run both the frontend/backend (WebUI w/Aurelia + WebAPI w/NodeJS), you can do so by calling `npm start -- withBackend` (make sure to follow the [Server installation](#server-nodejs---koa) prior to launching this command).
 ```bash
-cd Realtime-TODO-Aurelia-Auth-RethinkDB/client-ts-wp
+cd Realtime-TODO-Aurelia-Auth-RethinkDB
 npm install # or: yarn install
-npm start -- withBackend # or: yarn start -- withBackend
+npm start withBackend # or: yarn start withBackend
 ```
 
 #### Install/Run through VSCode
-If you use VSCode (Visual Studio Code) as your main editor, you can load the vscode workspace (requires version `1.18+`, `File -> Open Workspaces`). Once the workspace is loaded, you will then have access to multiple tasks (defined in `client-ts-wp/tasks.json`) which makes it easy to execute the code without even typing any command in the shell (you still have to make sure to `npm install` in both `client-ts-wp` and `server` folders prior to running a task).
+If you use VSCode (Visual Studio Code) as your main editor, you can simply load the folder. Once loaded, you can then click on `Tasks` and then have access to multiple tasks (defined in `.vscode/tasks.json`) which makes it easy to execute the code without even typing any command in the shell (starting any of the Task `Starting X` task(s) will also run `npm install` or `yarn install` prior to run).
+##### Note on Default Packager
+You can change the Default Packager to your liking by editing the `config.js` file with the packager you wish to use
+```javascript
+// config.js
+module.exports = {
+  webUiPort: 4000,
+  webApiPort: 5000,
+  packager: 'yarn'  // you can use 'npm or 'yarn'
+}
+```
 
 ### Server (NodeJS - KOA)
 **Optional, see the note below**
@@ -61,7 +57,7 @@ npm install # or: yarn install
 npm start # or: yarn start
 ```
 
-_**Note**: running the server here is totally optional, since you might have already started it with the `--node` flag with CLI client or `-- withBackend` with Webpack client._
+_**Note**: running the server here is totally optional, since you might have already started it with the `backend` flag with CLI client or ` withBackend` to run both servers._
 
 ## Web UI
 If everything goes well, your application should now run locally on port `4000`. Open your browser and go to the URL [http://localhost:4000](http://localhost:4000).
@@ -73,9 +69,6 @@ Server configurations are specified in the [/server/config](https://github.com/g
 ### Default Ports
 Default ports for this application are `4000` for the WebUI and `5000` for the API (server) calls.
 You can change these ports by going into
-
-#### CLI
-You can change the ports by going into [/client-cli/aurelia_project/tasks/run.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/client-cli/aurelia_project/tasks/run.js) and change the variables `portBackEnd` and `portFrontEnd`.
 
 #### WebPack with TypeScript
 You can change the ports by editing the file [/client-ts-wp/config.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/client-ts-wp/config.js). Please note that the `webpack.config.js` and `package-scripts.js` were modifed to use the `config.js` to make it easier to configure.

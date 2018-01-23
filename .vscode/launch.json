@@ -1,0 +1,30 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Chrome Debugger",
+        "type": "chrome",
+        "request": "launch",
+        "url": "http://localhost:4000",
+        "webRoot": "${workspaceRoot}/client-ts-wp/src",
+        "userDataDir": "${workspaceRoot}/.chrome",
+        "sourceMapPathOverrides": {
+          "webpack:///*": "${webRoot}/*"
+        }
+      },
+      {
+        "type": "node",
+        "request": "attach",
+        "protocol": "inspector",
+        "name": "Remote Inspect NodeJS",
+        "address": "127.0.0.1",
+        "port": 9229,
+        "localRoot": "${workspaceRoot}",
+        "remoteRoot": "",
+        "trace": true
+      }
+    ]
+}

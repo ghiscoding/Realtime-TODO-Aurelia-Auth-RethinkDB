@@ -8,6 +8,8 @@ confidential
 npm-debug.log
 scripts/css/
 scripts/fonts/
+client-ts-wp/dist
 server/config/config.development.js
-server/config/config.development.js
+server/config/config.development.ts
+server/dist
 yarn-error.log
