@@ -1,4 +1,4 @@
-const config = require("./config")
+const config = require("../config")
 const {series, crossEnv, concurrent, open, rimraf} = require('nps-utils')
 const {config: {port: E2E_PORT}} = require('./test/protractor.conf')
 const WEB_UI_PORT = config.webUiPort;
@@ -60,7 +60,7 @@ module.exports = {
       },
       noflag: 'nodemon ../server ../server/app.js'
     },
-    browseWhenReady: series(          
+    browseWhenReady: series(
       `wait-on --timeout 120000 http-get://localhost:${WEB_UI_PORT}/index.html`,
       open(`http://localhost:${WEB_UI_PORT}`),
     ),
@@ -117,7 +117,7 @@ module.exports = {
       server: {
         default: `webpack-dev-server -d --port=${WEB_UI_PORT} --inline --env.server`,
         extractCss: `webpack-dev-server -d --port=${WEB_UI_PORT} --inline --env.server --env.extractCss`,
-        hmr: `webpack-dev-server -d --port=${WEB_UI_PORT} --inline --hot --env.server`     
+        hmr: `webpack-dev-server -d --port=${WEB_UI_PORT} --inline --hot --env.server`
       },
     },
     serve: 'http-server dist --cors',

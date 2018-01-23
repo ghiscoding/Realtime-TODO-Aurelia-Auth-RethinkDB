@@ -1,7 +1,7 @@
 A Realtime TODO App with [Aurelia](http://aurelia.io), [Socket.IO](http://socket.io/), [Node.js](http://www.nodejs.org/), [Koa](http://koajs.com/) and [RethinkDB](https://www.rethinkdb.com/).
 
 A summary of tech stack:
-* **Client**: [Aurelia](http://aurelia.io/), [Bootstrap 4 (beta)](http://getbootstrap.com/), [Font-Awesome](http://fontawesome.io/) and [Aurelia-Bootstrap-Plugins](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins) ...my own creation :smile:.
+* **Client**: [Aurelia](http://aurelia.io/), [Bootstrap 4](http://getbootstrap.com/), [Font-Awesome](http://fontawesome.io/) and [Aurelia-Bootstrap-Plugins](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins) ...my own creation :smile:.
 * **Server**: [Koa](http://koajs.com/) for RESTful API serving on [Node.js](https://nodejs.org/).
 * **[Socket.IO](http://socket.io/)** along with JSON-RPC is used for real-time client-server communication and browser sync.
 * **[RethinkDB](https://rethinkdb.com/)** as the best open-source database for the realtime web.
@@ -64,14 +64,14 @@ If everything goes well, your application should now run locally on port `4000`.
 
 ## Configuration
 ### Server
-Server configurations are specified in the [/server/config](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/server/config/) directory. When running `npm start` it will load the configuration that is defined in your `process.env.NODE_ENV` (environment variable, if unset it will use `development` by default).
+Server configurations are specified in the [/server/config](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/config.js) directory. When running `npm start` it will load the configuration that is defined in your `process.env.NODE_ENV` (environment variable, if unset it will use `development` by default).
 
 ### Default Ports
 Default ports for this application are `4000` for the WebUI and `5000` for the API (server) calls.
-You can change these ports by going into
+You can change these ports by going into the [config.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/config.js) that is located in the root of the project.
 
 #### WebPack with TypeScript
-You can change the ports by editing the file [/client-ts-wp/config.js](https://github.com/ghiscoding/Realtime-TODO-Aurelia-Auth-RethinkDB/blob/master/client-ts-wp/config.js). Please note that the `webpack.config.js` and `package-scripts.js` were modifed to use the `config.js` to make it easier to configure.
+Please note that the `webpack.config.js` and `package-scripts.js` were modifed to use the `config.js` to make it easier to configure.
 
 ## Contributions
 Contributions are welcome. I use this project as a placeholder to help (and be helped by) people, which is all about the open community. So please feel free to make any PR (Pull Request).

@@ -15,7 +15,6 @@ import { Aurelia } from 'aurelia-framework';
 import { PLATFORM } from 'aurelia-pal';
 import * as Bluebird from 'bluebird';
 import authConfig from './modules/auth/authConfig';
-const BACKEND_SERVER_PORT: number = 5000;
 
 // remove out if you don't want a Promise polyfill (remove also from webpack.config.js)
 //Bluebird.config({ warnings: { wForgottenReturn: false } });
