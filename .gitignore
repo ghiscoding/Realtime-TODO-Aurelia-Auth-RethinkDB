@@ -13,3 +13,4 @@ server/config/config.development.js
 server/config/config.development.ts
 server/dist
 yarn-error.log
+yarn.lock
