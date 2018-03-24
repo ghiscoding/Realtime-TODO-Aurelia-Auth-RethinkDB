@@ -3,66 +3,43 @@
   "tasks": [
     {
       "label": "Start frontend only (Aurelia)",
-      "command": "npm",
       "type": "shell",
-      "args": [
-        "start"
-      ],
+      "command": "npm start",
       "problemMatcher": []
     },
     {
       "label": "Start frontend + backend (Aurelia/NodeJS)",
-      "command": "npm",
       "type": "shell",
-      "args": [
-        "start",
-        "withBackend"
-      ],
+      "command": "npm start withBackend",
       "problemMatcher": []
     },
     {
       "label": "Start backend only (NodeJS)",
-      "command": "npm",
       "type": "shell",
-      "args": [
-        "start",
-        "backend"
-      ],
+      "command": "npm start backend",
       "problemMatcher": []
     },
     {
       "label": "Build backend (NodeJS)",
-      "command": "npm",
       "type": "shell",
-      "args": [
-        "start",
-        "backend.build"
-      ],
+      "command": "npm start backend.build",
       "problemMatcher": []
     },
     {
       "label": "Build frontend Prod (Aurelia Dev)",
-      "command": "npm",
       "type": "shell",
-      "args": [
-        "start",
-        "frontend.build.development"
-      ],
+      "command": "npm start frontend.build.development",
       "problemMatcher": []
     },
     {
       "label": "Build frontend Prod (Aurelia Prod)",
-      "command": "npm",
       "type": "shell",
-      "args": [
-        "start",
-        "frontend.build.production"
-      ],
+      "command": "npm start frontend.build.production",
       "problemMatcher": []
     },
     {
-      "label": "Start RethinkDB",
       "type": "shell",
+      "label": "Start RethinkDB",
       "windows": {
         "command": "C:\\RethinkDB\\rethinkdb.exe",
         "args": [
