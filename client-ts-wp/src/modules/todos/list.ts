@@ -41,17 +41,17 @@ export class List {
     return this.getData();
   }
 
-  addItem(): void {
-    let description = this.newTodo.title;
-    if (!description) { return; }
+  async addItem() {
+    try {
+      let description = this.newTodo.title;
+      if (!description) { return; }
 
-    let newItem: Todo = new Todo();
-    newItem.title = description.trim();
-    newItem.completed = false;
-    newItem.dueDate = this.newTodo.dueDateObject;
+      let newItem: Todo = new Todo();
+      newItem.title = description.trim();
+      newItem.completed = false;
+      newItem.dueDate = this.newTodo.dueDateObject;
 
-    this.dataService.create(newItem).then(item => {
-      item = (typeof item === 'string') ? JSON.parse(item) : item;
+      const item = await this.dataService.create(newItem);
 
       // only add the post if we don't have it already in the posts list to avoid dupes
       if (!_.some(this.items, function (p) {
@@ -61,35 +61,34 @@ export class List {
       }
       // blank todo input
       this.newTodo.title = '';
-    }).catch((error) => {
-        alert('Failed to save the new TODO');
-    });
+    } catch(error) {
+      alert('Failed to save the new TODO');
+    }
 	}
 
-  getData(): Promise<void> {
-    //implement spinner
-    this.currentPage++;
+  async getData(): Promise<void> {
+    try {
+      //implement spinner
+      this.currentPage++;
 
-    return this.dataService.getAll(this.includeArchived)
-      .then(allItems => {
-        this.items = (typeof allItems === 'string') ? JSON.parse(allItems) : allItems;
-        this.subscribeSockets();
-        this.itemDoneCount = this.items.filter(x => x.completed).length;
-      })
-      .catch(function(err) {
-        console.error(err.message);
-      });
+      this.items = await this.dataService.getAll(this.includeArchived);
+      this.subscribeSockets();
+      this.itemDoneCount = this.items.filter(x => x.completed).length;
+    } catch(error) {
+      console.error(error.message);
+    }
   }
 
-  editTodo (item: Todo): void {
+  editTodo(item: Todo) {
 		this.editedTodo = item;
 		// Clone the original item to restore it on demand.
 		this.originalTodo = item;
 	}
 
-  get markAllCompleted (): boolean {
+  get markAllCompleted(): boolean {
     return this.items.filter(x => !x.completed && !x.archived).length === 0;
-	}
+  }
+
   set markAllCompleted(newValue: boolean) {
     this.items.filter(x => !x.archived).forEach(x => x.completed = newValue );
     this.dataService.markAllCompleted(!newValue).then(data => {
@@ -97,7 +96,7 @@ export class List {
     });
   }
 
-  archiveAllCompleted (): void {
+  archiveAllCompleted() {
     this.dataService.archiveAllCompleted().then(data => {
       /*if(data.count > 0) {
           this.itemDoneCount = 0;
@@ -105,8 +104,8 @@ export class List {
     });
   }
 
-  deleteItem (item: Todo): void {
-    swal({
+  async deleteItem(item: Todo) {
+    const response = await swal({
       title: `Are you sure you want to delete this TODO?`,
       text: `${item.title}`,
       type: 'question',
@@ -115,24 +114,27 @@ export class List {
       confirmButtonText: 'Yes, delete it!',
       cancelButtonText: 'No, cancel!',
       width: 700
-    }).then(() => {
-      this.dataService.delete(item.id).then(deletedId => {
+    });
+
+   if (response.value) {
+     try {
+        const deletedId = await this.dataService.delete(item.id);
         let pos = arrayFindObjectIndex(this.items, 'id', deletedId);
         if(pos >= 0) {
           this.items.splice(pos, 1);
         }
-      }).catch(function() {
-          swal('Oops...', 'Something went wrong!', 'error');
-      });
-      swal('Deleted!', 'Your item has been deleted.', 'success');
-    });
+        swal('Deleted!', 'Your item has been deleted.', 'success');
+      } catch(e) {
+        swal('Oops...', 'Something went wrong!', 'error');
+      }
+    }
 	}
 
-  editBegin(item: Todo): void {
+  editBegin(item: Todo) {
     item.isEditing = true;
   }
 
-  editEnd(item: Todo): void {
+  editEnd(item: Todo) {
     if(!!item) {
       item.isEditing = false;
       this.updateItem(item);
@@ -143,7 +145,7 @@ export class List {
     return Moment(date).isBefore(Moment().startOf('day'));
   }
 
-  purge(): void {
+  purge() {
     this.dataService.purgeArchiveItems().then(data => {
       console.log(data);
     }).catch(() => {
@@ -167,10 +169,10 @@ export class List {
     });
   }
 
-  subscribeSockets(): void {
+  subscribeSockets() {
     // create item, only add the item if we don't have it already in the items list to avoid dupes
     socket.on('todo_create', data => {
-      if (!_.some(this.items, function (p) {
+      if (!_.some(this.items, (p) => {
         return p.id === data.id;
       })) {
         this.items.unshift(data);
